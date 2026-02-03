@@ -173,6 +173,8 @@ nav a:hover {
 /* Sections General */
 .section {
     padding: 4rem 0;
+    scroll-margin-top: 100px;
+    /* Fix for sticky header covering content */
 }
 
 .section h2 {
@@ -482,5 +484,88 @@ nav a:hover {
     to {
         opacity: 0;
         transform: translateY(-20px);
+    }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .lab-header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    nav a {
+        margin: 0 5px;
+        font-size: 0.9rem;
+    }
+
+    .hero-section h1 {
+        font-size: 2rem;
+        padding: 0 10px;
+    }
+
+    .subtitle {
+        font-size: 1.1rem;
+    }
+
+    .section h2 {
+        font-size: 2rem;
+    }
+
+    /* Timeline Mobile Adjustments */
+    .timeline::before {
+        display: none;
+        /* Hide center line */
+    }
+
+    .step,
+    .step:nth-child(even) {
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 40px;
+    }
+
+    .step-icon {
+        position: static;
+        transform: none;
+        margin: 0 auto;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .step-content {
+        width: 100%;
+        text-align: center;
+        padding: 15px;
+    }
+
+    /* Periodic Table Mobile */
+    .element {
+        width: 80px;
+        height: 80px;
+    }
+
+    .element .symbol {
+        font-size: 1.5rem;
+    }
+
+    /* Safety Checklist */
+    .safety-checklist {
+        text-align: right;
+        /* Keep RTL alignment for checkboxes */
+        padding: 1.5rem;
+    }
+
+    .checklist-item {
+        font-size: 1rem;
     }
 }

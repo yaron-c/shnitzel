@@ -11,6 +11,17 @@ window.addEventListener('scroll', () => {
     }
 });
 
+function resetExperiment() {
+    // Uncheck safety boxes
+    document.querySelectorAll('.safety-checklist input').forEach(box => box.checked = false);
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Show message
+    showToast('🧪 המעבדה נוקתה! מוכנים לניסוי חדש.', 'info');
+}
+
 function showToast(message, type = 'normal') {
     const container = document.getElementById('toast-container');
     const toast = document.createElement('div');
