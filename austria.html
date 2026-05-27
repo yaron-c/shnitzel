@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🇦🇹 טיול לאוסטריה | יולי 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue-dark: #1a3a5c;
+            --blue-mid: #2563a8;
+            --blue-light: #5ba3d0;
+            --green-alpine: #2d6a4f;
+            --green-light: #52b788;
+            --gold: #c9973a;
+            --gold-light: #f0c060;
+            --sky: #d0e8f5;
+            --snow: #f0f4f8;
+            --warm: #fef9f0;
+            --shabbat-bg: #fff8e7;
+            --shabbat-border: #c9973a;
+            --text-dark: #1a2332;
+            --text-mid: #3d4f65;
+            --text-light: #6b7f94;
+            --card-shadow: 0 4px 20px rgba(26,58,92,0.12);
+            --radius: 16px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Assistant', sans-serif;
+            background: var(--snow);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(160deg, #0d2644 0%, #1a3a5c 40%, #2563a8 75%, #5ba3d0 100%);
+            color: white;
+            text-align: center;
+            padding: 60px 20px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 90px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 90'%3E%3Cpath fill='%23f0f4f8' d='M0,90 L0,60 L120,30 L240,55 L360,15 L480,50 L600,5 L720,45 L840,10 L960,50 L1080,20 L1200,55 L1320,25 L1440,60 L1440,90 Z'/%3E%3C/svg%3E") no-repeat bottom;
+            background-size: cover;
+        }
+
+        .hero-flag { font-size: 56px; margin-bottom: 12px; animation: wave 2s infinite; display: inline-block; }
+        @keyframes wave { 0%,100%{transform:rotate(-3deg)} 50%{transform:rotate(3deg)} }
+
+        .hero h1 {
+            font-size: clamp(28px,5vw,52px);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+        .hero-sub {
+            font-size: 18px;
+            opacity: .85;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .stat-pill {
+            background: rgba(255,255,255,.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,.3);
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* ===== ACCOMMODATION BANNER ===== */
+        .accommodation-bar {
+            background: var(--blue-dark);
+            color: #e8f0fa;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .accommodation-bar .badge {
+            background: var(--gold);
+            color: #1a2332;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        /* ===== DAY NAV ===== */
+        .day-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: white;
+            box-shadow: 0 2px 12px rgba(0,0,0,.1);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .day-nav::-webkit-scrollbar { display: none; }
+        .day-nav-inner {
+            display: flex;
+            min-width: max-content;
+            padding: 0 12px;
+        }
+        .nav-day {
+            flex: 0 0 auto;
+            padding: 14px 18px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all .25s;
+            text-align: center;
+            color: var(--text-mid);
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .nav-day:hover { background: var(--sky); color: var(--blue-dark); }
+        .nav-day.active { border-bottom-color: var(--blue-mid); color: var(--blue-mid); }
+        .nav-day.shabbat { border-bottom-color: var(--gold); color: var(--gold); }
+        .nav-day .nav-num { font-size: 20px; font-weight: 800; display: block; line-height: 1.1; }
+        .nav-day .nav-label { font-size: 12px; font-weight: 400; opacity: .8; }
+
+        /* ===== MAIN CONTENT ===== */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 16px 60px;
+        }
+
+        /* ===== DAY SECTION ===== */
+        .day-section {
+            display: none;
+            animation: fadeIn .35s ease;
+        }
+        .day-section.active { display: block; }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+
+        .day-card {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .day-header {
+            padding: 24px 28px 20px;
+            border-bottom: 1px solid #edf2f7;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .day-title-area h2 {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--blue-dark);
+        }
+        .day-title-area .day-subtitle {
+            font-size: 15px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+        .day-title-area .main-destination {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+            background: var(--sky);
+            color: var(--blue-dark);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        /* Shabbat styling */
+        .shabbat-card { border: 2px solid var(--shabbat-border); background: var(--shabbat-bg) !important; }
+        .shabbat-card .day-header { background: linear-gradient(135deg, #fff8e7, #fff3d0); }
+
+        /* ===== WEATHER WIDGET ===== */
+        .weather-widget {
+            background: linear-gradient(135deg, #e8f4fd, #d4ecfa);
+            border-radius: 12px;
+            padding: 14px 20px;
+            min-width: 160px;
+            text-align: center;
+            border: 1px solid rgba(91,163,208,.25);
+        }
+        .weather-icon { font-size: 36px; line-height: 1; }
+        .weather-temp { font-size: 22px; font-weight: 800; color: var(--blue-dark); margin-top: 4px; }
+        .weather-desc { font-size: 13px; color: var(--text-mid); }
+        .weather-range { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+        .weather-note { font-size: 11px; color: var(--text-light); margin-top: 6px; font-style: italic; }
+
+        /* ===== TIMELINE ===== */
+        .timeline {
+            padding: 24px 28px;
+        }
+        .timeline-item {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 22px;
+            position: relative;
+        }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: 52px;
+            top: 36px;
+            bottom: -22px;
+            width: 2px;
+            background: linear-gradient(to bottom, #cbd5e0, transparent);
+        }
+        .timeline-item:last-child::before { display: none; }
+
+        .tl-time {
+            width: 70px;
+            flex-shrink: 0;
+            text-align: center;
+            padding-top: 2px;
+        }
+        .tl-time .time-text {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--blue-mid);
+        }
+        .tl-icon-wrap {
+            width: 44px;
+            height: 44px;
+            flex-shrink: 0;
+            background: var(--sky);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 2px 8px rgba(91,163,208,.25);
+        }
+        .tl-content { flex: 1; padding-top: 4px; }
+        .tl-content h3 { font-size: 16px; font-weight: 700; color: var(--text-dark); }
+        .tl-content p { font-size: 14px; color: var(--text-mid); margin-top: 4px; }
+        .tl-content .tl-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+        .tl-tag {
+            font-size: 12px;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .tag-drive { background: #fef3c7; color: #92400e; }
+        .tag-must { background: #dcfce7; color: #166534; }
+        .tag-food { background: #ffe4e6; color: #9f1239; }
+        .tag-culture { background: #e0e7ff; color: #3730a3; }
+        .tag-nature { background: #d1fae5; color: #065f46; }
+        .tag-tip { background: #fef9c3; color: #713f12; }
+        .tag-book { background: #fee2e2; color: #991b1b; }
+        .tag-kosher { background: #fdf4ff; color: #6b21a8; }
+
+        /* ===== TIPS BOX ===== */
+        .tips-box {
+            margin: 0 28px 24px;
+            background: linear-gradient(135deg, #fffbf0, #fff8e7);
+            border: 1px solid #f0c060;
+            border-radius: 12px;
+            padding: 16px 20px;
+        }
+        .tips-box h4 { font-size: 14px; font-weight: 700; color: #92400e; margin-bottom: 10px; }
+        .tips-box ul { list-style: none; }
+        .tips-box li {
+            font-size: 14px;
+            color: var(--text-mid);
+            padding: 3px 0;
+            padding-right: 20px;
+            position: relative;
+        }
+        .tips-box li::before { content: '→'; position: absolute; right: 0; color: var(--gold); }
+
+        /* ===== DRIVE INFO ===== */
+        .drive-info {
+            display: flex;
+            gap: 12px;
+            padding: 14px 28px;
+            background: #f7f9fc;
+            border-top: 1px solid #edf2f7;
+            flex-wrap: wrap;
+        }
+        .drive-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--text-mid);
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 5px 14px;
+        }
+        .drive-pill strong { color: var(--text-dark); }
+
+        /* ===== INFO CARDS ROW ===== */
+        .info-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            padding: 18px 20px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+        }
+        .info-card .ic-icon { font-size: 28px; margin-bottom: 8px; }
+        .info-card .ic-title { font-size: 13px; color: var(--text-light); font-weight: 600; }
+        .info-card .ic-value { font-size: 18px; font-weight: 800; color: var(--blue-dark); margin-top: 4px; }
+
+        /* ===== OVERVIEW ===== */
+        .section-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--blue-dark);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* ===== TRIP OVERVIEW ===== */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+        .ov-card {
+            background: white;
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            cursor: pointer;
+            transition: transform .2s, box-shadow .2s;
+        }
+        .ov-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,58,92,.16); }
+        .ov-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--blue-dark);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 15px;
+            flex-shrink: 0;
+        }
+        .ov-num.shabbat-num { background: var(--gold); }
+        .ov-info { flex: 1; }
+        .ov-date { font-size: 12px; color: var(--text-light); }
+        .ov-dest { font-size: 15px; font-weight: 700; color: var(--text-dark); }
+        .ov-weather { font-size: 13px; margin-top: 4px; }
+
+        /* ===== MAP PLACEHOLDER ===== */
+        .map-placeholder {
+            background: linear-gradient(135deg, #e8f4fd, #d4ecfa);
+            border-radius: 14px;
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #5ba3d0;
+            color: var(--blue-mid);
+            margin-bottom: 24px;
+        }
+        .map-placeholder span { font-size: 36px; }
+        .map-placeholder p { font-size: 14px; font-weight: 600; margin-top: 8px; }
+
+        /* ===== USEFUL INFO ===== */
+        .useful-section {
+            background: var(--blue-dark);
+            color: white;
+            padding: 40px 20px;
+            margin-top: 40px;
+        }
+        .useful-section h2 { font-size: 22px; font-weight: 800; margin-bottom: 24px; text-align: center; }
+        .useful-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .useful-card {
+            background: rgba(255,255,255,.1);
+            border-radius: 12px;
+            padding: 18px;
+            border: 1px solid rgba(255,255,255,.15);
+        }
+        .useful-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; opacity: .9; }
+        .useful-card p, .useful-card li { font-size: 13px; opacity: .75; line-height: 1.7; }
+        .useful-card ul { list-style: none; }
+        .useful-card li { padding-right: 14px; position: relative; }
+        .useful-card li::before { content: '•'; position: absolute; right: 0; }
+
+        footer {
+            background: #0d1e2e;
+            color: rgba(255,255,255,.5);
+            text-align: center;
+            padding: 20px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            .day-header { flex-direction: column; }
+            .weather-widget { width: 100%; }
+            .timeline { padding: 18px; }
+            .tl-time { display: none; }
+            .timeline-item::before { right: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="hero-flag">🇦🇹</div>
+    <h1>טיול לאוסטריה</h1>
+    <p class="hero-sub">חבל זלצבורג | 1–9 ביולי 2026</p>
+    <div class="hero-stats">
+        <span class="stat-pill">✈️ 9 ימים</span>
+        <span class="stat-pill">🏨 8 לילות</span>
+        <span class="stat-pill">🏔️ 7 יעדים</span>
+        <span class="stat-pill">🚗 נסיעת כוכב</span>
+    </div>
+</header>
+
+<!-- ACCOMMODATION BAR -->
+<div class="accommodation-bar">
+    <span class="badge">🏠 לינה</span>
+    <span id="accom-text">אזור זלצבורג — פרטים יעודכנו</span>
+    <span class="badge">✈️ נחיתה</span>
+    <span id="flight-text">וינה, 1 ביולי — פרטי הטיסה יעודכנו</span>
+</div>
+
+<!-- DAY NAV -->
+<nav class="day-nav">
+    <div class="day-nav-inner">
+        <div class="nav-day active" onclick="showDay(0)">
+            <span class="nav-num">0</span>
+            <span class="nav-label">סקירה כללית</span>
+        </div>
+        <div class="nav-day" onclick="showDay(1)">
+            <span class="nav-num">1</span>
+            <span class="nav-label">רביעי 1/7</span>
+        </div>
+        <div class="nav-day" onclick="showDay(2)">
+            <span class="nav-num">2</span>
+            <span class="nav-label">חמישי 2/7</span>
+        </div>
+        <div class="nav-day" onclick="showDay(3)">
+            <span class="nav-num">3</span>
+            <span class="nav-label">שישי 3/7</span>
+        </div>
+        <div class="nav-day shabbat" onclick="showDay(4)">
+            <span class="nav-num">✡</span>
+            <span class="nav-label">שבת 4/7</span>
+        </div>
+        <div class="nav-day" onclick="showDay(5)">
+            <span class="nav-num">5</span>
+            <span class="nav-label">ראשון 5/7</span>
+        </div>
+        <div class="nav-day" onclick="showDay(6)">
+            <span class="nav-num">6</span>
+            <span class="nav-label">שני 6/7</span>
+        </div>
+        <div class="nav-day" onclick="showDay(7)">
+            <span class="nav-num">7</span>
+            <span class="nav-label">שלישי 7/7</span>
+        </div>
+        <div class="nav-day" onclick="showDay(8)">
+            <span class="nav-num">8</span>
+            <span class="nav-label">רביעי 8/7</span>
+        </div>
+        <div class="nav-day" onclick="showDay(9)">
+            <span class="nav-num">9</span>
+            <span class="nav-label">חמישי 9/7</span>
+        </div>
+    </div>
+</nav>
+
+<main class="container">
+
+    <!-- ===== DAY 0 - OVERVIEW ===== -->
+    <section class="day-section active" id="day-0">
+        <div class="section-title">🗺️ סקירת הטיול</div>
+
+        <div class="info-row">
+            <div class="info-card"><div class="ic-icon">🌡️</div><div class="ic-title">טמפרטורה ביולי</div><div class="ic-value">20–27°C</div></div>
+            <div class="info-card"><div class="ic-icon">☀️</div><div class="ic-title">שעות אור ביום</div><div class="ic-value">~16 שעות</div></div>
+            <div class="info-card"><div class="ic-icon">💶</div><div class="ic-title">מטבע</div><div class="ic-value">€ יורו</div></div>
+            <div class="info-card"><div class="ic-icon">🚗</div><div class="ic-title">טיפוס טיול</div><div class="ic-value">נסיעת כוכב</div></div>
+        </div>
+
+        <div class="map-placeholder">
+            <span>🏔️</span>
+            <p>מפת אזור זלצבורג — יעדי הטיול</p>
+        </div>
+
+        <div class="section-title">📅 לוח הטיול</div>
+        <div class="overview-grid">
+            <div class="ov-card" onclick="showDay(1)">
+                <div class="ov-num">1</div>
+                <div class="ov-info">
+                    <div class="ov-date">רביעי, 1 ביולי</div>
+                    <div class="ov-dest">✈️ הגעה — וינה ← זלצבורג</div>
+                    <div class="ov-weather">☀️ 25°C · שמשי</div>
+                </div>
+            </div>
+            <div class="ov-card" onclick="showDay(2)">
+                <div class="ov-num">2</div>
+                <div class="ov-info">
+                    <div class="ov-date">חמישי, 2 ביולי</div>
+                    <div class="ov-dest">🏰 עיר זלצבורג</div>
+                    <div class="ov-weather">⛅ 23°C · מעונן חלקית</div>
+                </div>
+            </div>
+            <div class="ov-card" onclick="showDay(3)">
+                <div class="ov-num">3</div>
+                <div class="ov-info">
+                    <div class="ov-date">שישי, 3 ביולי</div>
+                    <div class="ov-dest">💎 הלשטט ואגם הדכשטיין</div>
+                    <div class="ov-weather">☀️ 26°C · שמשי ויפה</div>
+                </div>
+            </div>
+            <div class="ov-card" onclick="showDay(4)">
+                <div class="ov-num ov-num shabbat-num">✡</div>
+                <div class="ov-info">
+                    <div class="ov-date">שבת, 4 ביולי</div>
+                    <div class="ov-dest">🕍 שבת — מנוחה ואזור הלינה</div>
+                    <div class="ov-weather">🌦️ 20°C · גשם מקומי</div>
+                </div>
+            </div>
+            <div class="ov-card" onclick="showDay(5)">
+                <div class="ov-num">5</div>
+                <div class="ov-info">
+                    <div class="ov-date">ראשון, 5 ביולי</div>
+                    <div class="ov-dest">⛵ אגם וולפגנגזה</div>
+                    <div class="ov-weather">☀️ 27°C · חם ושמשי</div>
+                </div>
+            </div>
+            <div class="ov-card" onclick="showDay(6)">
+                <div class="ov-num">6</div>
+                <div class="ov-info">
+                    <div class="ov-date">שני, 6 ביולי</div>
+                    <div class="ov-dest">🦅 ברכטסגאדן וקניגסזה</div>
+                    <div class="ov-weather">☀️ 25°C · שמשי</div>
+                </div>
+            </div>
+            <div class="ov-card" onclick="showDay(7)">
+                <div class="ov-num">7</div>
+                <div class="ov-info">
+                    <div class="ov-date">שלישי, 7 ביולי</div>
+                    <div class="ov-dest">🧊 וורפן — מערות הקרח</div>
+                    <div class="ov-weather">⛅ 22°C · מעונן חלקית</div>
+                </div>
+            </div>
+            <div class="ov-card" onclick="showDay(8)">
+                <div class="ov-num">8</div>
+                <div class="ov-info">
+                    <div class="ov-date">רביעי, 8 ביולי</div>
+                    <div class="ov-dest">🏔️ גרוסגלוקנר ו-Zell am See</div>
+                    <div class="ov-weather">🌤️ 24°C · בהיר בעיקר</div>
+                </div>
+            </div>
+            <div class="ov-card" onclick="showDay(9)">
+                <div class="ov-num">9</div>
+                <div class="ov-info">
+                    <div class="ov-date">חמישי, 9 ביולי</div>
+                    <div class="ov-dest">✈️ עזיבה — זלצבורג → וינה</div>
+                    <div class="ov-weather">☀️ 26°C · שמשי</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="day-card">
+            <div class="tips-box" style="margin:24px;">
+                <h4>⚠️ הזמנות חובה מראש</h4>
+                <ul>
+                    <li><strong>מערות הקרח בוורפן (Eisriesenwelt)</strong> — יש להזמין כרטיסים מראש, אין כניסה ספונטנית ביולי</li>
+                    <li><strong>קן הנשר (Kehlsteinhaus)</strong> ברכטסגאדן — אוטובוסים ומקומות חניה נגמרים מוקדם בבוקר</li>
+                    <li><strong>רכבת ההר בסנקט וולפגנג (Schafberg)</strong> — כרטיסים מוזמנים לפחות שבוע מראש</li>
+                    <li><strong>מסעדות מומלצות</strong> — מומלץ להזמין שולחן בלפחות 2–3 ימים מראש</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DAY 1 — ARRIVAL ===== -->
+    <section class="day-section" id="day-1">
+        <div class="day-card">
+            <div class="day-header">
+                <div class="day-title-area">
+                    <h2>יום 1 — הגעה לאוסטריה</h2>
+                    <div class="day-subtitle">רביעי, 1 ביולי 2026</div>
+                    <div class="main-destination">✈️ וינה ← חבל זלצבורג</div>
+                </div>
+                <div class="weather-widget">
+                    <div class="weather-icon">☀️</div>
+                    <div class="weather-temp">25°C</div>
+                    <div class="weather-desc">שמשי ונעים</div>
+                    <div class="weather-range">מינ' 13°C · מקס' 25°C</div>
+                    <div class="weather-note">תחזית ממוצע היסטורי</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text" id="d1-land-time">שעת נחיתה</span></div>
+                    <div class="tl-icon-wrap">✈️</div>
+                    <div class="tl-content">
+                        <h3>נחיתה בנמל התעופה וינה (VIE)</h3>
+                        <p id="d1-flight-details">פרטי הטיסה יעודכנו לאחר שתשלח את הכרטיס</p>
+                        <div class="tl-tags"><span class="tl-tag tag-tip">איסוף כבודה</span><span class="tl-tag tag-drive">השכרת רכב</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">~11:00</span></div>
+                    <div class="tl-icon-wrap">🚗</div>
+                    <div class="tl-content">
+                        <h3>נסיעה לאזור זלצבורג</h3>
+                        <p>~3 שעות נסיעה על אוטובאן A1. מטבע זהב: אין עצירה ישירה — הכנסו לאכול ולמלא דלק בדרך.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-drive">~300 ק"מ</span><span class="tl-tag tag-drive">~3 שעות</span><span class="tl-tag tag-tip">וניישם מדבקה</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">~14:00</span></div>
+                    <div class="tl-icon-wrap">🏨</div>
+                    <div class="tl-content">
+                        <h3>צ'ק-אין לאכסניה</h3>
+                        <p id="d1-accom">כתובת הלינה תעודכן בקרוב</p>
+                        <div class="tl-tags"><span class="tl-tag tag-tip">צ'ק-אין מ-14:00</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">15:30</span></div>
+                    <div class="tl-icon-wrap">🚶</div>
+                    <div class="tl-content">
+                        <h3>טיול קצר באזור הלינה</h3>
+                        <p>אחרי נסיעה ארוכה — טיול קצר ברגל, קפה אוסטרי ראשון, ספיגת אווירה מקומית.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-culture">Kaffeehauskultur</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">19:00</span></div>
+                    <div class="tl-icon-wrap">🍽️</div>
+                    <div class="tl-content">
+                        <h3>ארוחת ערב — מסעדה מקומית</h3>
+                        <p>וינר שניצל אמיתי! המסעדות המקומיות מגישות מנות גדולות ומשביעות. מחיר ממוצע 12–20€ למנה.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-food">ארוחת ערב</span><span class="tl-tag tag-kosher">⚠️ לא כשר</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-box">
+                <h4>💡 טיפים ליום ההגעה</h4>
+                <ul>
+                    <li>קנו vignette (מדבקת כביש אוסטרית) לרכב — חובה על האוטובאן, קנס גבוה</li>
+                    <li>אם מגיעים מאוחר — אין צורך לתכנן כלום נוסף ליום הזה</li>
+                    <li>חנות Hofer (Aldi האוסטרי) — מעולה לקנייה ראשונית זולה</li>
+                    <li>EUR — ניתן למשוך מכספומט בנמל התעופה בוינה</li>
+                </ul>
+            </div>
+
+            <div class="drive-info">
+                <div class="drive-pill">🛣️ <span>וינה ← זלצבורג: <strong>~300 ק"מ</strong></span></div>
+                <div class="drive-pill">⏱️ <span><strong>~3 שעות</strong> נסיעה</span></div>
+                <div class="drive-pill">⛽ <span>Tankstelle: <strong>~1.5€/ליטר</strong></span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DAY 2 — SALZBURG ===== -->
+    <section class="day-section" id="day-2">
+        <div class="day-card">
+            <div class="day-header">
+                <div class="day-title-area">
+                    <h2>יום 2 — עיר זלצבורג</h2>
+                    <div class="day-subtitle">חמישי, 2 ביולי 2026</div>
+                    <div class="main-destination">🏰 Salzburg Altstadt</div>
+                </div>
+                <div class="weather-widget">
+                    <div class="weather-icon">⛅</div>
+                    <div class="weather-temp">23°C</div>
+                    <div class="weather-desc">מעונן חלקית</div>
+                    <div class="weather-range">מינ' 12°C · מקס' 23°C</div>
+                    <div class="weather-note">תחזית ממוצע היסטורי</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">09:00</span></div>
+                    <div class="tl-icon-wrap">🚗</div>
+                    <div class="tl-content">
+                        <h3>נסיעה לזלצבורג</h3>
+                        <p>חניון מומלץ: Parkhaus Mönchsberg (תחת ההר) — 14€ ליום, מרחק הליכה מהעיר העתיקה.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-drive">~30–60 דק' מהלינה</span><span class="tl-tag tag-tip">חניון ריכוזי</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">10:00</span></div>
+                    <div class="tl-icon-wrap">🌸</div>
+                    <div class="tl-content">
+                        <h3>גני מירבל (Mirabellgarten)</h3>
+                        <p>הגן הנפלא מתוך "The Sound of Music" — כניסה חינם. פסלים, פרחים ונוף מרהיב לטירה.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-culture">Sound of Music</span><span class="tl-tag tag-must">חינם</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">10:45</span></div>
+                    <div class="tl-icon-wrap">🎵</div>
+                    <div class="tl-content">
+                        <h3>רחוב גטריידגאסה ובית הולדתו של מוצרט</h3>
+                        <p>הרחוב המסחרי ההיסטורי עם חנויות חרדל-יוניקות. מספר 9 — בית הולדתו של מוצרט (מוזיאון, 12€).</p>
+                        <div class="tl-tags"><span class="tl-tag tag-culture">מוצרט</span><span class="tl-tag tag-tip">סמטאות צרות יפות</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">12:30</span></div>
+                    <div class="tl-icon-wrap">☕</div>
+                    <div class="tl-content">
+                        <h3>קפה צהריים — Café Tomaselli</h3>
+                        <p>קפה אוסטרי מסורתי מ-1703, הוותיק ביותר בזלצבורג. Mozartkugeln — כדורי שוקולד מוצרט המפורסמים.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-food">Kaffee &amp; Kuchen</span><span class="tl-tag tag-culture">מסורת 1703</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">14:00</span></div>
+                    <div class="tl-icon-wrap">🏔️</div>
+                    <div class="tl-content">
+                        <h3>מצודת הוהנזלצבורג (Festung Hohensalzburg)</h3>
+                        <p>אחת המצודות השמורות ביותר באירופה! הגעה בפוניקולר או רגלית. נוף מטורף על העיר וההרים.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">חובה!</span><span class="tl-tag tag-culture">17€ כולל פוניקולר</span><span class="tl-tag tag-tip">2–3 שעות</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">17:00</span></div>
+                    <div class="tl-icon-wrap">⛪</div>
+                    <div class="tl-content">
+                        <h3>הקתדרלה וכיכר המוצרט (Mozartplatz)</h3>
+                        <p>כיכר הזלצבורג הגדולה עם פסל מוצרט ואפשרות לאיסוף עם Mozartkugeln כסובניר.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-culture">פלאצה</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">19:30</span></div>
+                    <div class="tl-icon-wrap">🍺</div>
+                    <div class="tl-content">
+                        <h3>ארוחת ערב — Augustinerbräu Mülln</h3>
+                        <p>בירה מנזרית אוסטרית בחצר גדולה. אפשר להביא אוכל מבחוץ! 1L בירה ~4.5€. סטאלוסקי מהיפות בזלצבורג.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-food">בירה מנזרית</span><span class="tl-tag tag-tip">מרגש!</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drive-info">
+                <div class="drive-pill">📍 <span>זלצבורג: <strong>~45 דק' מהלינה</strong></span></div>
+                <div class="drive-pill">🎟️ <span>תקציב: <strong>~50€ לאדם</strong></span></div>
+                <div class="drive-pill">🚶 <span>הליכה: <strong>~10 ק"מ</strong></span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DAY 3 — HALLSTATT ===== -->
+    <section class="day-section" id="day-3">
+        <div class="day-card">
+            <div class="day-header">
+                <div class="day-title-area">
+                    <h2>יום 3 — הלשטט</h2>
+                    <div class="day-subtitle">שישי, 3 ביולי 2026</div>
+                    <div class="main-destination">💎 כפר הירושה העולמי</div>
+                </div>
+                <div class="weather-widget">
+                    <div class="weather-icon">☀️</div>
+                    <div class="weather-temp">26°C</div>
+                    <div class="weather-desc">שמשי ויפה</div>
+                    <div class="weather-range">מינ' 14°C · מקס' 26°C</div>
+                    <div class="weather-note">תחזית ממוצע היסטורי</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">08:30</span></div>
+                    <div class="tl-icon-wrap">🚗</div>
+                    <div class="tl-content">
+                        <h3>יציאה מוקדמת להלשטט</h3>
+                        <p>כדאי להגיע לפני 10:00 — החניה מתמלאת מהר. חנו ב-P1 ועברו בסירה (3€) לכפר.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-drive">~1 שעה מהלינה</span><span class="tl-tag tag-tip">יציאה מוקדמת!</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">09:45</span></div>
+                    <div class="tl-icon-wrap">⛵</div>
+                    <div class="tl-content">
+                        <h3>מעבורת לכפר הלשטט</h3>
+                        <p>עיר הציור! כפר אינסטגרמי עם בתים צבעוניים, כנסייה, ואגם קסום. אחד הכפרים היפים בעולם.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">חובה!</span><span class="tl-tag tag-nature">UNESCO</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">10:30</span></div>
+                    <div class="tl-icon-wrap">🧂</div>
+                    <div class="tl-content">
+                        <h3>מכרה המלח ההיסטורי של הלשטט</h3>
+                        <p>המכרה הפעיל הוותיק בעולם! גלשן מהשלה, רכבת מכרה, תצוגות מרתקות. ~30€ לכרטיס כולל הכל.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">ממש שווה!</span><span class="tl-tag tag-culture">~2 שעות</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">13:00</span></div>
+                    <div class="tl-icon-wrap">🥪</div>
+                    <div class="tl-content">
+                        <h3>צהריים בכפר</h3>
+                        <p>מסעדות אגם עם דגי אגם טריים. Seehotel Grüner Baum — גישה טובה לאגם. אפשר גם פיקניק ענוג.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-food">דגי אגם</span><span class="tl-tag tag-nature">נוף אגם</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">15:00</span></div>
+                    <div class="tl-icon-wrap">🏔️</div>
+                    <div class="tl-content">
+                        <h3>אופציה: מערות הקרח בדכשטיין</h3>
+                        <p>Dachstein Krippenstein — טלפריק למעלה (23€) עם מערות קרח ונוף על האלפים. ~1.5 שעות.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-nature">אופציה</span><span class="tl-tag tag-book">הזמן מראש</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">17:30</span></div>
+                    <div class="tl-icon-wrap">📸</div>
+                    <div class="tl-content">
+                        <h3>נקודת התצפית העליונה — Hallstatt Skywalk</h3>
+                        <p>נקודת הצילום הקלאסית הנסתרת: 400 מדרגות מהעיר, שלט "World Heritage" — הנוף הנפלא ביותר.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">נוף מנשים נשימה</span><span class="tl-tag tag-nature">חינם</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">20:00</span></div>
+                    <div class="tl-icon-wrap">🏡</div>
+                    <div class="tl-content">
+                        <h3>חזרה ללינה</h3>
+                        <p>ערב שבת — כדאי לסיים את הנסיעה לפני שקיעה ולהכין ללינה.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-tip">ערב שבת</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drive-info">
+                <div class="drive-pill">📍 <span>הלשטט מהלינה: <strong>~1 שעה</strong></span></div>
+                <div class="drive-pill">🎟️ <span>תקציב: <strong>~60€ לאדם</strong></span></div>
+                <div class="drive-pill">⚠️ <span>חניה: <strong>P1 מומלץ</strong></span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DAY 4 — SHABBAT ===== -->
+    <section class="day-section" id="day-4">
+        <div class="day-card shabbat-card">
+            <div class="day-header">
+                <div class="day-title-area">
+                    <h2>✡ שבת — מנוחה ורוגע</h2>
+                    <div class="day-subtitle">שבת, 4 ביולי 2026 | אין נסיעות רחוקות</div>
+                    <div class="main-destination" style="background:#fff3d0;color:#92400e;">🕍 שבת שלום — יום מנוחה</div>
+                </div>
+                <div class="weather-widget" style="background:linear-gradient(135deg,#fff8e7,#fff3d0);border-color:#f0c060;">
+                    <div class="weather-icon">🌦️</div>
+                    <div class="weather-temp">20°C</div>
+                    <div class="weather-desc">גשם קל ומקומי</div>
+                    <div class="weather-range">מינ' 11°C · מקס' 20°C</div>
+                    <div class="weather-note">יום טוב לנוח בפנים!</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">בוקר</span></div>
+                    <div class="tl-icon-wrap">☕</div>
+                    <div class="tl-content">
+                        <h3>בוקר רגוע — קפה ואכילה בלינה</h3>
+                        <p>ארוחת בוקר מסודרת, שינה, תכנון שאר הטיול — אין לחץ בכלל.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">אמצע</span></div>
+                    <div class="tl-icon-wrap">🚶</div>
+                    <div class="tl-content">
+                        <h3>טיול רגלי באזור הקרוב</h3>
+                        <p>טבע ברגל — שבילים קצרים בסביבת הלינה, כפר מקומי, כנסייה עתיקה, פארק.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-nature">הליכה קצרה</span><span class="tl-tag tag-tip">ללא רכב</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">צהריים</span></div>
+                    <div class="tl-icon-wrap">🍽️</div>
+                    <div class="tl-content">
+                        <h3>ארוחה מאולתרת / מסעדה קרובה</h3>
+                        <p>מסעדה בכפר הקרוב, או בישול בלינה אם יש מטבח. פרויקט קולינרי אוסטרי קטן.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-food">מסעדה מקומית</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">אחה"צ</span></div>
+                    <div class="tl-icon-wrap">📚</div>
+                    <div class="tl-content">
+                        <h3>מנוחה, קריאה, תכנון הטיול</h3>
+                        <p>יום מנוחה אמיתי — לדאוג שמחר מוכנים לרכב, לבדוק הזמנות, להוריד מפות אופליין.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-tip">הכנות מחר</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-box" style="background:linear-gradient(135deg,#fffbf0,#fff8e7);border-color:#f0c060;">
+                <h4>🕍 הכנות לשבת</h4>
+                <ul>
+                    <li>כניסת שבת — ביולי בוינה/זלצבורג בסביבות 21:15 (שעון מקומי)</li>
+                    <li>כדאי לקנות אוכל ביום שישי לפני שבת</li>
+                    <li>Hofer (Aldi) ו-REWE סגורים בשבת — גם באוסטריה רוב החנויות סגורות ביום ראשון</li>
+                    <li>המוצא שבת: ביולי כ-22:30 — יום ארוך מאוד!</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DAY 5 — WOLFGANGSEE ===== -->
+    <section class="day-section" id="day-5">
+        <div class="day-card">
+            <div class="day-header">
+                <div class="day-title-area">
+                    <h2>יום 5 — אגם וולפגנגזה</h2>
+                    <div class="day-subtitle">ראשון, 5 ביולי 2026</div>
+                    <div class="main-destination">⛵ St. Wolfgang · St. Gilgen · Schafberg</div>
+                </div>
+                <div class="weather-widget">
+                    <div class="weather-icon">☀️</div>
+                    <div class="weather-temp">27°C</div>
+                    <div class="weather-desc">חם ושמשי</div>
+                    <div class="weather-range">מינ' 15°C · מקס' 27°C</div>
+                    <div class="weather-note">יום מעולה לאגם!</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">08:00</span></div>
+                    <div class="tl-icon-wrap">🚗</div>
+                    <div class="tl-content">
+                        <h3>נסיעה לסנקט גילגן</h3>
+                        <p>עיירה מקסימה — עיר הולדתה של אמא מוצרט ואחות אחותו. כפר קטן עם נוף מדהים לאגם.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-drive">~30–45 דק'</span><span class="tl-tag tag-culture">מוצרט קשר</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">09:00</span></div>
+                    <div class="tl-icon-wrap">🚢</div>
+                    <div class="tl-content">
+                        <h3>שייט בסירה לסנקט וולפגנג</h3>
+                        <p>האונייה מסנקט גילגן דרך האגם — נסיעה כ-40 דקות עם נוף הרים מטורף. ~15€ הלוך חזור.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">חוויה!</span><span class="tl-tag tag-nature">נוף אגם</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">10:00</span></div>
+                    <div class="tl-icon-wrap">🚂</div>
+                    <div class="tl-content">
+                        <h3>רכבת ההר — Schafbergbahn</h3>
+                        <p>רכבת קיטור היסטורית מ-1893 עולה 1700 מטר! נוף מ"Sound of Music". הזמן מראש!</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">WOW!</span><span class="tl-tag tag-book">הזמן שבוע מראש!</span><span class="tl-tag tag-tip">~38€</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">13:00</span></div>
+                    <div class="tl-icon-wrap">🏊</div>
+                    <div class="tl-content">
+                        <h3>שחייה באגם וולפגנגזה</h3>
+                        <p>27°C בחוץ, האגם ב-22°C — שחייה מדהימה! חופים ציבוריים חינם או ב-3€ כניסה.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-nature">שחייה</span><span class="tl-tag tag-must">בחום כזה — חובה!</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">17:00</span></div>
+                    <div class="tl-icon-wrap">🍦</div>
+                    <div class="tl-content">
+                        <h3>גלידה ו-Kaffee בכפר</h3>
+                        <p>עיירות האגם מלאות בגלדריות וקפה מקסימים. Eis (גלידה) כ-1.5€ פר כדור.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-food">Eis!</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drive-info">
+                <div class="drive-pill">📍 <span>וולפגנגזה: <strong>~35 דק' מהלינה</strong></span></div>
+                <div class="drive-pill">🎟️ <span>תקציב: <strong>~55€ לאדם</strong></span></div>
+                <div class="drive-pill">🚂 <span>Schafberg: <strong>הזמן מראש!</strong></span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DAY 6 — BERCHTESGADEN ===== -->
+    <section class="day-section" id="day-6">
+        <div class="day-card">
+            <div class="day-header">
+                <div class="day-title-area">
+                    <h2>יום 6 — ברכטסגאדן</h2>
+                    <div class="day-subtitle">שני, 6 ביולי 2026 | גרמניה</div>
+                    <div class="main-destination">🦅 Kehlsteinhaus · Königssee</div>
+                </div>
+                <div class="weather-widget">
+                    <div class="weather-icon">☀️</div>
+                    <div class="weather-temp">25°C</div>
+                    <div class="weather-desc">שמשי ובהיר</div>
+                    <div class="weather-range">מינ' 13°C · מקס' 25°C</div>
+                    <div class="weather-note">תחזית ממוצע היסטורי</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">07:30</span></div>
+                    <div class="tl-icon-wrap">🚗</div>
+                    <div class="tl-content">
+                        <h3>יציאה מוקדמת לברכטסגאדן</h3>
+                        <p>חציית גבול ל-גרמניה (ללא עצירה, שנגן). כניסה לכפר עצמו. חניה מרכזית בכניסה לאזור.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-drive">~45 דק'</span><span class="tl-tag tag-tip">חציית גבול</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">08:30</span></div>
+                    <div class="tl-icon-wrap">🦅</div>
+                    <div class="tl-content">
+                        <h3>קן הנשר — Kehlsteinhaus (Eagle's Nest)</h3>
+                        <p>בית ההר של היטלר ב-1834 מ' — היסטוריה ונוף מדהים. אוטובוס ייעודי עולה מהמגרש (ללא רכב פרטי). 33€ הכל כלול.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">היסטוריה</span><span class="tl-tag tag-book">אוטובוס מ-07:30</span><span class="tl-tag tag-tip">בוקר מוקדם!</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">12:30</span></div>
+                    <div class="tl-icon-wrap">🥪</div>
+                    <div class="tl-content">
+                        <h3>ארוחת צהריים בכפר ברכטסגאדן</h3>
+                        <p>הכפר עצמו שווה — חנויות, מסעדות בוואריות, Currywurst ו-Brezel. מחירים גרמניים = קצת יקר יותר.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-food">מסעדה בוואריות</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">14:00</span></div>
+                    <div class="tl-icon-wrap">⛵</div>
+                    <div class="tl-content">
+                        <h3>אגם קניגסזה — Königssee</h3>
+                        <p>"אגם המלכים" — ירוק אמרלד בצל הרים. טיול בסירה חשמלית שקטה, הד הקלרינט מהמלח, כנסיית סנקט ברתולמה.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">מרהיב!</span><span class="tl-tag tag-nature">28€ הלוך חזור</span><span class="tl-tag tag-tip">2–3 שעות</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">18:00</span></div>
+                    <div class="tl-icon-wrap">🏡</div>
+                    <div class="tl-content">
+                        <h3>חזרה ללינה</h3>
+                        <p>יום עמוס ומרהיב — מומלץ לחזור בשקט ולנוח.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-box">
+                <h4>🇩🇪 טיפים לביקור בגרמניה</h4>
+                <ul>
+                    <li>גרמניה = אירו, שנגן — אין צורך בויזה מיוחדת</li>
+                    <li>ה-Kehlsteinhaus פתוח 13 מאי–26 אוקטובר בלבד, ~יומי</li>
+                    <li>אין גישה ברכב פרטי לקן הנשר — רק אוטובוס מיוחד</li>
+                    <li>אגם קניגסזה — הגיעו מוקדם, סירות יכולות להיות מלאות</li>
+                </ul>
+            </div>
+
+            <div class="drive-info">
+                <div class="drive-pill">📍 <span>ברכטסגאדן: <strong>~45 דק'</strong></span></div>
+                <div class="drive-pill">🎟️ <span>תקציב: <strong>~60€ לאדם</strong></span></div>
+                <div class="drive-pill">🇩🇪 <span><strong>גרמניה!</strong></span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DAY 7 — WERFEN ===== -->
+    <section class="day-section" id="day-7">
+        <div class="day-card">
+            <div class="day-header">
+                <div class="day-title-area">
+                    <h2>יום 7 — וורפן ומערות הקרח</h2>
+                    <div class="day-subtitle">שלישי, 7 ביולי 2026</div>
+                    <div class="main-destination">🧊 Eisriesenwelt · Hohenwerfen</div>
+                </div>
+                <div class="weather-widget">
+                    <div class="weather-icon">⛅</div>
+                    <div class="weather-temp">22°C</div>
+                    <div class="weather-desc">מעונן חלקית</div>
+                    <div class="weather-range">מינ' 10°C · מקס' 22°C</div>
+                    <div class="weather-note">בתוך המערות: 0°C!</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">08:30</span></div>
+                    <div class="tl-icon-wrap">🚗</div>
+                    <div class="tl-content">
+                        <h3>נסיעה לוורפן</h3>
+                        <p>בעמק פונגאו דרומית לזלצבורג. כביש יפהפה דרך ההרים. חנייה חינם בכפר.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-drive">~1 שעה</span><span class="tl-tag tag-nature">נוף הרים</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">09:30</span></div>
+                    <div class="tl-icon-wrap">🧊</div>
+                    <div class="tl-content">
+                        <h3>מערות הקרח — Eisriesenwelt</h3>
+                        <p>מערות הקרח הגדולות ביותר בעולם! טלפריק + הליכה של 1 שעה בתוך אולמות קרח ענקיים. לקחת בגדים חמים!</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">MUST!</span><span class="tl-tag tag-book">הזמן מראש!</span><span class="tl-tag tag-tip">~32€ + לבשו שכבות</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">13:00</span></div>
+                    <div class="tl-icon-wrap">🍽️</div>
+                    <div class="tl-content">
+                        <h3>ארוחה בכפר וורפן</h3>
+                        <p>כפר נינוח עם מסעדות מקומיות. מחירים נוחים יחסית לאוסטריה.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-food">Gasthof מקומי</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">14:30</span></div>
+                    <div class="tl-icon-wrap">🏰</div>
+                    <div class="tl-content">
+                        <h3>מבצר הוהנוורפן (Hohenwerfen Castle)</h3>
+                        <p>מבצר ימי-ביניים מרשים ב-120 מ' על הכפר. תצוגות נשרים! פתוח אפריל–אוקטובר. ~18€ כולל טלפריק.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">מרהיב!</span><span class="tl-tag tag-culture">נשרים</span><span class="tl-tag tag-tip">2 שעות</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">17:00</span></div>
+                    <div class="tl-icon-wrap">🏡</div>
+                    <div class="tl-content">
+                        <h3>חזרה ללינה</h3>
+                        <p>יום מלא מאוד — מערות + מבצר. חזרה ונוח.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-box">
+                <h4>🧊 חשוב מאוד — מערות הקרח</h4>
+                <ul>
+                    <li><strong>חובה להזמין מראש</strong> — ביולי המערות מתמלאות שבועות מראש!</li>
+                    <li>בתוך המערות: 0–3°C גם בחום של קיץ — לבשו חולצה חמה, כיפה וכפפות</li>
+                    <li>סניקרס לא מספיקים — נעלי הליכה בטוחות עם אחיזה טובה</li>
+                    <li>הדרך למעלה: אוטובוס מהחניה + הליכה 20 דק' לכניסה</li>
+                </ul>
+            </div>
+
+            <div class="drive-info">
+                <div class="drive-pill">📍 <span>וורפן: <strong>~1 שעה מהלינה</strong></span></div>
+                <div class="drive-pill">🎟️ <span>תקציב: <strong>~50€ לאדם</strong></span></div>
+                <div class="drive-pill">🧊 <span>מערה: <strong>0°C! — לבשו חם</strong></span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DAY 8 — GROSSGLOCKNER ===== -->
+    <section class="day-section" id="day-8">
+        <div class="day-card">
+            <div class="day-header">
+                <div class="day-title-area">
+                    <h2>יום 8 — גרוסגלוקנר</h2>
+                    <div class="day-subtitle">רביעי, 8 ביולי 2026</div>
+                    <div class="main-destination">🏔️ Grossglockner · Zell am See</div>
+                </div>
+                <div class="weather-widget">
+                    <div class="weather-icon">🌤️</div>
+                    <div class="weather-temp">24°C</div>
+                    <div class="weather-desc">בהיר בעיקר</div>
+                    <div class="weather-range">מינ' 12°C · מקס' 24°C</div>
+                    <div class="weather-note">בגלוקנר: 5–10°C</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">08:00</span></div>
+                    <div class="tl-icon-wrap">🚗</div>
+                    <div class="tl-content">
+                        <h3>יציאה לכביש גרוסגלוקנר</h3>
+                        <p>הכביש האלפיני הגבוה ביותר באוסטריה — 48 ק"מ, 36 פניות, 2571 מ'. אחד הכבישים היפים בעולם!</p>
+                        <div class="tl-tags"><span class="tl-tag tag-drive">~1.5 שעה מהלינה</span><span class="tl-tag tag-must">אגדי!</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">10:00</span></div>
+                    <div class="tl-icon-wrap">🏔️</div>
+                    <div class="tl-content">
+                        <h3>כביש גרוסגלוקנר — נסיעה ועצירות</h3>
+                        <p>כביש עם תשלום (37€ לרכב). עצירות בנקודות תצפית — קרחון פסטרזה, נוף לשיא גרוסגלוקנר (3798 מ').</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">חובה!</span><span class="tl-tag tag-nature">37€ לרכב</span><span class="tl-tag tag-tip">~3 שעות לאורך הכביש</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">13:30</span></div>
+                    <div class="tl-icon-wrap">🏊</div>
+                    <div class="tl-content">
+                        <h3>Zell am See — עיר ואגם</h3>
+                        <p>עיירת נופש מקסימה עם אגם ירוק-כחול. שחייה, קיאקים, מסעדות נהדרות. טיסות פרגלידינג מעל האגם.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-nature">שחייה</span><span class="tl-tag tag-must">יפהפה</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">16:00</span></div>
+                    <div class="tl-icon-wrap">🛍️</div>
+                    <div class="tl-content">
+                        <h3>עיר Zell — קניות ותיירות</h3>
+                        <p>עיירה קסומה עם רחוב מרכזי. Mozartkugeln כסובניר, בגדי סקי, מוצרים אוסטריים.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-food">קפה ועוגה</span><span class="tl-tag tag-tip">קניות קטנות</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">19:00</span></div>
+                    <div class="tl-icon-wrap">🏡</div>
+                    <div class="tl-content">
+                        <h3>חזרה ללינה — ערב אחרון</h3>
+                        <p>לילה אחרון — ארוחת ערב מסיכמת. ארוז למחר!</p>
+                        <div class="tl-tags"><span class="tl-tag tag-tip">ארוז הכל!</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-box">
+                <h4>🏔️ גרוסגלוקנר — מה שחשוב לדעת</h4>
+                <ul>
+                    <li>הכביש פתוח בכל מזג אוויר, אבל בערפל הנוף נעלם — בדקו תחזית!</li>
+                    <li>בנסיעה כלפי מעלה: טמפרטורה יורדת ~6°C לכל 1000 מ' — קחו עליון חם</li>
+                    <li>Pasterze Glacier — קרחון שאפשר להגיע אליו ברגל (15 דק')</li>
+                    <li>תשלום: 37€ לרכב פרטי, כלול רב-כניסה ביום אחד</li>
+                </ul>
+            </div>
+
+            <div class="drive-info">
+                <div class="drive-pill">📍 <span>גרוסגלוקנר: <strong>~1.5 שעה</strong></span></div>
+                <div class="drive-pill">🎟️ <span>תקציב: <strong>~55€ לאדם</strong></span></div>
+                <div class="drive-pill">🌡️ <span>בשיא: <strong>5–10°C בלבד!</strong></span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DAY 9 — DEPARTURE ===== -->
+    <section class="day-section" id="day-9">
+        <div class="day-card">
+            <div class="day-header">
+                <div class="day-title-area">
+                    <h2>יום 9 — יום עזיבה</h2>
+                    <div class="day-subtitle">חמישי, 9 ביולי 2026</div>
+                    <div class="main-destination">✈️ חזרה לארץ</div>
+                </div>
+                <div class="weather-widget">
+                    <div class="weather-icon">☀️</div>
+                    <div class="weather-temp">26°C</div>
+                    <div class="weather-desc">שמשי</div>
+                    <div class="weather-range">מינ' 14°C · מקס' 26°C</div>
+                    <div class="weather-note">יום יפה לפרידה</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">07:00</span></div>
+                    <div class="tl-icon-wrap">🛏️</div>
+                    <div class="tl-content">
+                        <h3>בוקר אחרון — צ'ק-אאוט</h3>
+                        <p>ארוחת בוקר, צ'ק-אאוט, בדיקה שלא שכחתם כלום. סוגרים את הרכב.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-tip">צ'ק-אאוט עד 11:00</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text" id="d9-depart-time">שעת יציאה</span></div>
+                    <div class="tl-icon-wrap">🚗</div>
+                    <div class="tl-content">
+                        <h3>נסיעה לנמל התעופה</h3>
+                        <p id="d9-airport-text">פרטי הטיסה יעודכנו — נסיעה לוינה (~3 שעות) או זלצבורג (20 דק')</p>
+                        <div class="tl-tags"><span class="tl-tag tag-drive" id="d9-drive-tag">~3 שעות לוינה</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text" id="d9-flight-time">שעת המראה</span></div>
+                    <div class="tl-icon-wrap">✈️</div>
+                    <div class="tl-content">
+                        <h3>המראה לישראל</h3>
+                        <p id="d9-flight-details">פרטי הטיסה יעודכנו לאחר שתשלח את הכרטיס</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">Auf Wiedersehen! 🇦🇹</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-box">
+                <h4>✈️ לפני העזיבה</h4>
+                <ul>
+                    <li>החזרת מכונית שכורה — בדקו דלק מלא ואין שריטות</li>
+                    <li>Tax Refund — קניות מעל 75€ → בקשו טופס VAT בחנויות, מוחזר בנמל</li>
+                    <li>וינה VIE — הגיעו 2.5–3 שעות לפני טיסה בינלאומית</li>
+                    <li>Sticker vignette — החזירו לחברת הרכב עם הרכב</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ===== USEFUL INFO ===== -->
+<section class="useful-section">
+    <h2>🛠️ מידע שימושי לטיול</h2>
+    <div class="useful-grid">
+        <div class="useful-card">
+            <h3>🚨 חירום</h3>
+            <ul>
+                <li>חירום כללי: 112</li>
+                <li>משטרה: 133</li>
+                <li>כבאות: 122</li>
+                <li>אמבולנס: 144</li>
+                <li>שגרירות ישראל בוינה: +43 1 476 46 0</li>
+            </ul>
+        </div>
+        <div class="useful-card">
+            <h3>🗣️ גרמנית שימושית</h3>
+            <ul>
+                <li>Danke (דנקה) — תודה</li>
+                <li>Bitte (ביטה) — בבקשה</li>
+                <li>Entschuldigung — סליחה</li>
+                <li>Wo ist...? — איפה נמצא...?</li>
+                <li>Wie viel kostet? — כמה עולה?</li>
+                <li>Hilfe! — עזרה!</li>
+            </ul>
+        </div>
+        <div class="useful-card">
+            <h3>💶 כסף ותשלום</h3>
+            <ul>
+                <li>מטבע: Euro (€)</li>
+                <li>כרטיסי אשראי — נפוצים מאוד</li>
+                <li>מזומן — שימושי בכפרים קטנים</li>
+                <li>טיפ: 5–10% מקובל</li>
+                <li>ATM — בכל עיר</li>
+            </ul>
+        </div>
+        <div class="useful-card">
+            <h3>🚗 נסיעה ברכב</h3>
+            <ul>
+                <li>Vignette — חובה לאוטובאן!</li>
+                <li>מהירות: 130 אוטובאן, 100 כביש, 50 עיר</li>
+                <li>אלכוהול: 0.05% (כמעט אפס)</li>
+                <li>עדיפות: ימין תמיד</li>
+                <li>חניה: כחול = בתשלום, לבן = חינם</li>
+            </ul>
+        </div>
+        <div class="useful-card">
+            <h3>🌡️ מזג אוויר יולי</h3>
+            <ul>
+                <li>ממוצע: 20–27°C ביום</li>
+                <li>לילות: 10–15°C בהרים</li>
+                <li>גשם: אפשרי, במיוחד אחה"צ</li>
+                <li>ביגוד: קיץ + שכבה חמה להרים</li>
+                <li>שמש: זורחת ~05:30, שוקעת ~21:15</li>
+            </ul>
+        </div>
+        <div class="useful-card">
+            <h3>📱 אפליקציות מומלצות</h3>
+            <ul>
+                <li>Google Maps — ניווט אופליין</li>
+                <li>Komoot — שבילי הליכה</li>
+                <li>Weather.at — תחזית אוסטרית</li>
+                <li>ÖBB — רכבות אוסטריה</li>
+                <li>DeepL — תרגום גרמנית</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>🇦🇹 טיול לאוסטריה | יולי 2026 | חבל זלצבורג</p>
+    <p style="margin-top:6px;font-size:11px;">מזג האוויר מבוסס על ממוצע היסטורי — בדקו תחזית עדכנית לפני כל יום</p>
+</footer>
+
+<script>
+    function showDay(n) {
+        document.querySelectorAll('.day-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-day').forEach(d => d.classList.remove('active'));
+        document.getElementById('day-' + n).classList.add('active');
+        document.querySelectorAll('.nav-day')[n].classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Allow clicking overview cards
+    document.querySelectorAll('.ov-card').forEach((card, i) => {
+        card.addEventListener('click', () => showDay(i + 1));
+    });
+
+    // Update accommodation and flight details
+    function updateTripDetails(details) {
+        if (details.accommodation) {
+            document.getElementById('accom-text').textContent = details.accommodation;
+            document.getElementById('d1-accom').textContent = details.accommodation;
+        }
+        if (details.flightArrival) {
+            document.getElementById('flight-text').textContent = details.flightArrival;
+            document.getElementById('d1-flight-details').textContent = details.flightArrival;
+            document.getElementById('d1-land-time').textContent = details.landingTime || 'שעת נחיתה';
+        }
+        if (details.flightDeparture) {
+            document.getElementById('d9-flight-details').textContent = details.flightDeparture;
+            document.getElementById('d9-flight-time').textContent = details.departureTime || 'שעת המראה';
+            document.getElementById('d9-airport-text').textContent = details.airportInfo || document.getElementById('d9-airport-text').textContent;
+            if (details.departureAirport) {
+                document.getElementById('d9-drive-tag').textContent = details.departureAirport;
+            }
+        }
+    }
+
+    // Highlight active day in nav when scrolled
+    document.addEventListener('DOMContentLoaded', () => {
+        showDay(0);
+    });
+</script>
+</body>
+</html>
