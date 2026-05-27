@@ -404,21 +404,6 @@
         .ov-dest { font-size: 15px; font-weight: 700; color: var(--text-dark); }
         .ov-weather { font-size: 13px; margin-top: 4px; }
 
-        /* ===== MAP PLACEHOLDER ===== */
-        .map-placeholder {
-            background: linear-gradient(135deg, #e8f4fd, #d4ecfa);
-            border-radius: 14px;
-            height: 180px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed #5ba3d0;
-            color: var(--blue-mid);
-            margin-bottom: 24px;
-        }
-        .map-placeholder span { font-size: 36px; }
-        .map-placeholder p { font-size: 14px; font-weight: 600; margin-top: 8px; }
 
         /* ===== USEFUL INFO ===== */
         .useful-section {
@@ -462,6 +447,23 @@
             .tl-time { display: none; }
             .timeline-item::before { right: 22px; }
         }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <style>
+        .day-map-wrap {
+            height: 300px;
+            position: relative;
+            border-bottom: 1px solid #edf2f7;
+        }
+        .leaflet-map { height: 100%; width: 100%; }
+        .leaflet-popup-content { font-family: 'Assistant', sans-serif; direction: rtl; }
+        .map-waze-popup {
+            display: inline-flex; align-items: center; gap: 4px;
+            background: #35d4f3; color: #0d1e2e; border-radius: 14px;
+            padding: 3px 11px; font-size: 12px; font-weight: 800;
+            text-decoration: none; margin-top: 7px;
+        }
+        .map-waze-popup:hover { opacity: .82; }
     </style>
 </head>
 <body>
@@ -550,9 +552,8 @@
             <div class="info-card"><div class="ic-icon">🚗</div><div class="ic-title">טיפוס טיול</div><div class="ic-value">נסיעת כוכב</div></div>
         </div>
 
-        <div class="map-placeholder">
-            <span>🏔️</span>
-            <p>מפת אזור זלצבורג — יעדי הטיול</p>
+        <div style="height:360px;border-radius:14px;overflow:hidden;border:1px solid #e2e8f0;margin-bottom:24px;box-shadow:var(--card-shadow)">
+            <div id="map-day-0" class="leaflet-map"></div>
         </div>
 
         <div class="section-title">📅 לוח הטיול</div>
@@ -1547,13 +1548,211 @@
     <p style="margin-top:6px;font-size:11px;">מזג האוויר מבוסס על ממוצע היסטורי — בדקו תחזית עדכנית לפני כל יום</p>
 </footer>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLkQ=" crossorigin=""></script>
 <script>
+    // ===== MAP DATA =====
+    const HOME = [47.3822, 13.414];
+    const TILE = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+    const TILE_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>';
+
+    const dayMaps = {
+        0: {
+            center: [47.6, 13.2], zoom: 8,
+            markers: [
+                { ll:[48.1102,16.5697], e:'✈️', c:'#64748b', n:'וינה — VIE', d:'נחיתה 09:25 | יציאה 21:35' },
+                { ll:[48.2281,15.3337], e:'⛪', c:'#8b5cf6', n:'Stift Melk', d:'עצירה ביום 1' },
+                { ll:[47.8003,13.044],  e:'🏰', c:'#2563a8', n:'זלצבורג', d:'יום 2' },
+                { ll:[47.5622,13.649],  e:'💎', c:'#0891b2', n:'הלשטט', d:'יום 3' },
+                { ll:[47.3822,13.414],  e:'🏠', c:'#e74c3c', n:'Altenmarkt — לינה', d:'Götschlau 91' },
+                { ll:[47.7676,13.3628], e:'⛵', c:'#059669', n:'וולפגנגזה', d:'יום 5' },
+                { ll:[47.5945,12.999],  e:'⛵', c:'#16a34a', n:'קניגסזה', d:'יום 6' },
+                { ll:[47.6115,13.0418], e:'🦅', c:'#ea580c', n:'קן הנשר', d:'יום 6' },
+                { ll:[47.501, 13.192],  e:'🧊', c:'#5ba3d0', n:'Eisriesenwelt', d:'יום 7' },
+                { ll:[47.4828,13.189],  e:'🏰', c:'#c9973a', n:'Hohenwerfen', d:'יום 7' },
+                { ll:[47.0776,12.843],  e:'🏔️', c:'#1a3a5c', n:'גרוסגלוקנר', d:'יום 8' },
+                { ll:[47.3253,12.799],  e:'🏊', c:'#0284c7', n:'Zell am See', d:'יום 8' },
+                { ll:[47.8559,13.350],  e:'🌊', c:'#7c3aed', n:'Mondsee', d:'יום 9' },
+            ],
+            route: null
+        },
+        1: {
+            center: [47.85, 14.5], zoom: 7,
+            markers: [
+                { ll:[48.1102,16.5697], e:'✈️', c:'#2563a8', n:'נמל תעופה וינה (VIE)', d:'נחיתה 09:25 — LY361', w:'Vienna International Airport Schwechat Austria' },
+                { ll:[48.13,  14.95],   e:'🛝', c:'#52b788', n:'Rastplatz Viehdorf', d:'מגרש משחקים — ~70 ק"מ מוינה', w:'Rastplatz Viehdorf 3322 Austria' },
+                { ll:[48.2281,15.3337], e:'⛪', c:'#8b5cf6', n:'Stift Melk', d:'מנזר מרשים — אופציה, 25€ משפחה', w:'Stift Melk 3390 Melk Austria' },
+                { ll:[47.3822,13.414],  e:'🏠', c:'#e74c3c', n:'Altenmarkt — הלינה', d:'Götschlau 91 | צ\'ק-אין מ-14:00', w:'Gotschlau 91 5541 Altenmarkt im Pongau Austria' },
+            ],
+            route: [[48.1102,16.5697],[48.13,14.95],[48.2281,15.3337],[47.3822,13.414]]
+        },
+        2: {
+            center: [47.801, 13.044], zoom: 14,
+            markers: [
+                { ll:[47.8064,13.0432], e:'🌸', c:'#16a34a', n:'גני מירבל', d:'Mirabellgarten — חינם', w:'Mirabellgarten Salzburg Austria' },
+                { ll:[47.8003,13.043],  e:'🎵', c:'#2563a8', n:'גטריידגאסה — מוצרט', d:'Getreidegasse 9 — 12€', w:'Getreidegasse 9 Salzburg Austria' },
+                { ll:[47.7983,13.0457], e:'☕', c:'#c9973a', n:'Café Tomaselli', d:'קפה מ-1703', w:'Cafe Tomaselli Salzburg Austria' },
+                { ll:[47.7953,13.0472], e:'🏰', c:'#e74c3c', n:'מצודת הוהנזלצבורג', d:'Hohensalzburg Fortress — 17€', w:'Festung Hohensalzburg Salzburg Austria' },
+                { ll:[47.805, 13.0372], e:'🍺', c:'#1a3a5c', n:'Augustinerbräu Mülln', d:'בירה מנזרית — 4.5€/ליטר', w:'Augustinerbräu Mülln Salzburg Austria' },
+            ],
+            route: null,
+            home: true
+        },
+        3: {
+            center: [47.562, 13.645], zoom: 14,
+            markers: [
+                { ll:[47.5623,13.6495], e:'🅿️', c:'#2563a8', n:'Parkplatz P1 — חניון', d:'חנו כאן ועברו בסירה (3€)', w:'Parkplatz P1 Hallstatt Austria' },
+                { ll:[47.5622,13.649],  e:'💎', c:'#e74c3c', n:'כפר הלשטט', d:'UNESCO World Heritage', w:'Hallstatt Marktplatz Austria' },
+                { ll:[47.5588,13.660],  e:'🧂', c:'#c9973a', n:'מכרה המלח', d:'Salzwelten — ~30€', w:'Salzwelten Hallstatt Austria' },
+                { ll:[47.5558,13.643],  e:'📸', c:'#52b788', n:'Hallstatt Skywalk', d:'נוף מנשים נשימה — חינם', w:'Hallstatt Skywalk Austria' },
+            ],
+            route: null,
+            home: true
+        },
+        4: {
+            center: [47.382, 13.414], zoom: 13,
+            markers: [
+                { ll:[47.3822,13.414],  e:'🏠', c:'#e74c3c', n:'Altenmarkt im Pongau', d:'Götschlau 91 — שבת, מנוחה', w:'Gotschlau 91 5541 Altenmarkt im Pongau Austria' },
+                { ll:[47.392, 13.409],  e:'⛪', c:'#c9973a', n:'Pfarrkirche Altenmarkt', d:'כנסייה מקומית — טיול רגלי', w:'Altenmarkt im Pongau Kirche Austria' },
+                { ll:[47.375, 13.45],   e:'🚶', c:'#52b788', n:'נהר Enns', d:'שבילי הליכה לאורך הנהר', w:'Fluss Enns Altenmarkt Austria' },
+            ],
+            route: null
+        },
+        5: {
+            center: [47.745, 13.41], zoom: 12,
+            markers: [
+                { ll:[47.7676,13.3628], e:'⛵', c:'#2563a8', n:'St. Gilgen', d:'נקודת יציאת המעבורת', w:'St. Gilgen Wolfgangsee Austria' },
+                { ll:[47.7367,13.4503], e:'🚂', c:'#c9973a', n:'Schafbergbahn — St. Wolfgang', d:'רכבת קיטור היסטורית — הזמן מראש!', w:'Schafbergbahnhof St. Wolfgang Austria' },
+                { ll:[47.755, 13.442],  e:'🏊', c:'#0284c7', n:'חוף שחייה Wolfgangsee', d:'מים נקיים 22°C', w:'Strandbad Wolfgangsee Austria' },
+            ],
+            route: [[47.7676,13.3628],[47.7367,13.4503],[47.755,13.442]],
+            home: true
+        },
+        6: {
+            center: [47.615, 13.01], zoom: 11,
+            markers: [
+                { ll:[47.632, 13.001],  e:'🅿️', c:'#2563a8', n:'חניון ברכטסגאדן', d:'Dokumentation Obersalzberg', w:'Berchtesgaden Parkplatz Germany' },
+                { ll:[47.6115,13.0418], e:'🦅', c:'#ea580c', n:'Kehlsteinhaus — קן הנשר', d:'1834 מ\' — 33€ כולל אוטובוס', w:'Kehlsteinhaus Obersalzberg Berchtesgaden Germany' },
+                { ll:[47.5945,12.999],  e:'⛵', c:'#16a34a', n:'Königssee — קניגסזה', d:'אגם המלכים — 28€', w:'Königssee Schönau Berchtesgaden Germany' },
+            ],
+            route: [[47.632,13.001],[47.6115,13.0418],[47.5945,12.999]],
+            home: true
+        },
+        7: {
+            center: [47.49, 13.19], zoom: 13,
+            markers: [
+                { ll:[47.4783,13.187],  e:'🅿️', c:'#2563a8', n:'כפר וורפן — חניה', d:'חינם, נקודת יציאה', w:'Werfen Pongau Austria' },
+                { ll:[47.501, 13.192],  e:'🧊', c:'#5ba3d0', n:'Eisriesenwelt', d:'מערות הקרח הגדולות בעולם! — ~32€', w:'Eisriesenwelt Werfen Austria' },
+                { ll:[47.4828,13.189],  e:'🏰', c:'#c9973a', n:'Burg Hohenwerfen', d:'מבצר + תצוגת נשרים — 18€', w:'Burg Hohenwerfen Werfen Austria' },
+            ],
+            route: [[47.4783,13.187],[47.501,13.192],[47.4828,13.189]],
+            home: true
+        },
+        8: {
+            center: [47.2, 12.87], zoom: 10,
+            markers: [
+                { ll:[47.2249,12.832],  e:'🎫', c:'#2563a8', n:'כניסה גרוסגלוקנר — Fusch', d:'37€ לרכב', w:'Großglockner Hochalpenstraße Mautstelle Fusch Austria' },
+                { ll:[47.0776,12.843],  e:'🏔️', c:'#1a3a5c', n:'Kaiser-Franz-Josefs-Höhe', d:'נוף לקרחון פסטרזה וגרוסגלוקנר 3798 מ\'', w:'Kaiser Franz Josefs Höhe Grossglockner Austria' },
+                { ll:[47.3253,12.799],  e:'🏊', c:'#0284c7', n:'Zell am See', d:'אגם + עיר נופש', w:'Zell am See Seepromenade Austria' },
+            ],
+            route: [[47.3822,13.414],[47.2249,12.832],[47.0776,12.843],[47.3253,12.799]],
+            home: true
+        },
+        9: {
+            center: [47.9, 14.3], zoom: 8,
+            markers: [
+                { ll:[47.3822,13.414],  e:'👋', c:'#52b788', n:'Altenmarkt — פרידה', d:'יציאה ~15:30', w:'Altenmarkt im Pongau Austria' },
+                { ll:[47.8559,13.350],  e:'🌊', c:'#7c3aed', n:'Mondsee', d:'כנסיית Sound of Music + אגם', w:'Mondsee Marktplatz Austria' },
+                { ll:[48.1102,16.5697], e:'✈️', c:'#e74c3c', n:'VIE — המראה', d:'LY364 | 21:35 → ת"א', w:'Vienna International Airport Terminal 3 Schwechat Austria' },
+            ],
+            route: [[47.3822,13.414],[47.8559,13.350],[48.1102,16.5697]],
+        },
+    };
+
+    const initializedMaps = {};
+
+    function markerIcon(emoji, color, sz = 34) {
+        return L.divIcon({
+            className: '',
+            html: `<div style="background:${color};width:${sz}px;height:${sz}px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:${sz * .44}px;border:2.5px solid #fff;box-shadow:0 2px 9px rgba(0,0,0,.35)">${emoji}</div>`,
+            iconSize: [sz, sz], iconAnchor: [sz/2, sz/2], popupAnchor: [0, -sz/2 - 4]
+        });
+    }
+
+    function wazePopupLink(address, latLng) {
+        const q = address ? encodeURIComponent(address) : `${latLng[0]},${latLng[1]}`;
+        return `<a href="https://waze.com/ul?q=${q}&navigate=yes" target="_blank" rel="noopener" class="map-waze-popup">🗺️ ויז</a>`;
+    }
+
+    function buildMap(dayNum) {
+        const data = dayMaps[dayNum];
+        if (!data) return;
+
+        const containerId = 'map-day-' + dayNum;
+        let container = document.getElementById(containerId);
+
+        // For days 1–9 the container lives inside the day-card; create it if missing
+        if (!container && dayNum > 0) {
+            const dayCard = document.querySelector('#day-' + dayNum + ' .day-card');
+            if (!dayCard) return;
+            const header = dayCard.querySelector('.day-header');
+            const wrap = document.createElement('div');
+            wrap.className = 'day-map-wrap';
+            const inner = document.createElement('div');
+            inner.id = containerId;
+            inner.className = 'leaflet-map';
+            wrap.appendChild(inner);
+            header.insertAdjacentElement('afterend', wrap);
+            container = inner;
+        }
+        if (!container) return;
+
+        const map = L.map(containerId, { zoomControl: true, scrollWheelZoom: false });
+        L.tileLayer(TILE, { attribution: TILE_ATTR, maxZoom: 19 }).addTo(map);
+
+        // Home marker for all days except day 0 and day 4
+        if (data.home) {
+            L.marker(HOME, { icon: markerIcon('🏠', '#e74c3c', 30) })
+             .addTo(map)
+             .bindPopup(`<strong>Altenmarkt — הלינה</strong><br>Götschlau 91<br>${wazePopupLink('Gotschlau 91 5541 Altenmarkt im Pongau Austria', HOME)}`);
+        }
+
+        // Day markers
+        const bounds = [];
+        data.markers.forEach(m => {
+            bounds.push(m.ll);
+            L.marker(m.ll, { icon: markerIcon(m.e, m.c) })
+             .addTo(map)
+             .bindPopup(`<strong style="font-size:14px">${m.n}</strong><br><span style="color:#555;font-size:12px">${m.d}</span><br>${wazePopupLink(m.w, m.ll)}`);
+        });
+        if (data.home) bounds.push(HOME);
+
+        // Route polyline
+        if (data.route) {
+            L.polyline(data.route, { color: '#2563a8', weight: 3, opacity: .55, dashArray: '10,7' }).addTo(map);
+        }
+
+        // Fit bounds or use center/zoom
+        if (bounds.length > 1) {
+            map.fitBounds(bounds, { padding: [40, 40] });
+        } else {
+            map.setView(data.center, data.zoom);
+        }
+
+        initializedMaps[dayNum] = map;
+    }
+
     function showDay(n) {
         document.querySelectorAll('.day-section').forEach(s => s.classList.remove('active'));
         document.querySelectorAll('.nav-day').forEach(d => d.classList.remove('active'));
         document.getElementById('day-' + n).classList.add('active');
         document.querySelectorAll('.nav-day')[n].classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Build map on first visit; invalidate on revisit
+        if (!initializedMaps[n]) {
+            setTimeout(() => buildMap(n), 80);
+        } else {
+            setTimeout(() => initializedMaps[n].invalidateSize(), 80);
+        }
     }
 
     // Allow clicking overview cards
@@ -1585,6 +1784,8 @@
     // Highlight active day in nav when scrolled
     document.addEventListener('DOMContentLoaded', () => {
         showDay(0);
+        // Build overview map immediately (container already in DOM)
+        setTimeout(() => buildMap(0), 120);
     });
 
     // ===== WAZE BUTTONS =====
