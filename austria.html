@@ -267,6 +267,20 @@
         .tl-content h3 { font-size: 16px; font-weight: 700; color: var(--text-dark); }
         .tl-content p { font-size: 14px; color: var(--text-mid); margin-top: 4px; }
         .tl-content .tl-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+        .waze-btn {
+            background: #35d4f3 !important;
+            color: #0d1e2e !important;
+            font-weight: 800 !important;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-flex !important;
+            align-items: center;
+            gap: 4px;
+            transition: opacity .2s, transform .1s;
+            white-space: nowrap;
+        }
+        .waze-btn:hover { opacity: .82; transform: scale(1.04); }
+        .waze-btn svg { flex-shrink: 0; }
         .tl-tag {
             font-size: 12px;
             padding: 2px 10px;
@@ -469,6 +483,10 @@
 <div class="accommodation-bar">
     <span class="badge">🏠 לינה</span>
     <span id="accom-text">Götschlau 91, 5541 Altenmarkt im Pongau — פונגאו, אוסטריה</span>
+    <a href="https://waze.com/ul?q=Gotschlau+91+5541+Altenmarkt+im+Pongau+Austria&navigate=yes" target="_blank" rel="noopener noreferrer" class="tl-tag waze-btn" style="padding:4px 12px;border-radius:20px;font-size:13px;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        ויז לאכסניה
+    </a>
     <span class="badge">✈️ נחיתה</span>
     <span id="flight-text">LY361: המראה ת"א 06:40 ← נחיתה וינה 09:25 | LY364: המראה וינה 21:35 → הגעה ת"א 02:00</span>
 </div>
@@ -1567,6 +1585,59 @@
     // Highlight active day in nav when scrolled
     document.addEventListener('DOMContentLoaded', () => {
         showDay(0);
+    });
+
+    // ===== WAZE BUTTONS =====
+    const wazeMap = {
+        'נחיתה בנמל התעופה וינה':       'Vienna International Airport VIE Schwechat Austria',
+        'איסוף מכונית שכורה':            'Vienna Airport Car Rental Terminal 3 Schwechat Austria',
+        'Rastplatz Viehdorf':             'Rastplatz Viehdorf 3322 Viehdorf Austria',
+        'מנזר מלק':                       'Stift Melk 3390 Melk Wachau Austria',
+        'הגעה לאכסניה':                   'Gotschlau 91 5541 Altenmarkt im Pongau Austria',
+        'נסיעה לזלצבורג':                'Parkhaus Mönchsberg Salzburg Austria',
+        'גני מירבל':                      'Mirabellgarten Salzburg Austria',
+        'גטריידגאסה':                     'Getreidegasse 9 Salzburg Austria',
+        'Café Tomaselli':                 'Cafe Tomaselli Alter Markt Salzburg Austria',
+        'הוהנזלצבורג':                    'Festung Hohensalzburg Salzburg Austria',
+        'Augustinerbräu':                 'Augustinerbräu Mülln Salzburg Austria',
+        'יציאה מוקדמת להלשטט':           'Parkplatz P1 Hallstatt Salzkammergut Austria',
+        'מעבורת לכפר הלשטט':             'Hallstatt Marktplatz Austria',
+        'מכרה המלח':                      'Salzwelten Hallstatt Austria',
+        'Hallstatt Skywalk':              'Hallstatt Skywalk Austria',
+        'נסיעה לסנקט גילגן':             'St. Gilgen Wolfgangsee Austria',
+        'שייט בסירה לסנקט וולפגנג':      'Schifffahrt Wolfgangsee St. Gilgen Austria',
+        'Schafbergbahn':                  'Schafbergbahnhof St. Wolfgang Austria',
+        'שחייה באגם וולפגנגזה':          'Strandbad St. Wolfgang Wolfgangsee Austria',
+        'יציאה מוקדמת לברכטסגאדן':      'Parkplatz Berchtesgaden Germany',
+        'קן הנשר':                        'Kehlsteinhaus Parkplatz Obersalzberg Berchtesgaden Germany',
+        'אגם קניגסזה':                    'Königssee Parkplatz Schönau Berchtesgaden Germany',
+        'נסיעה לוורפן':                   'Werfen Pongau Salzburg Austria',
+        'מערות הקרח':                     'Eisriesenwelt Werfen Austria',
+        'מבצר הוהנוורפן':                 'Burg Hohenwerfen Werfen Austria',
+        'יציאה לגרוסגלוקנר':             'Großglockner Hochalpenstraße Mautstelle Fusch Austria',
+        'גרוסגלוקנר — נסיעה':            'Großglockner Hochalpenstraße Kaiser-Franz-Josefs-Höhe Austria',
+        'Zell am See':                    'Zell am See Stadtpark Seepromenade Austria',
+        'Mondsee':                        'Mondsee Marktplatz Austria',
+        'החזרת הרכב':                     'Vienna Airport Car Rental Return Schwechat Austria',
+        'המראה — LY364':                  'Vienna International Airport Terminal 3 Schwechat Austria',
+    };
+
+    const wazeIcon = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`;
+
+    document.querySelectorAll('.timeline-item .tl-content').forEach(content => {
+        const h3 = content.querySelector('h3');
+        const tags = content.querySelector('.tl-tags');
+        if (!h3 || !tags) return;
+        const title = h3.textContent;
+        const key = Object.keys(wazeMap).find(k => title.includes(k));
+        if (!key) return;
+        const btn = document.createElement('a');
+        btn.href = `https://waze.com/ul?q=${encodeURIComponent(wazeMap[key])}&navigate=yes`;
+        btn.target = '_blank';
+        btn.rel = 'noopener noreferrer';
+        btn.className = 'tl-tag waze-btn';
+        btn.innerHTML = `${wazeIcon} ויז`;
+        tags.appendChild(btn);
     });
 </script>
 </body>
