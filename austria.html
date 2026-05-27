@@ -468,7 +468,18 @@
             background: #e8f0f5;
         }
         .map-day-0-wrap iframe { width:100%; height:100%; border:0; display:block; }
+        /* Leaflet overrides */
+        .leaflet-map { height:100%; width:100%; }
+        .leaflet-popup-content { font-family:'Assistant',sans-serif; direction:rtl; min-width:170px; }
+        .map-waze-btn {
+            display:inline-flex; align-items:center; gap:4px;
+            background:#35d4f3; color:#0d1e2e; border-radius:14px;
+            padding:3px 11px; font-size:12px; font-weight:800;
+            text-decoration:none; margin-top:7px;
+        }
     </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
 </head>
 <body>
 
@@ -556,7 +567,9 @@
             <div class="info-card"><div class="ic-icon">🚗</div><div class="ic-title">טיפוס טיול</div><div class="ic-value">נסיעת כוכב</div></div>
         </div>
 
-        <div class="map-day-0-wrap" id="map-day-0-wrap"></div>
+        <div class="map-day-0-wrap" id="map-day-0-wrap">
+            <div id="map-day-0" class="leaflet-map"></div>
+        </div>
 
         <div class="section-title">📅 לוח הטיול</div>
         <div class="overview-grid">
@@ -1551,47 +1564,230 @@
 </footer>
 
 <script>
-    // ===== GOOGLE MAPS IFRAMES =====
-    const gmapsUrls = {
-        0: 'https://maps.google.com/maps?ll=47.6,13.2&z=9&t=m&output=embed',
-        1: 'https://maps.google.com/maps?saddr=Vienna+International+Airport+Austria&daddr=Stift+Melk+Austria+to:Altenmarkt+im+Pongau+Austria&output=embed',
+    // ===== MAPS =====
+    const HOME = [47.3822, 13.414];
+
+    // Leaflet POI data per day
+    const dayPOI = {
+        0: {
+            view: [47.55, 13.15], zoom: 8,
+            places: [
+                { ll:[48.1102,16.5697], e:'✈️', c:'#64748b', n:'וינה — VIE', d:'נחיתה 09:25 | יציאה 21:35' },
+                { ll:[48.2281,15.3337], e:'⛪', c:'#8b5cf6', n:'Stift Melk', d:'עצירה ביום 1' },
+                { ll:[47.8003,13.044],  e:'🏰', c:'#2563a8', n:'זלצבורג', d:'יום 2' },
+                { ll:[47.5622,13.649],  e:'💎', c:'#0891b2', n:'הלשטט', d:'יום 3' },
+                { ll:[47.3822,13.414],  e:'🏠', c:'#e74c3c', n:'Altenmarkt — לינה', d:'Götschlau 91' },
+                { ll:[47.7676,13.3628], e:'⛵', c:'#059669', n:'וולפגנגזה', d:'יום 5' },
+                { ll:[47.5945,12.999],  e:'⛵', c:'#16a34a', n:'קניגסזה', d:'יום 6' },
+                { ll:[47.6115,13.0418], e:'🦅', c:'#ea580c', n:'קן הנשר', d:'יום 6' },
+                { ll:[47.501, 13.192],  e:'🧊', c:'#5ba3d0', n:'Eisriesenwelt', d:'יום 7' },
+                { ll:[47.4828,13.189],  e:'🏰', c:'#c9973a', n:'Hohenwerfen', d:'יום 7' },
+                { ll:[47.0776,12.843],  e:'🏔️', c:'#1a3a5c', n:'גרוסגלוקנר', d:'יום 8' },
+                { ll:[47.3253,12.799],  e:'🏊', c:'#0284c7', n:'Zell am See', d:'יום 8' },
+                { ll:[47.8559,13.350],  e:'🌊', c:'#7c3aed', n:'Mondsee', d:'יום 9' },
+            ]
+        },
+        1: {
+            view: [47.85, 14.5], zoom: 7,
+            route: [[48.1102,16.5697],[48.13,14.95],[48.2281,15.3337],[47.3822,13.414]],
+            places: [
+                { ll:[48.1102,16.5697], e:'✈️', c:'#2563a8', n:'נמל תעופה וינה (VIE)', d:'נחיתה 09:25 — LY361', w:'Vienna International Airport Schwechat Austria' },
+                { ll:[48.13,  14.95],   e:'🛝', c:'#52b788', n:'Rastplatz Viehdorf', d:'מגרש משחקים לילדים', w:'Rastplatz Viehdorf 3322 Austria' },
+                { ll:[48.2281,15.3337], e:'⛪', c:'#8b5cf6', n:'Stift Melk', d:'מנזר מרשים — כרטיס משפחה 25€', w:'Stift Melk 3390 Melk Austria' },
+                { ll:[47.3822,13.414],  e:'🏠', c:'#e74c3c', n:'Altenmarkt — הלינה', d:'Götschlau 91 | צ\'ק-אין מ-14:00', w:'Gotschlau 91 5541 Altenmarkt im Pongau Austria' },
+            ]
+        },
+        2: {
+            view: [47.801, 13.044], zoom: 14,
+            home: true,
+            places: [
+                { ll:[47.8064,13.0432], e:'🌸', c:'#16a34a', n:'גני מירבל', d:'Mirabellgarten — חינם', w:'Mirabellgarten Salzburg Austria' },
+                { ll:[47.8003,13.043],  e:'🎵', c:'#2563a8', n:'גטריידגאסה — מוצרט', d:'Getreidegasse 9 — 12€', w:'Getreidegasse 9 Salzburg Austria' },
+                { ll:[47.7983,13.0457], e:'☕', c:'#c9973a', n:'Café Tomaselli', d:'קפה מ-1703', w:'Cafe Tomaselli Salzburg Austria' },
+                { ll:[47.7953,13.0472], e:'🏰', c:'#e74c3c', n:'מצודת הוהנזלצבורג', d:'Hohensalzburg Fortress — 17€', w:'Festung Hohensalzburg Salzburg Austria' },
+                { ll:[47.805, 13.0372], e:'🍺', c:'#1a3a5c', n:'Augustinerbräu Mülln', d:'בירה מנזרית — 4.5€/ל׳', w:'Augustinerbräu Mülln Salzburg Austria' },
+            ]
+        },
+        3: {
+            view: [47.562, 13.648], zoom: 14,
+            home: true,
+            places: [
+                { ll:[47.5623,13.6495], e:'🅿️', c:'#2563a8', n:'Parkplatz P1', d:'חנו כאן → סירה לכפר (3€)', w:'Parkplatz P1 Hallstatt Austria' },
+                { ll:[47.5622,13.649],  e:'💎', c:'#e74c3c', n:'כפר הלשטט', d:'UNESCO World Heritage', w:'Hallstatt Marktplatz Austria' },
+                { ll:[47.5588,13.660],  e:'🧂', c:'#c9973a', n:'מכרה המלח', d:'Salzwelten — ~30€', w:'Salzwelten Hallstatt Austria' },
+                { ll:[47.5558,13.643],  e:'📸', c:'#52b788', n:'Hallstatt Skywalk', d:'נוף מנשים נשימה — חינם', w:'Hallstatt Skywalk Austria' },
+            ]
+        },
+        4: {
+            view: [47.382, 13.414], zoom: 13,
+            places: [
+                { ll:[47.3822,13.414],  e:'🏠', c:'#e74c3c', n:'Altenmarkt im Pongau', d:'שבת — מנוחה', w:'Gotschlau 91 5541 Altenmarkt im Pongau Austria' },
+                { ll:[47.392, 13.409],  e:'⛪', c:'#c9973a', n:'Pfarrkirche Altenmarkt', d:'כנסייה מקומית', w:'Pfarrkirche Altenmarkt Austria' },
+                { ll:[47.375, 13.45],   e:'🚶', c:'#52b788', n:'נהר Enns', d:'שבילי הליכה', w:'Fluss Enns Altenmarkt Austria' },
+            ]
+        },
+        5: {
+            view: [47.745, 13.41], zoom: 12,
+            home: true,
+            route: [[47.7676,13.3628],[47.7367,13.4503],[47.755,13.442]],
+            places: [
+                { ll:[47.7676,13.3628], e:'⛵', c:'#2563a8', n:'St. Gilgen', d:'יציאת המעבורת', w:'St. Gilgen Wolfgangsee Austria' },
+                { ll:[47.7367,13.4503], e:'🚂', c:'#c9973a', n:'Schafbergbahn — St. Wolfgang', d:'רכבת קיטור — הזמן מראש!', w:'Schafbergbahnhof St. Wolfgang Austria' },
+                { ll:[47.755, 13.442],  e:'🏊', c:'#0284c7', n:'חוף שחייה Wolfgangsee', d:'מים נקיים 22°C', w:'Strandbad Wolfgangsee Austria' },
+            ]
+        },
+        6: {
+            view: [47.615, 13.01], zoom: 11,
+            home: true,
+            route: [[47.632,13.001],[47.6115,13.0418],[47.5945,12.999]],
+            places: [
+                { ll:[47.632, 13.001],  e:'🅿️', c:'#2563a8', n:'חניון ברכטסגאדן', d:'Dokumentation Obersalzberg', w:'Berchtesgaden Parkplatz Germany' },
+                { ll:[47.6115,13.0418], e:'🦅', c:'#ea580c', n:'Kehlsteinhaus — קן הנשר', d:'1834 מ\' — 33€ כולל אוטובוס', w:'Kehlsteinhaus Obersalzberg Berchtesgaden Germany' },
+                { ll:[47.5945,12.999],  e:'⛵', c:'#16a34a', n:'Königssee', d:'אגם המלכים — 28€', w:'Königssee Schönau Berchtesgaden Germany' },
+            ]
+        },
+        7: {
+            view: [47.49, 13.19], zoom: 13,
+            home: true,
+            route: [[47.4783,13.187],[47.501,13.192],[47.4828,13.189]],
+            places: [
+                { ll:[47.4783,13.187],  e:'🅿️', c:'#2563a8', n:'כפר וורפן — חניה', d:'חינם, נקודת יציאה', w:'Werfen Pongau Austria' },
+                { ll:[47.501, 13.192],  e:'🧊', c:'#5ba3d0', n:'Eisriesenwelt', d:'מערות הקרח — ~32€', w:'Eisriesenwelt Werfen Austria' },
+                { ll:[47.4828,13.189],  e:'🏰', c:'#c9973a', n:'Burg Hohenwerfen', d:'מבצר + נשרים — 18€', w:'Burg Hohenwerfen Werfen Austria' },
+            ]
+        },
+        8: {
+            view: [47.2, 12.87], zoom: 10,
+            home: true,
+            route: [[47.3822,13.414],[47.2249,12.832],[47.0776,12.843],[47.3253,12.799]],
+            places: [
+                { ll:[47.2249,12.832],  e:'🎫', c:'#2563a8', n:'כניסה גרוסגלוקנר — Fusch', d:'37€ לרכב', w:'Großglockner Hochalpenstraße Fusch Austria' },
+                { ll:[47.0776,12.843],  e:'🏔️', c:'#1a3a5c', n:'Kaiser-Franz-Josefs-Höhe', d:'נוף לקרחון פסטרזה + גרוסגלוקנר 3798 מ\'', w:'Kaiser Franz Josefs Höhe Grossglockner Austria' },
+                { ll:[47.3253,12.799],  e:'🏊', c:'#0284c7', n:'Zell am See', d:'אגם + עיר נופש', w:'Zell am See Seepromenade Austria' },
+            ]
+        },
+        9: {
+            view: [47.9, 14.3], zoom: 8,
+            route: [[47.3822,13.414],[47.8559,13.350],[48.1102,16.5697]],
+            places: [
+                { ll:[47.3822,13.414],  e:'👋', c:'#52b788', n:'Altenmarkt — פרידה', d:'יציאה ~15:30', w:'Altenmarkt im Pongau Austria' },
+                { ll:[47.8559,13.350],  e:'🌊', c:'#7c3aed', n:'Mondsee', d:'כנסיית Sound of Music + אגם', w:'Mondsee Marktplatz Austria' },
+                { ll:[48.1102,16.5697], e:'✈️', c:'#e74c3c', n:'VIE — המראה', d:'LY364 | 21:35 → ת"א', w:'Vienna International Airport Schwechat Austria' },
+            ]
+        },
+    };
+
+    // Google Maps fallback URLs (used if Leaflet fails to load)
+    const gmapsFallback = {
+        0: 'https://maps.google.com/maps?ll=47.55,13.15&z=8&t=m&output=embed',
+        1: 'https://maps.google.com/maps?saddr=Vienna+International+Airport&daddr=Stift+Melk+to:Altenmarkt+im+Pongau&output=embed',
         2: 'https://maps.google.com/maps?ll=47.8,13.044&z=14&t=m&output=embed',
-        3: 'https://maps.google.com/maps?q=Hallstatt+Salzkammergut+Austria&z=14&output=embed',
+        3: 'https://maps.google.com/maps?q=Hallstatt+Austria&z=14&output=embed',
         4: 'https://maps.google.com/maps?q=Altenmarkt+im+Pongau+Austria&z=13&output=embed',
-        5: 'https://maps.google.com/maps?q=Wolfgangsee+St+Wolfgang+St+Gilgen+Austria&z=12&output=embed',
-        6: 'https://maps.google.com/maps?saddr=Berchtesgaden+Germany&daddr=Kehlsteinhaus+Germany+to:Konigssee+Berchtesgaden+Germany&output=embed',
-        7: 'https://maps.google.com/maps?saddr=Werfen+Austria&daddr=Eisriesenwelt+Werfen+Austria+to:Burg+Hohenwerfen+Austria&output=embed',
-        8: 'https://maps.google.com/maps?saddr=Fusch+an+der+Grossglocknerstrasse+Austria&daddr=Kaiser+Franz+Josefs+Hohe+Grossglockner+to:Zell+am+See+Austria&output=embed',
-        9: 'https://maps.google.com/maps?saddr=Altenmarkt+im+Pongau+Austria&daddr=Mondsee+Austria+to:Vienna+International+Airport+Austria&output=embed',
+        5: 'https://maps.google.com/maps?q=Wolfgangsee+Austria&z=12&output=embed',
+        6: 'https://maps.google.com/maps?saddr=Berchtesgaden+Germany&daddr=Kehlsteinhaus+to:Konigssee+Berchtesgaden&output=embed',
+        7: 'https://maps.google.com/maps?saddr=Werfen+Austria&daddr=Eisriesenwelt+to:Burg+Hohenwerfen&output=embed',
+        8: 'https://maps.google.com/maps?saddr=Grossglockner+Austria&daddr=Zell+am+See+Austria&output=embed',
+        9: 'https://maps.google.com/maps?saddr=Altenmarkt+im+Pongau&daddr=Mondsee+to:Vienna+Airport&output=embed',
     };
 
     const shownMaps = new Set();
 
-    function buildMap(dayNum) {
-        if (shownMaps.has(dayNum)) return;
-        shownMaps.add(dayNum);
-        const url = gmapsUrls[dayNum];
-        if (!url) return;
+    function pinIcon(emoji, color, sz) {
+        sz = sz || 34;
+        return L.divIcon({
+            className: '',
+            html: '<div style="background:' + color + ';width:' + sz + 'px;height:' + sz + 'px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:' + Math.round(sz * .44) + 'px;border:2.5px solid #fff;box-shadow:0 2px 9px rgba(0,0,0,.35)">' + emoji + '</div>',
+            iconSize: [sz, sz], iconAnchor: [sz/2, sz/2], popupAnchor: [0, -sz/2 - 4]
+        });
+    }
 
+    function wazeLink(address, ll) {
+        const q = address ? encodeURIComponent(address) : ll[0] + ',' + ll[1];
+        return '<a href="https://waze.com/ul?q=' + q + '&navigate=yes" target="_blank" rel="noopener" class="map-waze-btn">🗺️ ויז</a>';
+    }
+
+    function getOrCreateContainer(dayNum) {
+        if (dayNum === 0) return document.getElementById('map-day-0');
+        const dayCard = document.querySelector('#day-' + dayNum + ' .day-card');
+        if (!dayCard) return null;
+        const existing = dayCard.querySelector('.day-map-wrap');
+        if (existing) return existing.querySelector('.leaflet-map') || existing;
+        const wrap = document.createElement('div');
+        wrap.className = 'day-map-wrap';
+        const inner = document.createElement('div');
+        inner.className = 'leaflet-map';
+        wrap.appendChild(inner);
+        dayCard.querySelector('.day-header').insertAdjacentElement('afterend', wrap);
+        return inner;
+    }
+
+    function buildLeafletMap(dayNum) {
+        const data = dayPOI[dayNum];
+        if (!data) return;
+        const container = getOrCreateContainer(dayNum);
+        if (!container) return;
+
+        const map = L.map(container, { zoomControl: true, scrollWheelZoom: false });
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            subdomains: 'abc', maxZoom: 19
+        }).addTo(map);
+
+        const bounds = [];
+        if (data.home) {
+            bounds.push(HOME);
+            L.marker(HOME, { icon: pinIcon('🏠', '#e74c3c', 30) }).addTo(map)
+             .bindPopup('<strong>Altenmarkt — הלינה</strong><br>Götschlau 91<br>' + wazeLink('Gotschlau 91 5541 Altenmarkt im Pongau Austria', HOME));
+        }
+        data.places.forEach(function(p) {
+            bounds.push(p.ll);
+            L.marker(p.ll, { icon: pinIcon(p.e, p.c) }).addTo(map)
+             .bindPopup('<strong style="font-size:14px">' + p.n + '</strong><br><span style="color:#555;font-size:12px">' + p.d + '</span>' + (p.w ? '<br>' + wazeLink(p.w, p.ll) : ''));
+        });
+        if (data.route) {
+            L.polyline(data.route, { color:'#2563a8', weight:3, opacity:.55, dashArray:'10,7' }).addTo(map);
+        }
+        if (bounds.length > 1) {
+            map.fitBounds(bounds, { padding:[40,40], maxZoom: dayNum === 0 ? 9 : 16 });
+        } else {
+            map.setView(data.view, data.zoom);
+        }
+        setTimeout(function() { map.invalidateSize(); }, 300);
+    }
+
+    function buildGmapsIframe(dayNum) {
+        const url = gmapsFallback[dayNum];
+        if (!url) return;
         let container;
         if (dayNum === 0) {
             container = document.getElementById('map-day-0-wrap');
+            const inner = document.getElementById('map-day-0');
+            if (inner) inner.remove();
         } else {
             const dayCard = document.querySelector('#day-' + dayNum + ' .day-card');
             if (!dayCard) return;
-            const header = dayCard.querySelector('.day-header');
             container = document.createElement('div');
             container.className = 'day-map-wrap';
-            header.insertAdjacentElement('afterend', container);
+            dayCard.querySelector('.day-header').insertAdjacentElement('afterend', container);
         }
         if (!container) return;
-
         const iframe = document.createElement('iframe');
         iframe.src = url;
+        iframe.style.cssText = 'width:100%;height:100%;border:0;display:block;';
         iframe.allowFullscreen = true;
         iframe.loading = 'lazy';
-        iframe.referrerPolicy = 'no-referrer-when-downgrade';
         container.appendChild(iframe);
+    }
+
+    function buildMap(dayNum) {
+        if (shownMaps.has(dayNum)) return;
+        shownMaps.add(dayNum);
+        if (typeof L !== 'undefined') {
+            buildLeafletMap(dayNum);
+        } else {
+            buildGmapsIframe(dayNum);
+        }
     }
 
     function showDay(n) {
