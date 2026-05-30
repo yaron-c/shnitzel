@@ -477,6 +477,26 @@
             padding:3px 11px; font-size:12px; font-weight:800;
             text-decoration:none; margin-top:7px;
         }
+        /* SalzburgerLand Card badge */
+        .slc-badge {
+            display:inline-flex; align-items:center; gap:3px;
+            background:linear-gradient(135deg,#16a34a,#15803d);
+            color:#fff !important; border-radius:12px;
+            padding:2px 9px; font-size:11px; font-weight:800;
+            cursor:help; white-space:nowrap;
+            text-decoration:none !important;
+        }
+        .slc-badge-excl {
+            background:linear-gradient(135deg,#d97706,#b45309);
+        }
+        .slc-legend {
+            display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+            background:#f0fdf4; border:1px solid #bbf7d0; border-radius:10px;
+            padding:8px 14px; margin:8px 16px 0; font-size:12px; color:#166534;
+            direction:rtl;
+        }
+        .slc-legend .slc-badge { cursor:default; font-size:11px; }
+        .slc-legend-sep { color:#86efac; }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
@@ -1883,6 +1903,47 @@
         btn.innerHTML = `${wazeIcon} ויז`;
         tags.appendChild(btn);
     });
+
+    // ===== SALZBURGERLAND CARD BADGES =====
+    // type 'slc' = כלול תמיד, type 'city' = כלול דרך 24ש זלצבורג (אקסקלוסיבי עם גרוסגלוקנר), type 'gross' = גרוסגלוקנר (אקסקלוסיבי עם זלצבורג)
+    const slcMap = {
+        'הוהנזלצבורג':               { type:'city', tip:'כלול בכרטיס SalzburgerLand דרך 24ש לעיר זלצבורג — אך לא ניתן לשלב עם גרוסגלוקנר באותו כרטיס' },
+        'גטריידגאסה':                { type:'city', tip:'מוזיאון בית מוצרט כלול בכרטיס SalzburgerLand דרך 24ש לעיר זלצבורג' },
+        'שייט בסירה לסנקט וולפגנג':  { type:'slc',  tip:'שייט בוולפגנגזה כלול בכרטיס SalzburgerLand Card' },
+        'Schafbergbahn':              { type:'slc',  tip:'רכבת הקיטור שאפברג כלולה בכרטיס SalzburgerLand Card' },
+        'Eisriesenwelt':              { type:'slc',  tip:'מערות הקרח של וורפן (Eisriesenwelt) כלולות בכרטיס SalzburgerLand Card' },
+        'הוהנוורפן':                 { type:'slc',  tip:'מבצר הוהנוורפן כלול בכרטיס SalzburgerLand Card' },
+        'כביש גרוסגלוקנר':           { type:'gross', tip:'כלול בכרטיס SalzburgerLand — אך לא ניתן לשלב עם 24ש בעיר זלצבורג (בחרו אחד!)' },
+        'Zell am See — עיר ואגם':    { type:'slc',  tip:'שייט ורכבל Schmittenhöhe בציל אם זה כלולים בכרטיס SalzburgerLand Card' },
+    };
+
+    document.querySelectorAll('.timeline-item .tl-content').forEach(content => {
+        const h3 = content.querySelector('h3');
+        const tags = content.querySelector('.tl-tags');
+        if (!h3 || !tags) return;
+        const title = h3.textContent;
+        const key = Object.keys(slcMap).find(k => title.includes(k));
+        if (!key) return;
+        const { type, tip } = slcMap[key];
+        const badge = document.createElement('span');
+        badge.className = 'tl-tag slc-badge' + (type === 'gross' ? ' slc-badge-excl' : type === 'city' ? ' slc-badge-excl' : '');
+        badge.title = tip;
+        badge.textContent = type === 'gross' ? '🎫 SLC*' : type === 'city' ? '🎫 SLC*' : '🎫 SLC ✓';
+        tags.prepend(badge);
+    });
+
+    // אגדה מתחת לניווט הימים
+    const nav = document.querySelector('.day-nav');
+    if (nav) {
+        const legend = document.createElement('div');
+        legend.className = 'slc-legend';
+        legend.innerHTML = `
+            <span class="slc-badge">🎫 SLC ✓</span><span>כלול בכרטיס SalzburgerLand Card</span>
+            <span class="slc-legend-sep">|</span>
+            <span class="slc-badge slc-badge-excl">🎫 SLC*</span><span>כלול — אך לא ניתן לשלב גרוסגלוקנר + זלצבורג עיר באותו כרטיס</span>
+        `;
+        nav.insertAdjacentElement('afterend', legend);
+    }
 </script>
 </body>
 </html>
