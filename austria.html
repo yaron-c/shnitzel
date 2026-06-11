@@ -497,6 +497,17 @@
         }
         .slc-legend .slc-badge { cursor:default; font-size:11px; }
         .slc-legend-sep { color:#86efac; }
+        /* Weather suitability badges */
+        .weather-badge {
+            display:inline-flex; align-items:center; gap:3px;
+            border-radius:12px; padding:2px 9px;
+            font-size:11px; font-weight:700;
+            white-space:nowrap; cursor:help;
+        }
+        .wx-sun       { background:#fef3c7; color:#92400e; }
+        .wx-partly    { background:#dbeafe; color:#1e3a8a; }
+        .wx-lightrain { background:#ede9fe; color:#4c1d95; }
+        .wx-any       { background:#d1fae5; color:#065f46; }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
@@ -1944,6 +1955,66 @@
         `;
         nav.insertAdjacentElement('afterend', legend);
     }
+
+    // ===== WEATHER SUITABILITY BADGES =====
+    // w: 'sun'=☀️ יום בהיר בלבד | 'partly'=🌤️ עננות בסדר | 'lightrain'=🌦️ גשם קל בסדר | 'any'=🌧️ כל מזג אוויר
+    const weatherMap = {
+        // יום 1
+        'Rastplatz Viehdorf':              { w:'partly',    label:'🌤️ עננות בסדר' },
+        'מנזר מלק':                        { w:'lightrain', label:'🌦️ גשם קל בסדר' },
+        'טיול קצר באזור הלינה':           { w:'partly',    label:'🌤️ עדיף שמש' },
+        // יום 2 — זלצבורג
+        'גני מירבל':                       { w:'partly',    label:'🌤️ עדיף שמש' },
+        'גטריידגאסה':                      { w:'lightrain', label:'🌦️ גשם קל בסדר' },
+        'Café Tomaselli':                  { w:'any',       label:'🌧️ כל מזג אוויר' },
+        'הוהנזלצבורג':                     { w:'partly',    label:'🌤️ עננות בסדר' },
+        'הקתדרלה וכיכר המוצרט':           { w:'lightrain', label:'🌦️ גשם קל בסדר' },
+        'Augustinerbräu':                  { w:'lightrain', label:'🌦️ גשם קל בסדר' },
+        // יום 3 — הלשטט
+        'מעבורת לכפר הלשטט':              { w:'partly',    label:'🌤️ עדיף שמש' },
+        'מכרה המלח ההיסטורי':             { w:'any',       label:'🌧️ מושלם לגשם!' },
+        'מערות הקרח בדכשטיין':            { w:'any',       label:'🌧️ מושלם לגשם!' },
+        'Hallstatt Skywalk':               { w:'sun',       label:'☀️ יום בהיר בלבד' },
+        // יום 4 — שבת
+        'טיול רגלי באזור הקרוב':          { w:'partly',    label:'🌤️ עדיף שמש' },
+        // יום 5 — וולפגנגזה
+        'שייט בסירה לסנקט וולפגנג':       { w:'partly',    label:'🌤️ עננות בסדר' },
+        'Schafbergbahn':                   { w:'sun',       label:'☀️ יום בהיר — נוף!' },
+        'שחייה באגם וולפגנגזה':           { w:'sun',       label:'☀️ יום בהיר בלבד' },
+        'גלידה ו-Kaffee':                 { w:'any',       label:'🌧️ כל מזג אוויר' },
+        // יום 6 — ברכטסגאדן (גרמניה)
+        'קן הנשר':                         { w:'sun',       label:'☀️ יום בהיר — נוף!' },
+        'אגם קניגסזה':                     { w:'partly',    label:'🌤️ עננות בסדר' },
+        // יום 7 — וורפן
+        'Eisriesenwelt':                   { w:'any',       label:'🌧️ מושלם לגשם!' },
+        'הוהנוורפן':                      { w:'lightrain', label:'🌦️ גשם קל בסדר' },
+        // יום 8 — גרוסגלוקנר / ציל
+        'כביש גרוסגלוקנר':                { w:'sun',       label:'☀️ יום בהיר — נוף!' },
+        'Zell am See — עיר ואגם':         { w:'lightrain', label:'🌦️ גשם קל בסדר' },
+        'עיר Zell — קניות':              { w:'any',       label:'🌧️ כל מזג אוויר' },
+        // יום 9 — חזרה
+        'Mondsee':                         { w:'partly',    label:'🌤️ עדיף שמש' },
+    };
+
+    const wxClass = { sun:'wx-sun', partly:'wx-partly', lightrain:'wx-lightrain', any:'wx-any' };
+
+    document.querySelectorAll('.timeline-item .tl-content').forEach(content => {
+        const h3 = content.querySelector('h3');
+        const tags = content.querySelector('.tl-tags');
+        if (!h3 || !tags) return;
+        const title = h3.textContent;
+        const key = Object.keys(weatherMap).find(k => title.includes(k));
+        if (!key) return;
+        const { w, label } = weatherMap[key];
+        const badge = document.createElement('span');
+        badge.className = 'tl-tag weather-badge ' + (wxClass[w] || 'wx-partly');
+        badge.title = { sun:'מומלץ רק ביום בהיר — ערפל/גשם פוגע משמעותית בחוויה', partly:'ניתן ביום מעונן — עדיף שמש', lightrain:'גשם קל לא מפריע — יש מחסה', any:'אטרקציה פנימית — מצוינת לכל מזג אוויר' }[w];
+        badge.textContent = label;
+        // הוסף אחרי תגיות קיימות, לפני כפתור וייז
+        const wazeBtn = tags.querySelector('.waze-btn');
+        if (wazeBtn) tags.insertBefore(badge, wazeBtn);
+        else tags.appendChild(badge);
+    });
 </script>
 </body>
 </html>
