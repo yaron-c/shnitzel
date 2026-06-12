@@ -337,6 +337,56 @@
         }
         .drive-pill strong { color: var(--text-dark); }
 
+        /* ===== ALTERNATIVE ROUTES ===== */
+        .alt-routes {
+            border-top: 1px solid #e2e8f0;
+            padding: 0;
+        }
+        .alt-routes summary {
+            cursor: pointer;
+            padding: 13px 28px;
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--blue-mid);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #f7f9fc;
+            user-select: none;
+        }
+        .alt-routes summary::-webkit-details-marker { display: none; }
+        .alt-routes summary::before { content: '▶'; font-size: 10px; transition: transform .2s; }
+        .alt-routes[open] summary::before { transform: rotate(90deg); }
+        .alt-routes-content {
+            padding: 12px 28px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .alt-option {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-right: 4px solid var(--gold);
+            border-radius: 10px;
+            padding: 11px 14px;
+        }
+        .alt-option.alt-weather { border-right-color: #7dd3fc; }
+        .alt-option.alt-crowd   { border-right-color: #f59e0b; }
+        .alt-option.alt-tip     { border-right-color: #34d399; }
+        .alt-trigger {
+            font-weight: 800;
+            font-size: 13px;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+        .alt-desc {
+            font-size: 13px;
+            color: var(--text-mid);
+            line-height: 1.6;
+        }
+        .alt-desc strong { color: var(--text-dark); }
+
         /* ===== INFO CARDS ROW ===== */
         .info-row {
             display: grid;
@@ -510,7 +560,7 @@
         .wx-any       { background:#d1fae5; color:#065f46; }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js" defer></script>
 </head>
 <body>
 
@@ -912,6 +962,30 @@
                 <div class="drive-pill">🎟️ <span>תקציב: <strong>~50€ לאדם</strong></span></div>
                 <div class="drive-pill">🚶 <span>הליכה: <strong>~10 ק"מ</strong></span></div>
             </div>
+            <details class="alt-routes">
+                <summary>🔄 מסלולים חלופיים ליום זלצבורג</summary>
+                <div class="alt-routes-content">
+                    <div class="alt-option alt-weather">
+                        <div class="alt-trigger">🌧️ אם גשם כבד — מסלול פנימי</div>
+                        <div class="alt-desc">
+                            <strong>Haus der Natur</strong> — מוזיאון טבע מדהים עם אקווריום, זוחלים וחלל. מושלם לילדים (10€ מבוגר, 5€ ילד). הוהנזלצבורג עדיין אפשרי — רוב החדרים מקורים.
+                            <br>חלופה שניה: <strong>DomQuartier</strong> — מוזיאון ארמון הארכיבישוף עם גלריות ומגדל. כרטיס משפחה ~40€.
+                        </div>
+                    </div>
+                    <div class="alt-option alt-crowd">
+                        <div class="alt-trigger">😰 אם זלצבורג עמוסה מדי (קיץ שיא)</div>
+                        <div class="alt-desc">
+                            הגיעו <strong>לפני 09:00</strong> — העיר העתיקה שקטה בבוקר מוקדם. חלופה: <strong>Bad Ischl</strong> (עיר הקיסר פרנץ יוסף, ~35 דק' מאלטנמרקט) — Kaiservilla, רחוב קניות, Konditorei Zauner. פחות תיירותי, מקסים.
+                        </div>
+                    </div>
+                    <div class="alt-option alt-tip">
+                        <div class="alt-trigger">⚡ מסלול מקוצר (חצי יום)</div>
+                        <div class="alt-desc">
+                            <strong>גני מירבל → גטריידגאסה → Tomaselli</strong> — 4 שעות, ויתור על הוהנזלצבורג. חוסך ~30€ לאדם ו-3 שעות. מתאים אם יש ילדים קטנים עייפים.
+                        </div>
+                    </div>
+                </div>
+            </details>
         </div>
     </section>
 
@@ -1004,6 +1078,31 @@
                 <div class="drive-pill">🎟️ <span>תקציב: <strong>~60€ לאדם</strong></span></div>
                 <div class="drive-pill">⚠️ <span>חניה: <strong>P1 מומלץ</strong></span></div>
             </div>
+            <details class="alt-routes">
+                <summary>🔄 מסלולים חלופיים ליום הלשטט</summary>
+                <div class="alt-routes-content">
+                    <div class="alt-option alt-weather">
+                        <div class="alt-trigger">🌧️ אם גשם כבד — וותרו על ה-Skywalk</div>
+                        <div class="alt-desc">
+                            הלשטט עדיין שווה בגשם קל — <strong>מכרה המלח</strong> (פנימי לחלוטין!) + <strong>מוזיאון הלשטט</strong> (4€ לאדם). וותרו על ה-Skywalk — אין נוף בערפל.
+                            <br>אם גשם ממש כבד: <strong>Dachstein מערות קרח</strong> (אופציה ב') — פנימי, מרשים, עובד בכל מזג אוויר.
+                        </div>
+                    </div>
+                    <div class="alt-option alt-crowd">
+                        <div class="alt-trigger">😰 אם הלשטט עמוסה מאוד</div>
+                        <div class="alt-desc">
+                            <strong>St. Gilgen</strong> (אגם וולפגנגזה, ~45 דק' מאלטנמרקט) — כפר יפהפה הרבה פחות עמוס. מולדת אמא של מוצרט. שייט, שחייה, מסעדות. כמעט אותה אווירה.
+                            <br>חלופה שניה: <strong>Gmunden</strong> (קצה אגם Traunsee) — טירת Orth ישר מעל המים, ספינת גלגל. 50 דק' מאלטנמרקט.
+                        </div>
+                    </div>
+                    <div class="alt-option alt-tip">
+                        <div class="alt-trigger">💡 טיפ: הלשטט + Gosausee באותו יום</div>
+                        <div class="alt-desc">
+                            אחר הצהריים ב<strong>Gosausee</strong> — אגם הרים קטן ויפהפה עם רקע גלציאלי, 15 דק' מהלשטט. כניסה חינם, שחייה אפשרית. פחות ידוע = פחות עומס.
+                        </div>
+                    </div>
+                </div>
+            </details>
         </div>
     </section>
 
@@ -1146,6 +1245,30 @@
                 <div class="drive-pill">🎟️ <span>תקציב: <strong>~55€ לאדם</strong></span></div>
                 <div class="drive-pill">🚂 <span>Schafberg: <strong>הזמן מראש!</strong></span></div>
             </div>
+            <details class="alt-routes">
+                <summary>🔄 מסלולים חלופיים ליום וולפגנגזה</summary>
+                <div class="alt-routes-content">
+                    <div class="alt-option alt-weather">
+                        <div class="alt-trigger">☁️ אם שאפברג בערפל / גשם</div>
+                        <div class="alt-desc">
+                            <strong>אל תעלו!</strong> — 43€ לאדם ואין מה לראות בערפל. וותרו על הרכבת, בילו יותר זמן בשחייה, שייט חינמי בסירה קטנה, ואכילה ב-St. Wolfgang.
+                            <br>חלופה: <strong>Bad Ischl</strong> (35 דק') — Kaiservilla, עיר קיסרית מקסימה עם ילדים. קפה Zauner — עוגות אוסטריות מפורסמות.
+                        </div>
+                    </div>
+                    <div class="alt-option alt-crowd">
+                        <div class="alt-trigger">🎫 אם שאפברג אזל (כרטיסים נגמרו)</div>
+                        <div class="alt-desc">
+                            <strong>Mondsee</strong> (אגם ירח, 40 דק' מאלטנמרקט) — כפר יפה עם כנסייה מפורסמת מ"The Sound of Music". שחייה מעולה, פחות עמוס. ניתן לשלב שניהם באותו יום.
+                        </div>
+                    </div>
+                    <div class="alt-option alt-tip">
+                        <div class="alt-trigger">💡 יום מים מלא — חלופה מרגיעה</div>
+                        <div class="alt-desc">
+                            שייט מ-St. Gilgen → St. Wolfgang (40 דק', ~15€ הלוך-חזור) + שחייה + גלידה + Strandbad. ללא רכבל כלל. יום נהדר ורגוע לילדים ים-אגמים.
+                        </div>
+                    </div>
+                </div>
+            </details>
         </div>
     </section>
 
@@ -1229,6 +1352,31 @@
                 <div class="drive-pill">🎟️ <span>תקציב: <strong>~60€ לאדם</strong></span></div>
                 <div class="drive-pill">🇩🇪 <span><strong>גרמניה!</strong></span></div>
             </div>
+            <details class="alt-routes">
+                <summary>🔄 מסלולים חלופיים ליום ברכטסגאדן</summary>
+                <div class="alt-routes-content">
+                    <div class="alt-option alt-weather">
+                        <div class="alt-trigger">🌧️ אם קן הנשר בערפל / גשם</div>
+                        <div class="alt-desc">
+                            בוששו — קן הנשר ללא נוף הוא בזבוז כסף ואכזבה. <strong>קניגסזה</strong> לבד עובד גם בעננות — הנהר הירוק ב-fjord מרשים גם בלי שמש.
+                            <br>חלופה מלאה: <strong>Ramsau bei Berchtesgaden</strong> — כפר הרים יפהפה, כנסייה מצולמת בנחל, טיול קל לכל המשפחה.
+                        </div>
+                    </div>
+                    <div class="alt-option alt-crowd">
+                        <div class="alt-trigger">🔄 חלופה ישראלית פחות — אותה רמה</div>
+                        <div class="alt-desc">
+                            <strong>Liechtensteinklamm</strong> — קניון מדהים עם מפלים, <strong>רק 10 דק' מאלטנמרקט</strong>. 7€ מבוגר, מרשים מאוד. מותאם לילדים.
+                            <br>+ <strong>Golling Waterfall</strong> (15 דק' מהלינה) — מפל 75 מטר בכניסה חינם. ניתן לשלב שניהם בחצי יום.
+                        </div>
+                    </div>
+                    <div class="alt-option alt-tip">
+                        <div class="alt-trigger">💡 אם רוצים להישאר באוסטריה</div>
+                        <div class="alt-desc">
+                            <strong>Bad Gastein</strong> (35 דק' מאלטנמרקט) — עיר ספא וינטג' עם <strong>מפל ענק באמצע העיר</strong>. ארכיטקטורה בל-אפוק מרשימה. Stubnerkogel cable car (כולל ב-SLC) עם גשר תלוי על הפסגה.
+                        </div>
+                    </div>
+                </div>
+            </details>
         </div>
     </section>
 
@@ -1312,6 +1460,31 @@
                 <div class="drive-pill">🎟️ <span>תקציב: <strong>~50€ לאדם</strong></span></div>
                 <div class="drive-pill">🧊 <span>מערה: <strong>0°C! — לבשו חם</strong></span></div>
             </div>
+            <details class="alt-routes">
+                <summary>🔄 מסלולים חלופיים ליום וורפן</summary>
+                <div class="alt-routes-content">
+                    <div class="alt-option alt-weather">
+                        <div class="alt-trigger">🌧️ גשם? אין בעיה — יום מקורה</div>
+                        <div class="alt-desc">
+                            Eisriesenwelt ו-Hohenwerfen שניהם עובדים <strong>מצוין בכל מזג אוויר</strong> — זה היום הכי גמיש בטיול!
+                            <br>אם יש זמן עודף: <strong>Liechtensteinklamm</strong> (10 דק' מאלטנמרקט, 7€) — קניון עם מפלים, מתאים בגשם קל.
+                        </div>
+                    </div>
+                    <div class="alt-option alt-crowd">
+                        <div class="alt-trigger">⏰ אם הרכבל ל-Eisriesenwelt עמוס</div>
+                        <div class="alt-desc">
+                            הרכבל עולה כל 15 דק' — אין בעיה אמיתית. אם ממש עמוס (קיץ שיא), קחו קודם את <strong>Hohenwerfen</strong> (מטה) ותעלו ל-Eisriesenwelt אחה"צ.
+                        </div>
+                    </div>
+                    <div class="alt-option alt-tip">
+                        <div class="alt-trigger">💡 תוספת אם נשאר זמן</div>
+                        <div class="alt-desc">
+                            <strong>Golling Waterfall</strong> (15 דק' צפונה) — חינם, מפל 75 מטר, טיול קל 30 דק'. נהדר לאחר המערות כדי לאוורר את הראש.
+                            <br>או <strong>Bad Gastein</strong> (35 דק' דרומה) — ספא טרמי עם מפל בתוך העיר.
+                        </div>
+                    </div>
+                </div>
+            </details>
         </div>
     </section>
 
@@ -1396,6 +1569,31 @@
                 <div class="drive-pill">🎟️ <span>תקציב: <strong>~55€ לאדם</strong></span></div>
                 <div class="drive-pill">🌡️ <span>בשיא: <strong>5–10°C בלבד!</strong></span></div>
             </div>
+            <details class="alt-routes">
+                <summary>🔄 מסלולים חלופיים ליום גרוסגלוקנר</summary>
+                <div class="alt-routes-content">
+                    <div class="alt-option alt-weather">
+                        <div class="alt-trigger">🌧️ ⚠️ אם גרוסגלוקנר בערפל — אל תסעו!</div>
+                        <div class="alt-desc">
+                            גרוסגלוקנר בערפל = <strong>38€ לרכב ולא רואים כלום</strong>. בדקו את מצלמות החי באתר grossglockner.at לפני היציאה.
+                            <br>חלופה מלאה: <strong>Kaprun</strong> (20 דק' מהלינה) — סכר ומאגר מים Mooserboden ב-2000 מטר. עלייה בחשמלית מנהרה (!) תוך ההר. מרשים לא פחות + כולל ב-SLC.
+                            <br>חלופה שניה: <strong>מפלי קרימל</strong> (Krimml Waterfalls, 1:10 שעה) — הגדולים באוסטריה 380 מטר, כוללים בכרטיס SLC. עובד בכל מזג אוויר.
+                        </div>
+                    </div>
+                    <div class="alt-option alt-crowd">
+                        <div class="alt-trigger">🔄 אם רוצים יום רגוע יותר</div>
+                        <div class="alt-desc">
+                            <strong>Zell am See + Schmittenhöhebahn בלבד</strong> — רכבל עולה לפסגה 1965 מטר (כולל SLC), נוף מדהים על 30 אגמים. עיר, אגם, שחייה, קניות. יום שלם נעים ללא נסיעות ארוכות.
+                        </div>
+                    </div>
+                    <div class="alt-option alt-tip">
+                        <div class="alt-trigger">💡 גרוסגלוקנר + ציל אם זה באותו יום</div>
+                        <div class="alt-desc">
+                            גרוסגלוקנר בבוקר מוקדם (פתוח מ-06:00) → ציל אם זה אחה"צ. ~50 ק"מ ביניהם. ציל מ-Zell am See: שייט באגם + עיר + ערב נחמד לפני יום אחרון.
+                        </div>
+                    </div>
+                </div>
+            </details>
         </div>
     </section>
 
