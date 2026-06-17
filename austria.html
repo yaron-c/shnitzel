@@ -518,6 +518,7 @@
             background: #e8f0f5;
         }
         .map-day-0-wrap iframe { width:100%; height:100%; border:0; display:block; }
+        .day-map-mymaps { height: 460px !important; }
         /* Leaflet overrides */
         .leaflet-map { height:100%; width:100%; }
         .leaflet-popup-content { font-family:'Assistant',sans-serif; direction:rtl; min-width:170px; }
@@ -1942,6 +1943,12 @@
         9: 'https://maps.google.com/maps?saddr=Altenmarkt+im+Pongau&daddr=Mondsee+to:Vienna+Airport&output=embed',
     };
 
+    // מפות Google My Maps שהוכנו ידנית — מקבלות עדיפות על מפות Leaflet
+    // כדי להוסיף מפה ליום נוסף: הוסף שורה עם מספר היום וה-embed URL
+    const myMaps = {
+        1: 'https://www.google.com/maps/d/u/0/embed?mid=18N0n23LZywkIGwwxDftesrjm9CL7bi4&ehbc=2E312F',
+    };
+
     const shownMaps = new Set();
 
     function pinIcon(emoji, color, sz) {
@@ -2007,9 +2014,10 @@
         setTimeout(function() { map.invalidateSize(); }, 300);
     }
 
-    function buildGmapsIframe(dayNum) {
-        const url = gmapsFallback[dayNum];
+    function buildGmapsIframe(dayNum, url) {
+        url = url || gmapsFallback[dayNum];
         if (!url) return;
+        const isMyMap = !!myMaps[dayNum];
         let container;
         if (dayNum === 0) {
             container = document.getElementById('map-day-0-wrap');
@@ -2019,10 +2027,11 @@
             const dayCard = document.querySelector('#day-' + dayNum + ' .day-card');
             if (!dayCard) return;
             container = document.createElement('div');
-            container.className = 'day-map-wrap';
+            container.className = 'day-map-wrap' + (isMyMap ? ' day-map-mymaps' : '');
             dayCard.querySelector('.day-header').insertAdjacentElement('afterend', container);
         }
         if (!container) return;
+        if (isMyMap) container.classList.add('day-map-mymaps');
         const iframe = document.createElement('iframe');
         iframe.src = url;
         iframe.style.cssText = 'width:100%;height:100%;border:0;display:block;';
@@ -2034,7 +2043,9 @@
     function buildMap(dayNum) {
         if (shownMaps.has(dayNum)) return;
         shownMaps.add(dayNum);
-        if (typeof L !== 'undefined') {
+        if (myMaps[dayNum]) {
+            buildGmapsIframe(dayNum, myMaps[dayNum]);
+        } else if (typeof L !== 'undefined') {
             buildLeafletMap(dayNum);
         } else {
             buildGmapsIframe(dayNum);
