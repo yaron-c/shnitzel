@@ -519,6 +519,8 @@
         }
         .map-day-0-wrap iframe { width:100%; height:100%; border:0; display:block; }
         .day-map-mymaps { height: 460px !important; }
+        .gmaps-dir-btn { display:block; text-align:center; background:#1a73e8; color:#fff !important; padding:9px 18px; border-radius:0 0 12px 12px; font-size:13px; font-weight:700; text-decoration:none; transition:background .15s; }
+        .gmaps-dir-btn:hover { background:#1557b0; }
         /* Leaflet overrides */
         .leaflet-map { height:100%; width:100%; }
         .leaflet-popup-content { font-family:'Assistant',sans-serif; direction:rtl; min-width:170px; }
@@ -1954,6 +1956,17 @@
         8: 'https://www.google.com/maps/d/u/0/embed?mid=1i0pgVPDvHQ4-GZkGilu18hBv1M8Vw18&ehbc=2E312F',
     };
 
+    const dayGmapsDir = {
+        1: 'https://www.google.com/maps/dir/Vienna+International+Airport+Schwechat/SCS+Shopping+City+Süd+Vösendorf/Rastplatz+Viehdorf+Austria/Stift+Melk+3390/Gmunden+Rathausplatz+Austria/Altenmarkt+im+Pongau+Austria',
+        2: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Mirabellgarten+Salzburg/Getreidegasse+9+Salzburg/Festung+Hohensalzburg+Salzburg/Altenmarkt+im+Pongau',
+        3: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Parkplatz+P1+Hallstatt/Hallstatt/Obertraun+Austria/Altenmarkt+im+Pongau',
+        5: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/St+Gilgen+Wolfgangsee/St+Wolfgang+im+Salzkammergut/Altenmarkt+im+Pongau',
+        6: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Berchtesgaden+Germany/Kehlsteinhaus+Obersalzberg/Königssee+Schönau+am+Königssee/Altenmarkt+im+Pongau',
+        7: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Werfen+Pongau/Eisriesenwelt+Werfen+Austria/Burg+Hohenwerfen+Werfen/Altenmarkt+im+Pongau',
+        8: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Großglockner+Hochalpenstraße+Austria/Zell+am+See+Austria/Altenmarkt+im+Pongau',
+        9: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Mondsee+Austria/Vienna+International+Airport+Schwechat',
+    };
+
     const shownMaps = new Set();
 
     function pinIcon(emoji, color, sz) {
@@ -2054,6 +2067,21 @@
             buildLeafletMap(dayNum);
         } else {
             buildGmapsIframe(dayNum);
+        }
+        if (dayNum > 0 && dayGmapsDir[dayNum]) {
+            const dayCard = document.querySelector('#day-' + dayNum + ' .day-card');
+            if (dayCard) {
+                const mapWrap = dayCard.querySelector('.day-map-wrap');
+                if (mapWrap) {
+                    const btn = document.createElement('a');
+                    btn.href = dayGmapsDir[dayNum];
+                    btn.target = '_blank';
+                    btn.rel = 'noopener noreferrer';
+                    btn.className = 'gmaps-dir-btn';
+                    btn.textContent = '🗺️ פתח ב-Google Maps — ראה זמני נסיעה';
+                    mapWrap.insertAdjacentElement('afterend', btn);
+                }
+            }
         }
     }
 
