@@ -1543,6 +1543,15 @@
                     </div>
                 </div>
                 <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">09:00</span></div>
+                    <div class="tl-icon-wrap">🦌</div>
+                    <div class="tl-content">
+                        <h3>Wildgehege Ferleiten — גן חיות אלפיני</h3>
+                        <p>ממש בכניסה לכביש גרוסגלוקנר — גן חי עם אייל, יעל, שמרגל ומרמוטות אלפיניות בטבע פתוח. כלול בכרטיס הכביש (37€)! ילדים משתגעים. ~45 דקות.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-nature">חיות אלפיניות</span><span class="tl-tag tag-must">כלול בכרטיס!</span><span class="tl-tag tag-tip">~45 דק'</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
                     <div class="tl-time"><span class="time-text">10:00</span></div>
                     <div class="tl-icon-wrap">🏔️</div>
                     <div class="tl-content">
@@ -1918,8 +1927,9 @@
         8: {
             view: [47.2, 12.87], zoom: 10,
             home: true,
-            route: [[47.3822,13.414],[47.2249,12.832],[47.0776,12.843],[47.3253,12.799]],
+            route: [[47.3822,13.414],[47.1895,12.838],[47.2249,12.832],[47.0776,12.843],[47.3253,12.799]],
             places: [
+                { ll:[47.1895,12.838],  e:'🦌', c:'#52b788', n:'Wildgehege Ferleiten', d:'גן חיות אלפיני — כלול בכרטיס', w:'Wildgehege Ferleiten Großglocknerstraße Austria' },
                 { ll:[47.2249,12.832],  e:'🎫', c:'#2563a8', n:'כניסה גרוסגלוקנר — Fusch', d:'37€ לרכב', w:'Großglockner Hochalpenstraße Fusch Austria' },
                 { ll:[47.0776,12.843],  e:'🏔️', c:'#1a3a5c', n:'Kaiser-Franz-Josefs-Höhe', d:'נוף לקרחון פסטרזה + גרוסגלוקנר 3798 מ\'', w:'Kaiser Franz Josefs Höhe Grossglockner Austria' },
                 { ll:[47.3253,12.799],  e:'🏊', c:'#0284c7', n:'Zell am See', d:'אגם + עיר נופש', w:'Zell am See Seepromenade Austria' },
@@ -1965,7 +1975,7 @@
         5: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/St+Gilgen+Wolfgangsee/St+Wolfgang+im+Salzkammergut/Altenmarkt+im+Pongau',
         6: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Berchtesgaden+Germany/Kehlsteinhaus+Obersalzberg/Königssee+Schönau+am+Königssee/Altenmarkt+im+Pongau',
         7: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Werfen+Pongau/Eisriesenwelt+Werfen+Austria/Burg+Hohenwerfen+Werfen/Altenmarkt+im+Pongau',
-        8: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Großglockner+Hochalpenstraße+Austria/Zell+am+See+Austria/Altenmarkt+im+Pongau',
+        8: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Wildgehege+Ferleiten+Austria/Großglockner+Hochalpenstraße+Austria/Zell+am+See+Austria/Altenmarkt+im+Pongau',
         9: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Mondsee+Austria/Vienna+International+Airport+Schwechat',
     };
 
@@ -2161,6 +2171,7 @@
         'ארוחה בכפר וורפן':              'Marktplatz Werfen Salzburg Austria',
         'מבצר הוהנוורפן':                 'Burg Hohenwerfen Werfen Austria',
         'יציאה לגרוסגלוקנר':             'Großglockner Hochalpenstraße Mautstelle Fusch Austria',
+        'Wildgehege Ferleiten':           'Wildgehege Ferleiten Großglocknerstraße Austria',
         'גרוסגלוקנר — נסיעה':            'Großglockner Hochalpenstraße Kaiser-Franz-Josefs-Höhe Austria',
         'Zell am See':                    'Zell am See Stadtpark Seepromenade Austria',
         'עיר Zell — קניות':             'Zell am See Stadtplatz Austria',
@@ -2265,6 +2276,7 @@
         'Eisriesenwelt':                   { w:'any',       label:'🌧️ מושלם לגשם!' },
         'הוהנוורפן':                      { w:'lightrain', label:'🌦️ גשם קל בסדר' },
         // יום 8 — גרוסגלוקנר / ציל
+        'Wildgehege Ferleiten':           { w:'partly',    label:'🌤️ עדיף שמש' },
         'כביש גרוסגלוקנר':                { w:'sun',       label:'☀️ יום בהיר — נוף!' },
         'Zell am See — עיר ואגם':         { w:'lightrain', label:'🌦️ גשם קל בסדר' },
         'עיר Zell — קניות':              { w:'any',       label:'🌧️ כל מזג אוויר' },
