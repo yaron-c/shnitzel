@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⭐ ימים אופציונליים | טיול אוסטריה</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue-dark: #1a3a5c;
+            --blue-mid: #2563a8;
+            --blue-light: #5ba3d0;
+            --green-alpine: #2d6a4f;
+            --green-light: #52b788;
+            --gold: #c9973a;
+            --gold-light: #f0c060;
+            --sky: #d0e8f5;
+            --snow: #f0f4f8;
+            --warm: #fef9f0;
+            --shabbat-bg: #fff8e7;
+            --shabbat-border: #c9973a;
+            --text-dark: #1a2332;
+            --text-mid: #3d4f65;
+            --text-light: #6b7f94;
+            --card-shadow: 0 4px 20px rgba(26,58,92,0.12);
+            --radius: 16px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Assistant', sans-serif;
+            background: var(--snow);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(160deg, #2d1b69 0%, #5b21b6 55%, #7c3aed 100%);
+            color: white;
+            text-align: center;
+            padding: 60px 20px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 90px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 90'%3E%3Cpath fill='%23f0f4f8' d='M0,90 L0,60 L120,30 L240,55 L360,15 L480,50 L600,5 L720,45 L840,10 L960,50 L1080,20 L1200,55 L1320,25 L1440,60 L1440,90 Z'/%3E%3C/svg%3E") no-repeat bottom;
+            background-size: cover;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            color: rgba(255,255,255,.85);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,.15);
+            border: 1px solid rgba(255,255,255,.3);
+            border-radius: 24px;
+            padding: 7px 16px;
+            transition: background .2s;
+            backdrop-filter: blur(6px);
+        }
+        .back-link:hover { background: rgba(255,255,255,.25); }
+
+        .hero-icon { font-size: 56px; margin-bottom: 12px; display: inline-block; }
+
+        .hero h1 {
+            font-size: clamp(26px, 5vw, 48px);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+        .hero-sub {
+            font-size: 17px;
+            opacity: .85;
+            font-weight: 300;
+            margin-bottom: 32px;
+        }
+
+        .hero-nav {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .hero-nav a {
+            text-decoration: none;
+            border-radius: 50px;
+            padding: 9px 22px;
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity .2s, transform .1s;
+        }
+        .hero-nav a:hover { opacity: .85; transform: translateY(-1px); }
+        .nav-btn-green {
+            background: #16a34a;
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(22,163,74,.35);
+        }
+        .nav-btn-white {
+            background: rgba(255,255,255,.15);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,.35);
+            backdrop-filter: blur(6px);
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 16px 60px;
+        }
+
+        /* ===== OPTIONAL CARDS ===== */
+        .optional-card {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 2px 24px rgba(91,33,182,.1);
+            border: 2px dashed #a78bfa;
+            max-width: 860px;
+            margin: 0 auto 28px;
+            overflow: hidden;
+        }
+
+        .optional-header {
+            background: linear-gradient(135deg, #7c3aed, #5b21b6);
+            color: #fff;
+            padding: 20px 28px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .optional-badge {
+            display: inline-block;
+            background: rgba(255,255,255,.2);
+            border: 1px solid rgba(255,255,255,.4);
+            border-radius: 20px;
+            padding: 3px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .optional-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin: 4px 0 2px;
+        }
+
+        .optional-subtitle {
+            font-size: 13px;
+            opacity: .8;
+        }
+
+        .optional-dest {
+            font-size: 14px;
+            font-weight: 700;
+            opacity: .9;
+            margin-top: 4px;
+        }
+
+        /* ===== WEATHER WIDGET ===== */
+        .weather-widget {
+            background: linear-gradient(135deg, #e8f4fd, #d4ecfa);
+            border-radius: 12px;
+            padding: 14px 20px;
+            min-width: 160px;
+            text-align: center;
+            border: 1px solid rgba(91,163,208,.25);
+            flex-shrink: 0;
+        }
+        .weather-icon { font-size: 36px; line-height: 1; }
+        .weather-temp { font-size: 22px; font-weight: 800; color: var(--blue-dark); margin-top: 4px; }
+        .weather-desc { font-size: 13px; color: var(--text-mid); }
+        .weather-range { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+        .weather-note { font-size: 11px; color: var(--text-light); margin-top: 6px; font-style: italic; }
+
+        /* ===== TIMELINE ===== */
+        .timeline {
+            padding: 24px 28px;
+        }
+        .optional-card .timeline {
+            padding: 24px 28px;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 22px;
+            position: relative;
+        }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: 52px;
+            top: 36px;
+            bottom: -22px;
+            width: 2px;
+            background: linear-gradient(to bottom, #cbd5e0, transparent);
+        }
+        .timeline-item:last-child::before { display: none; }
+
+        .tl-time {
+            width: 70px;
+            flex-shrink: 0;
+            text-align: center;
+            padding-top: 2px;
+        }
+        .tl-time .time-text {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--blue-mid);
+        }
+        .tl-icon-wrap {
+            width: 44px;
+            height: 44px;
+            flex-shrink: 0;
+            background: var(--sky);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 2px 8px rgba(91,163,208,.25);
+        }
+        .tl-content { flex: 1; padding-top: 4px; }
+        .tl-content h3 { font-size: 16px; font-weight: 700; color: var(--text-dark); }
+        .tl-content p { font-size: 14px; color: var(--text-mid); margin-top: 4px; }
+        .tl-content .tl-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+
+        .tl-tag {
+            font-size: 12px;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .tag-drive   { background: #fef3c7; color: #92400e; }
+        .tag-must    { background: #dcfce7; color: #166534; }
+        .tag-food    { background: #ffe4e6; color: #9f1239; }
+        .tag-culture { background: #e0e7ff; color: #3730a3; }
+        .tag-nature  { background: #d1fae5; color: #065f46; }
+        .tag-tip     { background: #fef9c3; color: #713f12; }
+        .tag-book    { background: #fee2e2; color: #991b1b; }
+        .tag-kosher  { background: #fdf4ff; color: #6b21a8; }
+
+        .waze-btn {
+            background: #35d4f3 !important;
+            color: #0d1e2e !important;
+            font-weight: 800 !important;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-flex !important;
+            align-items: center;
+            gap: 4px;
+            transition: opacity .2s, transform .1s;
+            white-space: nowrap;
+        }
+        .waze-btn:hover { opacity: .82; transform: scale(1.04); }
+
+        /* ===== TIPS BOX ===== */
+        .tips-box {
+            margin: 0 28px 24px;
+            background: linear-gradient(135deg, #fffbf0, #fff8e7);
+            border: 1px solid #f0c060;
+            border-radius: 12px;
+            padding: 16px 20px;
+        }
+        .tips-box h4 { font-size: 14px; font-weight: 700; color: #92400e; margin-bottom: 10px; }
+        .tips-box ul { list-style: none; }
+        .tips-box li {
+            font-size: 14px;
+            color: var(--text-mid);
+            padding: 3px 0;
+            padding-right: 20px;
+            position: relative;
+        }
+        .tips-box li::before { content: '→'; position: absolute; right: 0; color: var(--gold); }
+        .tips-box a { color: var(--blue-mid); font-weight: 600; }
+
+        /* ===== DRIVE INFO ===== */
+        .drive-info {
+            display: flex;
+            gap: 12px;
+            padding: 14px 28px;
+            background: #f7f9fc;
+            border-top: 1px solid #edf2f7;
+            flex-wrap: wrap;
+        }
+        .optional-card .drive-info {
+            margin: 0;
+            border-top: 1px solid #edf2f7;
+        }
+
+        .drive-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--text-mid);
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 5px 14px;
+        }
+        .drive-pill strong { color: var(--text-dark); }
+
+        /* ===== GOOGLE MAPS BUTTON ===== */
+        .optional-gmaps-btn {
+            display: block;
+            text-align: center;
+            background: #1a73e8;
+            color: #fff !important;
+            padding: 10px 18px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            margin: 0 28px 24px;
+            border-radius: 10px;
+            transition: background .15s;
+        }
+        .optional-gmaps-btn:hover { background: #1557b0; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #2d1b69;
+            color: rgba(255,255,255,.6);
+            text-align: center;
+            padding: 28px 20px;
+            font-size: 13px;
+        }
+        footer a {
+            color: rgba(255,255,255,.85);
+            text-decoration: none;
+            font-weight: 700;
+            transition: opacity .2s;
+        }
+        footer a:hover { opacity: .75; }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .footer-links a {
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: 20px;
+            padding: 6px 18px;
+            font-size: 13px;
+        }
+        .footer-links a:hover { background: rgba(255,255,255,.22); opacity: 1; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .optional-header { flex-direction: column; }
+            .weather-widget { width: 100%; }
+            .timeline { padding: 18px; }
+            .tl-time { display: none; }
+            .timeline-item::before { right: 22px; }
+            .tips-box { margin: 0 16px 20px; }
+            .optional-gmaps-btn { margin: 0 16px 20px; }
+            .back-link { top: 14px; right: 14px; font-size: 13px; padding: 6px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+    <a class="back-link" href="austria.html">← חזרה לטיול</a>
+    <div class="hero-icon">⭐</div>
+    <h1>ימים אופציונליים</h1>
+    <p class="hero-sub">ימים שאפשר להוסיף לפי מזג האוויר, אנרגיה וחשק</p>
+    <div class="hero-nav">
+        <a class="nav-btn-green" href="slc.html">💚 כרטיס זלצבורגלנד</a>
+        <a class="nav-btn-white" href="austria.html">🇦🇹 חזרה לטיול הראשי</a>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- ===== CARD 1 — WOLFGANGSEE ===== -->
+    <div class="optional-card">
+        <div class="optional-header">
+            <div>
+                <div class="optional-badge">יום בונוס — אגם וולפגנגזה</div>
+                <div class="optional-title">⛵ אגם וולפגנגזה</div>
+                <div class="optional-subtitle">Wolfgangsee · St. Gilgen · St. Wolfgang · ~60 דק' מהלינה</div>
+                <div class="optional-dest">🚢 שייט · 🚂 Schafbergbahn · 🏊 שחייה</div>
+            </div>
+            <div class="weather-widget">
+                <div class="weather-icon">☀️</div>
+                <div class="weather-temp">27°C</div>
+                <div class="weather-desc">חם ושמשי</div>
+                <div class="weather-range">מינ' 15°C · מקס' 27°C</div>
+                <div class="weather-note">יום מעולה לאגם!</div>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="tl-time"><span class="time-text">08:30</span></div>
+                <div class="tl-icon-wrap">🚗</div>
+                <div class="tl-content">
+                    <h3>נסיעה לסנקט גילגן — A10 → B158</h3>
+                    <p>Altenmarkt → A10 צפון → Golling → B159 → St. Gilgen. עיירה מקסימה — עיר הולדתה של אמא מוצרט. כפר קטן עם נוף מדהים לאגם.</p>
+                    <div class="tl-tags"><span class="tl-tag tag-drive">~60 דק'</span><span class="tl-tag tag-culture">מוצרט קשר</span></div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="tl-time"><span class="time-text">09:00</span></div>
+                <div class="tl-icon-wrap">🚢</div>
+                <div class="tl-content">
+                    <h3>שייט בסירה לסנקט וולפגנג</h3>
+                    <p>האונייה מסנקט גילגן דרך האגם — נסיעה כ-40 דקות עם נוף הרים מטורף. ~15€ הלוך חזור.</p>
+                    <div class="tl-tags"><span class="tl-tag tag-must">חוויה!</span><span class="tl-tag tag-nature">נוף אגם</span></div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="tl-time"><span class="time-text">10:00</span></div>
+                <div class="tl-icon-wrap">🚂</div>
+                <div class="tl-content">
+                    <h3>רכבת ההר — Schafbergbahn</h3>
+                    <p>רכבת קיטור היסטורית מ-1893 עולה 1700 מטר! נוף מ"Sound of Music". הזמן מראש!</p>
+                    <div class="tl-tags"><span class="tl-tag tag-must">WOW!</span><span class="tl-tag tag-book">הזמן שבוע מראש!</span><span class="tl-tag tag-tip">~38€</span></div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="tl-time"><span class="time-text">13:00</span></div>
+                <div class="tl-icon-wrap">🏊</div>
+                <div class="tl-content">
+                    <h3>שחייה באגם וולפגנגזה</h3>
+                    <p>27°C בחוץ, האגם ב-22°C — שחייה מדהימה! חופים ציבוריים חינם או ב-3€ כניסה.</p>
+                    <div class="tl-tags"><span class="tl-tag tag-nature">שחייה</span><span class="tl-tag tag-must">בחום כזה — חובה!</span></div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="tl-time"><span class="time-text">17:00</span></div>
+                <div class="tl-icon-wrap">🍦</div>
+                <div class="tl-content">
+                    <h3>גלידה ו-Kaffee בכפר</h3>
+                    <p>עיירות האגם מלאות בגלדריות וקפה מקסימים. Eis (גלידה) כ-1.5€ פר כדור.</p>
+                    <div class="tl-tags"><span class="tl-tag tag-food">Eis!</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tips-box">
+            <h4>⛵ טיפים לוולפגנגזה</h4>
+            <ul>
+                <li>הגיעו מוקדם ל-Schafbergbahn — הזמינו מראש שבוע לפחות! ← <a href="https://www.schafbergbahn.at" target="_blank" rel="noopener">schafbergbahn.at</a></li>
+                <li>St. Gilgen — עיר הולדתה של אמא מוצרט, כדאי לטייל קצת</li>
+                <li>חוף ציבורי חינם ב-St. Wolfgang ממול לכנסייה הלבנה</li>
+                <li>אם שאפברג בערפל — אל תעלו! 38€ ואין מה לראות</li>
+                <li>SalzburgerLand Card כולל שייט ורכבת שאפברג ✓</li>
+            </ul>
+        </div>
+
+        <div class="drive-info">
+            <div class="drive-pill">📍 <span>וולפגנגזה: <strong>~60 דק' מהלינה</strong></span></div>
+            <div class="drive-pill">🎟️ <span>תקציב: <strong>~55€ לאדם</strong></span></div>
+            <div class="drive-pill">🚂 <span>Schafberg: <strong>הזמן מראש!</strong></span></div>
+        </div>
+
+        <a class="optional-gmaps-btn" href="https://www.google.com/maps/dir/Altenmarkt+im+Pongau/St+Gilgen+Wolfgangsee/St+Wolfgang+im+Salzkammergut/Altenmarkt+im+Pongau" target="_blank" rel="noopener">🗺️ פתח ב-Google Maps — ראה זמני נסיעה</a>
+    </div>
+
+    <!-- ===== CARD 2 — SALZBURG ===== -->
+    <div class="optional-card">
+        <div class="optional-header">
+            <div>
+                <div class="optional-badge">יום בונוס — עיר תרבות</div>
+                <div class="optional-title">🏰 זלצבורג — עיר מוצרט</div>
+                <div class="optional-subtitle">Salzburg Altstadt · ~55 דק' מהלינה</div>
+                <div class="optional-dest">🎵 גטריידגאסה · הוהנזלצבורג · Augustinerbräu</div>
+            </div>
+            <div class="weather-widget">
+                <div class="weather-icon">⛅</div>
+                <div class="weather-temp">23°C</div>
+                <div class="weather-desc">מעונן חלקית</div>
+                <div class="weather-range">מינ' 12°C · מקס' 23°C</div>
+                <div class="weather-note">טוב גם בגשם!</div>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="tl-time"><span class="time-text">09:00</span></div>
+                <div class="tl-icon-wrap">🚗</div>
+                <div class="tl-content">
+                    <h3>נסיעה לזלצבורג — צפון A10</h3>
+                    <p>Altenmarkt → A10 צפון → ~60 ק"מ. חניון מומלץ: Parkhaus Mönchsberg — 14€ ליום, מרחק הליכה מהעיר העתיקה.</p>
+                    <div class="tl-tags"><span class="tl-tag tag-drive">~55 דק'</span><span class="tl-tag tag-tip">חניון מרכזי</span></div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="tl-time"><span class="time-text">10:00</span></div>
+                <div class="tl-icon-wrap">🌸</div>
+                <div class="tl-content">
+                    <h3>גני מירבל (Mirabellgarten)</h3>
+                    <p>הגן מתוך "The Sound of Music" — כניסה חינם. פסלים, פרחים ונוף מרהיב לטירה.</p>
+                    <div class="tl-tags"><span class="tl-tag tag-culture">Sound of Music</span><span class="tl-tag tag-must">חינם</span></div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="tl-time"><span class="time-text">10:45</span></div>
+                <div class="tl-icon-wrap">🎵</div>
+                <div class="tl-content">
+                    <h3>רחוב גטריידגאסה ובית הולדתו של מוצרט</h3>
+                    <p>הרחוב המסחרי ההיסטורי. מספר 9 — בית הולדתו של מוצרט (מוזיאון, 12€).</p>
+                    <div class="tl-tags"><span class="tl-tag tag-culture">מוצרט</span><span class="tl-tag tag-tip">סמטאות צרות יפות</span></div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="tl-time"><span class="time-text">12:30</span></div>
+                <div class="tl-icon-wrap">☕</div>
+                <div class="tl-content">
+                    <h3>קפה צהריים — Café Tomaselli</h3>
+                    <p>קפה אוסטרי מסורתי מ-1703, הוותיק ביותר בזלצבורג. Mozartkugeln — כדורי שוקולד מוצרט המפורסמים.</p>
+                    <div class="tl-tags"><span class="tl-tag tag-food">Kaffee &amp; Kuchen</span><span class="tl-tag tag-culture">מסורת 1703</span></div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="tl-time"><span class="time-text">14:00</span></div>
+                <div class="tl-icon-wrap">🏰</div>
+                <div class="tl-content">
+                    <h3>מצודת הוהנזלצבורג (Festung Hohensalzburg)</h3>
+                    <p>אחת המצודות השמורות ביותר באירופה! פוניקולר או הליכה. נוף מטורף על העיר וההרים.</p>
+                    <div class="tl-tags"><span class="tl-tag tag-must">חובה!</span><span class="tl-tag tag-culture">17€ כולל פוניקולר</span><span class="tl-tag tag-tip">2–3 שעות</span></div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="tl-time"><span class="time-text">17:00</span></div>
+                <div class="tl-icon-wrap">⛪</div>
+                <div class="tl-content">
+                    <h3>הקתדרלה וכיכר המוצרט (Mozartplatz)</h3>
+                    <p>כיכר הזלצבורג הגדולה עם פסל מוצרט. Mozartkugeln כסובניר.</p>
+                    <div class="tl-tags"><span class="tl-tag tag-culture">פלאצה</span></div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="tl-time"><span class="time-text">19:30</span></div>
+                <div class="tl-icon-wrap">🍺</div>
+                <div class="tl-content">
+                    <h3>ארוחת ערב — Augustinerbräu Mülln</h3>
+                    <p>בירה מנזרית אוסטרית בחצר גדולה. אפשר להביא אוכל מבחוץ! 1L בירה ~4.5€.</p>
+                    <div class="tl-tags"><span class="tl-tag tag-food">בירה מנזרית</span><span class="tl-tag tag-tip">אווירה!</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tips-box">
+            <h4>🏰 טיפים לזלצבורג</h4>
+            <ul>
+                <li>הגיעו לפני 09:00 — העיר העתיקה שקטה בבוקר מוקדם. בצהריים עמוס מאוד</li>
+                <li>חניון Mönchsberg: מנהרה ישירה להר + מרחק הליכה מהכל. 14€ ליום</li>
+                <li>Haus der Natur — מוזיאון טבע מדהים עם אקווריום, נהדר לגשם (10€ מבוגר)</li>
+                <li>SalzburgerLand Card כולל כניסה להוהנזלצבורג ולמוזיאון מוצרט</li>
+            </ul>
+        </div>
+
+        <div class="drive-info">
+            <div class="drive-pill">📍 <span>זלצבורג: <strong>~55 דק' מהלינה</strong></span></div>
+            <div class="drive-pill">🎟️ <span>תקציב: <strong>~50€ לאדם</strong></span></div>
+            <div class="drive-pill">🎫 <span><strong>חלק מ-SLC</strong></span></div>
+        </div>
+
+        <a class="optional-gmaps-btn" href="https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Mirabellgarten+Salzburg/Getreidegasse+9+Salzburg/Festung+Hohensalzburg+Salzburg/Altenmarkt+im+Pongau" target="_blank" rel="noopener">🗺️ פתח ב-Google Maps — ראה זמני נסיעה</a>
+    </div>
+
+</main>
+
+<footer>
+    <div>⭐ ימים אופציונליים | טיול אוסטריה יולי 2026</div>
+    <div class="footer-links">
+        <a href="austria.html">🇦🇹 לוח הטיול הראשי</a>
+        <a href="slc.html">💚 כרטיס זלצבורגלנד</a>
+    </div>
+</footer>
+
+</body>
+</html>

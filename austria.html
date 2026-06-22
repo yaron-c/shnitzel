@@ -486,7 +486,15 @@
 
         /* ===== OPTIONAL DAYS ===== */
         .optional-section { background: #f5f3ff; padding: 40px 20px 48px; border-top: 3px solid #ede9fe; }
-        .optional-section > h2 { text-align:center; font-size:22px; font-weight:800; color:#5b21b6; margin-bottom:24px; }
+        .optional-section > h2 { text-align:center; font-size:22px; font-weight:800; color:#5b21b6; margin-bottom:8px; }
+        .opt-teaser-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; max-width:720px; margin:0 auto 20px; }
+        @media(max-width:520px){ .opt-teaser-grid{grid-template-columns:1fr;} }
+        .opt-teaser-card { display:block; background:#fff; border:2px dashed #a78bfa; border-radius:16px; padding:20px 18px 16px; text-decoration:none; color:var(--text-dark); text-align:center; transition:transform .15s,box-shadow .15s; box-shadow:0 2px 12px rgba(91,33,182,.08); }
+        .opt-teaser-card:hover { transform:translateY(-3px); box-shadow:0 6px 20px rgba(91,33,182,.18); border-color:#7c3aed; }
+        .opt-teaser-emoji { font-size:36px; margin-bottom:6px; }
+        .opt-teaser-name { font-size:16px; font-weight:800; color:#5b21b6; margin-bottom:4px; }
+        .opt-teaser-sub { font-size:12px; color:var(--text-light); margin-bottom:6px; }
+        .opt-teaser-meta { font-size:11px; font-weight:700; color:#16a34a; }
         .optional-card { background:#fff; border-radius:18px; box-shadow:0 2px 24px rgba(91,33,182,.1); border:2px dashed #a78bfa; max-width:860px; margin:0 auto 28px; overflow:hidden; }
         .optional-header { background:linear-gradient(135deg,#7c3aed,#5b21b6); color:#fff; padding:20px 28px 16px; display:flex; justify-content:space-between; align-items:flex-start; gap:16px; }
         .optional-badge { display:inline-block; background:rgba(255,255,255,.2); border:1px solid rgba(255,255,255,.4); border-radius:20px; padding:3px 12px; font-size:11px; font-weight:700; margin-bottom:6px; }
@@ -654,6 +662,15 @@
     </div>
 </nav>
 
+<div style="background:#fff;border-bottom:1px solid #e5e7eb;padding:8px 16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+    <a href="optional.html" style="display:inline-flex;align-items:center;gap:6px;background:#f5f3ff;color:#5b21b6;text-decoration:none;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:700;border:1.5px solid #ede9fe;transition:background .15s;">
+        ⭐ ימים אופציונליים
+    </a>
+    <a href="slc.html" style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;color:#16a34a;text-decoration:none;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:700;border:1.5px solid #bbf7d0;transition:background .15s;">
+        💚 כרטיס זלצבורגלנד
+    </a>
+</div>
+
 <main class="container">
 
     <!-- ===== DAY 0 - OVERVIEW ===== -->
@@ -709,8 +726,8 @@
                 <div class="ov-num">5</div>
                 <div class="ov-info">
                     <div class="ov-date">ראשון, 5 ביולי</div>
-                    <div class="ov-dest">⛵ אגם וולפגנגזה</div>
-                    <div class="ov-weather">☀️ 27°C · חם ושמשי</div>
+                    <div class="ov-dest">💧 גולינג — מפלים, קניון וספא</div>
+                    <div class="ov-weather">🌤️ 22°C · שמש חלקית</div>
                 </div>
             </div>
             <div class="ov-card" onclick="showDay(6)">
@@ -1232,96 +1249,93 @@
         <div class="day-card">
             <div class="day-header">
                 <div class="day-title-area">
-                    <h2>יום 5 — אגם וולפגנגזה</h2>
+                    <h2>יום 5 — גולינג</h2>
                     <div class="day-subtitle">ראשון, 5 ביולי 2026</div>
-                    <div class="main-destination">⛵ St. Wolfgang · St. Gilgen · Schafberg</div>
+                    <div class="main-destination">💧 Gollinger Wasserfall · Salzachöfen · Aqua Salza</div>
                 </div>
                 <div class="weather-widget">
-                    <div class="weather-icon">☀️</div>
-                    <div class="weather-temp">27°C</div>
-                    <div class="weather-desc">חם ושמשי</div>
-                    <div class="weather-range">מינ' 15°C · מקס' 27°C</div>
-                    <div class="weather-note">יום מעולה לאגם!</div>
+                    <div class="weather-icon">🌤️</div>
+                    <div class="weather-temp">22°C</div>
+                    <div class="weather-desc">שמש חלקית</div>
+                    <div class="weather-range">מינ' 12°C · מקס' 24°C</div>
+                    <div class="weather-note">טוב גם בגשם (ספא)</div>
                 </div>
             </div>
 
             <div class="timeline">
                 <div class="timeline-item">
-                    <div class="tl-time"><span class="time-text">08:30</span></div>
+                    <div class="tl-time"><span class="time-text">09:00</span></div>
                     <div class="tl-icon-wrap">🚗</div>
                     <div class="tl-content">
-                        <h3>נסיעה לסנקט גילגן — A10 → B158</h3>
-                        <p>Altenmarkt → A10 צפון → Golling → B159 → St. Gilgen. עיירה מקסימה — עיר הולדתה של אמא מוצרט. כפר קטן עם נוף מדהים לאגם.</p>
-                        <div class="tl-tags"><span class="tl-tag tag-drive">~60 דק'</span><span class="tl-tag tag-culture">מוצרט קשר</span></div>
+                        <h3>נסיעה לגולינג — A10 צפון</h3>
+                        <p>Altenmarkt → A10 צפון → ~27 ק"מ. חניון P1 ליד הקופות (חינמי) — <strong>שימו לב:</strong> נכון לעדכון האחרון P1 סגור. חנו ב-P2/P3 (~5€ לרכב) או ליד המסעדות Torrenerhof / Abfalter — חינם אם אוכלים שם.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-drive">~30 דק'</span><span class="tl-tag tag-tip">בדרך לוורפן</span></div>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="tl-time"><span class="time-text">09:00</span></div>
-                    <div class="tl-icon-wrap">🚢</div>
+                    <div class="tl-time"><span class="time-text">09:30</span></div>
+                    <div class="tl-icon-wrap">💧</div>
                     <div class="tl-content">
-                        <h3>שייט בסירה לסנקט וולפגנג</h3>
-                        <p>האונייה מסנקט גילגן דרך האגם — נסיעה כ-40 דקות עם נוף הרים מטורף. ~15€ הלוך חזור.</p>
-                        <div class="tl-tags"><span class="tl-tag tag-must">חוויה!</span><span class="tl-tag tag-nature">נוף אגם</span></div>
+                        <h3>מפלי גולינג (Gollinger Wasserfall)</h3>
+                        <p>מפל מרהיב מגובה 75 מטר, מחולק לשני מפלסים בלב הטבע הירוק. רק 10 דקות הליכה מהכניסה למרגלות המפל. <strong>טיפ:</strong> אחרי 17:00 לרוב אין קופאי — ניתן להיכנס בחינם. עלות רגילה: מבוגר €7 · ילד €5 · משפחה €15.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">מפל 75 מ'</span><span class="tl-tag tag-tip">~1.5 שעות</span></div>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="tl-time"><span class="time-text">10:00</span></div>
-                    <div class="tl-icon-wrap">🚂</div>
+                    <div class="tl-time"><span class="time-text">11:15</span></div>
+                    <div class="tl-icon-wrap">🪨</div>
                     <div class="tl-content">
-                        <h3>רכבת ההר — Schafbergbahn</h3>
-                        <p>רכבת קיטור היסטורית מ-1893 עולה 1700 מטר! נוף מ"Sound of Music". הזמן מראש!</p>
-                        <div class="tl-tags"><span class="tl-tag tag-must">WOW!</span><span class="tl-tag tag-book">הזמן שבוע מראש!</span><span class="tl-tag tag-tip">~38€</span></div>
+                        <h3>קניון זלצאכהופן (Salzachöfen)</h3>
+                        <p>~10 דקות נסיעה דרומה מהמפלים (Obergau 82, Golling). מסלול מסודר ומשולט דרך קניון טבעי שנחצב על ידי נהר הזלצך — יש מדרגות ומעברים צרים. שיא המסלול: "כיפת הסלע" (Dome) עם תצפית מרהיבה על הנהר. יש גם זיפליין מעל המים! עלות: מבוגר €5 · ילד €3 · משפחה €12.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">קניון טבעי</span><span class="tl-tag tag-tip">~1.5 שעות</span></div>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="tl-time"><span class="time-text">13:00</span></div>
-                    <div class="tl-icon-wrap">🏊</div>
+                    <div class="tl-icon-wrap">🍽️</div>
                     <div class="tl-content">
-                        <h3>שחייה באגם וולפגנגזה</h3>
-                        <p>27°C בחוץ, האגם ב-22°C — שחייה מדהימה! חופים ציבוריים חינם או ב-3€ כניסה.</p>
-                        <div class="tl-tags"><span class="tl-tag tag-nature">שחייה</span><span class="tl-tag tag-must">בחום כזה — חובה!</span></div>
+                        <h3>ארוחת צהריים — Landgasthof Torrenerhof</h3>
+                        <p>מסעדה כפרית אוסטרית מסורתית בסמוך למפלים. חלופה: Gasthof Abfalter — גם בקרבת מקום. אם תאכלו שם, החנייה ליד המפלים תהיה חינם!</p>
+                        <div class="tl-tags"><span class="tl-tag tag-food">Schnitzel &amp; Knödel</span><span class="tl-tag tag-tip">~20€ לאדם</span></div>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="tl-time"><span class="time-text">17:00</span></div>
-                    <div class="tl-icon-wrap">🍦</div>
+                    <div class="tl-time"><span class="time-text">14:30</span></div>
+                    <div class="tl-icon-wrap">♨️</div>
                     <div class="tl-content">
-                        <h3>גלידה ו-Kaffee בכפר</h3>
-                        <p>עיירות האגם מלאות בגלדריות וקפה מקסימים. Eis (גלידה) כ-1.5€ פר כדור.</p>
-                        <div class="tl-tags"><span class="tl-tag tag-food">Eis!</span></div>
+                        <h3>ספא אקווה זלצה (Aqua Salza)</h3>
+                        <p>מתחם ספא גדול ומשפחתי: 3 בריכות מחוממות (28–30°C) + ג'קוזי + מגלשה + בריכת פעוטות (35°C). בריכות חוץ ופנים מחוברות בתעלה. עולם סאונות נפרד — מבוגרים בלבד, ללא בגדי ים. <strong>מחיר עולם המים (3 שעות):</strong> מבוגר €15.5 · ילד (5–15) €10.5 · פעוט (3–5) €7.2 · תינוק חינם · משפחה 20% הנחה.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">3+ שעות</span><span class="tl-tag tag-tip">פעוטות חינם</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">17:30</span></div>
+                    <div class="tl-icon-wrap">🚗</div>
+                    <div class="tl-content">
+                        <h3>חזרה לאלטנמרקט</h3>
+                        <p>A10 דרום → ~30 דקות. אפשר לשלב עצירה קצרה בכפר וורפן בדרך חזרה.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-drive">~30 דק'</span></div>
                     </div>
                 </div>
             </div>
 
-            <div class="drive-info">
-                <div class="drive-pill">📍 <span>וולפגנגזה: <strong>~60 דק' מהלינה</strong></span></div>
-                <div class="drive-pill">🎟️ <span>תקציב: <strong>~55€ לאדם</strong></span></div>
-                <div class="drive-pill">🚂 <span>Schafberg: <strong>הזמן מראש!</strong></span></div>
+            <div class="tips-box">
+                <h4>💧 טיפים לגולינג</h4>
+                <ul>
+                    <li>שלשת האטרקציות (מפלים, קניון, ספא) כלולות בכרטיס SalzburgerLand Card — יום שלם כמעט ללא עלות</li>
+                    <li>גולינג על הדרך לוורפן — ניתן לשלב עם יום 7 (טירת הוהנוורפן + מערת הקרח)</li>
+                    <li>אחרי 17:00 לרוב אין קופאי במפלים — כניסה חינם (בנוסף לSLC)</li>
+                    <li>קניון פתוח עד 20:00 (ביולי/אוגוסט עד 18:00) — גמישות בתכנון</li>
+                    <li>ספא שעות מים: 9:00–20:00 כל יום · סאונות: 9:00–21:00 כל יום</li>
+                    <li>העיירה גולינג עצמה יפה — טירה מהמאה ה-13 ורחובות כפריים שווים עצירה קצרה</li>
+                </ul>
             </div>
-            <details class="alt-routes">
-                <summary>🔄 מסלולים חלופיים ליום וולפגנגזה</summary>
-                <div class="alt-routes-content">
-                    <div class="alt-option alt-weather">
-                        <div class="alt-trigger">☁️ אם שאפברג בערפל / גשם</div>
-                        <div class="alt-desc">
-                            <strong>אל תעלו!</strong> — 38€ לאדם ואין מה לראות בערפל. בילו יותר זמן בשחייה, שייט בסירה קטנה, ואכילה ב-St. Wolfgang.
-                            <br>חלופה: <strong>Bad Ischl</strong> (35 דק') — Kaiservilla, עיר קיסרית עם ילדים. קפה Zauner — עוגות אוסטריות מפורסמות.
-                        </div>
-                    </div>
-                    <div class="alt-option alt-crowd">
-                        <div class="alt-trigger">🎫 אם שאפברג אזל</div>
-                        <div class="alt-desc">
-                            <strong>Mondsee</strong> (אגם ירח, 40 דק') — כנסייה מפורסמת מ"The Sound of Music". שחייה מעולה, פחות עמוס.
-                        </div>
-                    </div>
-                    <div class="alt-option alt-tip">
-                        <div class="alt-trigger">💡 חלופה מרהיבה — קרחון דכשטיין</div>
-                        <div class="alt-desc">
-                            <strong>Dachstein Skywalk</strong> (ראו יום אופציונלי) — קרחון, גשר תלוי, מדרגות לאין ב-2700 מ'. ~40 דק' מהלינה.
-                        </div>
-                    </div>
-                </div>
-            </details>
+
+            <div class="drive-info">
+                <div class="drive-pill">📍 <span>גולינג: <strong>~30 דק' מהלינה</strong></span></div>
+                <div class="drive-pill">🎟️ <span>תקציב: <strong>~5€</strong> (חניון)</span></div>
+                <div class="drive-pill">🎫 <span><strong>3 אטרקציות בSLC ✓</strong></span></div>
+            </div>
         </div>
     </section>
 
@@ -1770,206 +1784,30 @@
 <!-- ===== OPTIONAL DAYS ===== -->
 <section class="optional-section">
     <h2>⭐ ימים אופציונליים — הוסיפו לפי חשק</h2>
-    <div style="text-align:center;margin-bottom:24px;">
-        <a href="slc.html" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:#16a34a;color:#fff;text-decoration:none;padding:10px 22px;border-radius:24px;font-size:13px;font-weight:700;box-shadow:0 2px 12px rgba(22,163,74,.3);">
-            💚 כל האטרקציות המומלצות בכרטיס זלצבורגלנד →
+    <p style="text-align:center;color:#5b21b6;font-size:14px;margin-top:-12px;margin-bottom:24px;">ימים שאפשר לשלב בטיול לפי מזג אוויר, אנרגיה ותכנון</p>
+
+    <div class="opt-teaser-grid">
+        <a href="optional.html" class="opt-teaser-card">
+            <div class="opt-teaser-emoji">⛵</div>
+            <div class="opt-teaser-name">אגם וולפגנגזה</div>
+            <div class="opt-teaser-sub">שייט · Schafbergbahn · שחייה</div>
+            <div class="opt-teaser-meta">🎫 SLC ✓ · ~60 דק'</div>
+        </a>
+        <a href="optional.html" class="opt-teaser-card">
+            <div class="opt-teaser-emoji">🏰</div>
+            <div class="opt-teaser-name">זלצבורג — עיר מוצרט</div>
+            <div class="opt-teaser-sub">Mirabellgarten · הוהנזלצבורג · Augustinerbräu</div>
+            <div class="opt-teaser-meta">🎫 SLC ✓ · ~55 דק'</div>
         </a>
     </div>
-    <div class="optional-card">
-        <div class="optional-header">
-            <div>
-                <div class="optional-badge">יום בונוס — עיר תרבות</div>
-                <div class="optional-title">🏰 זלצבורג — עיר מוצרט</div>
-                <div class="optional-subtitle">Salzburg Altstadt · ~55 דק' מהלינה</div>
-                <div class="optional-dest">🎵 גטריידגאסה · הוהנזלצבורג · Augustinerbräu</div>
-            </div>
-            <div class="weather-widget" style="flex-shrink:0">
-                <div class="weather-icon">⛅</div>
-                <div class="weather-temp">23°C</div>
-                <div class="weather-desc">מעונן חלקית</div>
-                <div class="weather-range">מינ' 12°C · מקס' 23°C</div>
-                <div class="weather-note">טוב גם בגשם!</div>
-            </div>
-        </div>
 
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="tl-time"><span class="time-text">09:00</span></div>
-                <div class="tl-icon-wrap">🚗</div>
-                <div class="tl-content">
-                    <h3>נסיעה לזלצבורג — צפון A10</h3>
-                    <p>Altenmarkt → A10 צפון → ~60 ק"מ. חניון מומלץ: Parkhaus Mönchsberg — 14€ ליום, מרחק הליכה מהעיר העתיקה.</p>
-                    <div class="tl-tags"><span class="tl-tag tag-drive">~55 דק'</span><span class="tl-tag tag-tip">חניון מרכזי</span></div>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="tl-time"><span class="time-text">10:00</span></div>
-                <div class="tl-icon-wrap">🌸</div>
-                <div class="tl-content">
-                    <h3>גני מירבל (Mirabellgarten)</h3>
-                    <p>הגן מתוך "The Sound of Music" — כניסה חינם. פסלים, פרחים ונוף מרהיב לטירה.</p>
-                    <div class="tl-tags"><span class="tl-tag tag-culture">Sound of Music</span><span class="tl-tag tag-must">חינם</span></div>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="tl-time"><span class="time-text">10:45</span></div>
-                <div class="tl-icon-wrap">🎵</div>
-                <div class="tl-content">
-                    <h3>רחוב גטריידגאסה ובית הולדתו של מוצרט</h3>
-                    <p>הרחוב המסחרי ההיסטורי. מספר 9 — בית הולדתו של מוצרט (מוזיאון, 12€).</p>
-                    <div class="tl-tags"><span class="tl-tag tag-culture">מוצרט</span><span class="tl-tag tag-tip">סמטאות צרות יפות</span></div>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="tl-time"><span class="time-text">12:30</span></div>
-                <div class="tl-icon-wrap">☕</div>
-                <div class="tl-content">
-                    <h3>קפה צהריים — Café Tomaselli</h3>
-                    <p>קפה אוסטרי מסורתי מ-1703, הוותיק ביותר בזלצבורג. Mozartkugeln — כדורי שוקולד מוצרט המפורסמים.</p>
-                    <div class="tl-tags"><span class="tl-tag tag-food">Kaffee &amp; Kuchen</span><span class="tl-tag tag-culture">מסורת 1703</span></div>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="tl-time"><span class="time-text">14:00</span></div>
-                <div class="tl-icon-wrap">🏰</div>
-                <div class="tl-content">
-                    <h3>מצודת הוהנזלצבורג (Festung Hohensalzburg)</h3>
-                    <p>אחת המצודות השמורות ביותר באירופה! פוניקולר או הליכה. נוף מטורף על העיר וההרים.</p>
-                    <div class="tl-tags"><span class="tl-tag tag-must">חובה!</span><span class="tl-tag tag-culture">17€ כולל פוניקולר</span><span class="tl-tag tag-tip">2–3 שעות</span></div>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="tl-time"><span class="time-text">17:00</span></div>
-                <div class="tl-icon-wrap">⛪</div>
-                <div class="tl-content">
-                    <h3>הקתדרלה וכיכר המוצרט (Mozartplatz)</h3>
-                    <p>כיכר הזלצבורג הגדולה עם פסל מוצרט. Mozartkugeln כסובניר.</p>
-                    <div class="tl-tags"><span class="tl-tag tag-culture">פלאצה</span></div>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="tl-time"><span class="time-text">19:30</span></div>
-                <div class="tl-icon-wrap">🍺</div>
-                <div class="tl-content">
-                    <h3>ארוחת ערב — Augustinerbräu Mülln</h3>
-                    <p>בירה מנזרית אוסטרית בחצר גדולה. אפשר להביא אוכל מבחוץ! 1L בירה ~4.5€.</p>
-                    <div class="tl-tags"><span class="tl-tag tag-food">בירה מנזרית</span><span class="tl-tag tag-tip">אווירה!</span></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="tips-box">
-            <h4>🏰 טיפים לזלצבורג</h4>
-            <ul>
-                <li>הגיעו לפני 09:00 — העיר העתיקה שקטה בבוקר מוקדם. בצהריים עמוס מאוד</li>
-                <li>חניון Mönchsberg: מנהרה ישירה להר + מרחק הליכה מהכל. 14€ ליום</li>
-                <li>Haus der Natur — מוזיאון טבע מדהים עם אקווריום, נהדר לגשם (10€ מבוגר)</li>
-                <li>SalzburgerLand Card כולל כניסה להוהנזלצבורג ולמוזיאון מוצרט</li>
-            </ul>
-        </div>
-
-        <div class="drive-info">
-            <div class="drive-pill">📍 <span>זלצבורג: <strong>~55 דק' מהלינה</strong></span></div>
-            <div class="drive-pill">🎟️ <span>תקציב: <strong>~50€ לאדם</strong></span></div>
-            <div class="drive-pill">🎫 <span><strong>חלק מ-SLC</strong></span></div>
-        </div>
-
-        <a class="optional-gmaps-btn" href="https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Mirabellgarten+Salzburg/Getreidegasse+9+Salzburg/Festung+Hohensalzburg+Salzburg/Altenmarkt+im+Pongau" target="_blank" rel="noopener">🗺️ פתח ב-Google Maps — ראה זמני נסיעה</a>
-    </div>
-
-    <div class="optional-card">
-        <div class="optional-header">
-            <div>
-                <div class="optional-badge">יום בונוס — טבע וספא</div>
-                <div class="optional-title">💧 גולינג — מפלים, קניון וספא</div>
-                <div class="optional-subtitle">Golling an der Salzach · ~30 דק' מהלינה</div>
-                <div class="optional-dest">🌊 Gollinger Wasserfall · Salzachöfen · Aqua Salza</div>
-            </div>
-            <div class="weather-widget" style="flex-shrink:0">
-                <div class="weather-icon">🌤️</div>
-                <div class="weather-temp">22°C</div>
-                <div class="weather-desc">שמש חלקית</div>
-                <div class="weather-range">מינ' 12°C · מקס' 24°C</div>
-                <div class="weather-note">טוב גם בגשם (ספא)</div>
-            </div>
-        </div>
-
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="tl-time"><span class="time-text">09:00</span></div>
-                <div class="tl-icon-wrap">🚗</div>
-                <div class="tl-content">
-                    <h3>נסיעה לגולינג — A10 צפון</h3>
-                    <p>Altenmarkt → A10 צפון → ~27 ק"מ. חניון P1 ליד הקופות (חינמי) — <strong>שימו לב:</strong> נכון לעדכון האחרון P1 סגור. חנו ב-P2/P3 (~5€ לרכב) או ליד המסעדות Torrenerhof / Abfalter — חינם אם אוכלים שם.</p>
-                    <div class="tl-tags"><span class="tl-tag tag-drive">~30 דק'</span><span class="tl-tag tag-tip">בדרך לוורפן</span></div>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="tl-time"><span class="time-text">09:30</span></div>
-                <div class="tl-icon-wrap">💧</div>
-                <div class="tl-content">
-                    <h3>מפלי גולינג (Gollinger Wasserfall)</h3>
-                    <p>מפל מרהיב מגובה 75 מטר, מחולק לשני מפלסים בלב הטבע הירוק. רק 10 דקות הליכה מהכניסה למרגלות המפל. <strong>טיפ:</strong> אחרי 17:00 לרוב אין קופאי — ניתן להיכנס בחינם. עלות רגילה: מבוגר €7 · ילד €5 · משפחה €15.</p>
-                    <div class="tl-tags"><span class="tl-tag tag-must">מפל 75 מ'</span><span class="tl-tag tag-tip">~1.5 שעות</span></div>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="tl-time"><span class="time-text">11:15</span></div>
-                <div class="tl-icon-wrap">🪨</div>
-                <div class="tl-content">
-                    <h3>קניון זלצאכהופן (Salzachöfen)</h3>
-                    <p>~10 דקות נסיעה דרומה מהמפלים (Obergau 82, Golling). מסלול מסודר ומשולט דרך קניון טבעי שנחצב על ידי נהר הזלצך — יש מדרגות ומעברים צרים. שיא המסלול: "כיפת הסלע" (Dome) עם תצפית מרהיבה על הנהר. יש גם זיפליין מעל המים! עלות: מבוגר €5 · ילד €3 · משפחה €12.</p>
-                    <div class="tl-tags"><span class="tl-tag tag-must">קניון טבעי</span><span class="tl-tag tag-tip">~1.5 שעות</span></div>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="tl-time"><span class="time-text">13:00</span></div>
-                <div class="tl-icon-wrap">🍽️</div>
-                <div class="tl-content">
-                    <h3>ארוחת צהריים — Landgasthof Torrenerhof</h3>
-                    <p>מסעדה כפרית אוסטרית מסורתית בסמוך למפלים. חלופה: Gasthof Abfalter — גם בקרבת מקום. אם תאכלו שם, החנייה ליד המפלים תהיה חינם!</p>
-                    <div class="tl-tags"><span class="tl-tag tag-food">Schnitzel &amp; Knödel</span><span class="tl-tag tag-tip">~20€ לאדם</span></div>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="tl-time"><span class="time-text">14:30</span></div>
-                <div class="tl-icon-wrap">♨️</div>
-                <div class="tl-content">
-                    <h3>ספא אקווה זלצה (Aqua Salza)</h3>
-                    <p>מתחם ספא גדול ומשפחתי: 3 בריכות מחוממות (28–30°C) + ג'קוזי + מגלשה + בריכת פעוטות (35°C). בריכות חוץ ופנים מחוברות בתעלה. עולם סאונות נפרד — מבוגרים בלבד, ללא בגדי ים. <strong>מחיר עולם המים (3 שעות):</strong> מבוגר €15.5 · ילד (5–15) €10.5 · פעוט (3–5) €7.2 · תינוק חינם · משפחה 20% הנחה.</p>
-                    <div class="tl-tags"><span class="tl-tag tag-must">3+ שעות</span><span class="tl-tag tag-tip">פעוטות חינם</span></div>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="tl-time"><span class="time-text">17:30</span></div>
-                <div class="tl-icon-wrap">🚗</div>
-                <div class="tl-content">
-                    <h3>חזרה לאלטנמרקט</h3>
-                    <p>A10 דרום → ~30 דקות. אפשר לשלב עצירה קצרה בכפר וורפן בדרך חזרה.</p>
-                    <div class="tl-tags"><span class="tl-tag tag-drive">~30 דק'</span></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="tips-box">
-            <h4>💧 טיפים לגולינג</h4>
-            <ul>
-                <li>שלשת האטרקציות (מפלים, קניון, ספא) כלולות בכרטיס SalzburgerLand Card — יום שלם כמעט ללא עלות</li>
-                <li>גולינג על הדרך לוורפן — ניתן לשלב עם יום 7 (טירת הוהנוורפן + מערת הקרח)</li>
-                <li>אחרי 17:00 לרוב אין קופאי במפלים — כניסה חינם (בנוסף לSLC)</li>
-                <li>קניון פתוח עד 20:00 (ביולי/אוגוסט עד 18:00) — גמישות בתכנון</li>
-                <li>ספא שעות מים: 9:00–20:00 כל יום · סאונות: 9:00–21:00 כל יום</li>
-                <li>העיירה גולינג עצמה יפה — טירה מהמאה ה-13 ורחובות כפריים שווים עצירה קצרה</li>
-            </ul>
-        </div>
-
-        <div class="drive-info">
-            <div class="drive-pill">📍 <span>גולינג: <strong>~30 דק' מהלינה</strong></span></div>
-            <div class="drive-pill">🎟️ <span>תקציב: <strong>~5€ חניון</strong> + ספא ללא SLC</span></div>
-            <div class="drive-pill">🎫 <span><strong>3 אטרקציות כלולות בSLC ✓</strong></span></div>
-        </div>
-
-        <a class="optional-gmaps-btn" href="https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Gollinger+Wasserfall+5440+Golling/Obergau+82+5440+Golling+Austria/M%C3%B6slstra%C3%9Fe+199+5440+Golling+Austria/Altenmarkt+im+Pongau" target="_blank" rel="noopener">🗺️ פתח ב-Google Maps — ראה זמני נסיעה</a>
+    <div style="text-align:center;margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+        <a href="optional.html" style="display:inline-flex;align-items:center;gap:8px;background:#5b21b6;color:#fff;text-decoration:none;padding:11px 24px;border-radius:24px;font-size:14px;font-weight:700;box-shadow:0 2px 12px rgba(91,33,182,.3);">
+            ⭐ לדף הימים האופציונליים המלא →
+        </a>
+        <a href="slc.html" style="display:inline-flex;align-items:center;gap:8px;background:#16a34a;color:#fff;text-decoration:none;padding:11px 24px;border-radius:24px;font-size:14px;font-weight:700;box-shadow:0 2px 12px rgba(22,163,74,.3);">
+            💚 אטרקציות כרטיס זלצבורגלנד →
+        </a>
     </div>
 </section>
 
@@ -2088,7 +1926,7 @@
                 { ll:[47.490, 13.601],  e:'🌉', c:'#7c3aed', n:'Dachstein Skywalk', d:'יום 2' },
                 { ll:[47.5622,13.649],  e:'💎', c:'#0891b2', n:'הלשטט', d:'יום 3' },
                 { ll:[47.3822,13.414],  e:'🏠', c:'#e74c3c', n:'Altenmarkt — לינה', d:'91 Götschlau' },
-                { ll:[47.7676,13.3628], e:'⛵', c:'#059669', n:'וולפגנגזה', d:'יום 5' },
+                { ll:[47.570, 13.148],  e:'💧', c:'#0891b2', n:'גולינג — מפלים וספא', d:'יום 5' },
                 { ll:[47.303, 13.283],  e:'🏞️', c:'#0891b2', n:'Liechtensteinklamm', d:'יום 6' },
                 { ll:[47.356, 13.198],  e:'🎿', c:'#ea580c', n:'Geisterberg Alpendorf', d:'יום 6' },
                 { ll:[47.501, 13.192],  e:'🧊', c:'#5ba3d0', n:'Eisriesenwelt', d:'יום 7' },
@@ -2138,13 +1976,13 @@
             ]
         },
         5: {
-            view: [47.745, 13.41], zoom: 12,
+            view: [47.578, 13.158], zoom: 13,
             home: true,
-            route: [[47.7676,13.3628],[47.7367,13.4503],[47.755,13.442]],
+            route: [[47.3822,13.414],[47.570,13.148],[47.558,13.163],[47.590,13.170]],
             places: [
-                { ll:[47.7676,13.3628], e:'⛵', c:'#2563a8', n:'St. Gilgen', d:'יציאת המעבורת', w:'St. Gilgen Wolfgangsee Austria' },
-                { ll:[47.7367,13.4503], e:'🚂', c:'#c9973a', n:'Schafbergbahn — St. Wolfgang', d:'רכבת קיטור — הזמן מראש!', w:'Schafbergbahnhof St. Wolfgang Austria' },
-                { ll:[47.755, 13.442],  e:'🏊', c:'#0284c7', n:'חוף שחייה Wolfgangsee', d:'מים נקיים 22°C', w:'Strandbad Wolfgangsee Austria' },
+                { ll:[47.570, 13.148],  e:'💧', c:'#0891b2', n:'Gollinger Wasserfall', d:'מפל 75 מ׳ — SLC ✓', w:'Wasserfallstraße 23 5440 Golling Austria' },
+                { ll:[47.558, 13.163],  e:'🪨', c:'#047857', n:'Salzachöfen', d:'קניון הזלצך — SLC ✓', w:'Obergau 82 5440 Golling Austria' },
+                { ll:[47.590, 13.170],  e:'♨️', c:'#7c3aed', n:'Aqua Salza', d:'ספא + בריכות — SLC ✓', w:'Möslstraße 199 5440 Golling Austria' },
             ]
         },
         6: {
@@ -2214,7 +2052,7 @@
         1: 'https://www.google.com/maps/dir/Vienna+International+Airport+Schwechat/SCS+Shopping+City+Süd+Vösendorf/Rastplatz+Viehdorf+Austria/Stift+Melk+3390/Gmunden+Rathausplatz+Austria/Altenmarkt+im+Pongau+Austria',
         2: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Dachstein+Gletscherbahn+Ramsau+am+Dachstein/Altenmarkt+im+Pongau',
         3: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Parkplatz+P1+Hallstatt/Hallstatt/Obertraun+Austria/Altenmarkt+im+Pongau',
-        5: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/St+Gilgen+Wolfgangsee/St+Wolfgang+im+Salzkammergut/Altenmarkt+im+Pongau',
+        5: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Gollinger+Wasserfall+5440+Golling/Obergau+82+5440+Golling+Austria/M%C3%B6slstra%C3%9Fe+199+5440+Golling+Austria/Altenmarkt+im+Pongau',
         6: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Liechtensteinklamm+St.+Johann+im+Pongau/Alpendorf+2+St.+Johann+im+Pongau/Altenmarkt+im+Pongau',
         7: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Werfen+Pongau/Eisriesenwelt+Werfen+Austria/Burg+Hohenwerfen+Werfen/Altenmarkt+im+Pongau',
         8: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Wildgehege+Ferleiten+Austria/Großglockner+Hochalpenstraße+Austria/Zell+am+See+Austria/Altenmarkt+im+Pongau',
