@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💚 כרטיס זלצבורגלנד | אטרקציות מומלצות</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #14532d;
+            --green-mid: #166534;
+            --green-main: #16a34a;
+            --green-light: #4ade80;
+            --green-pale: #f0fdf4;
+            --green-border: #bbf7d0;
+            --gold: #c9973a;
+            --gold-light: #fde68a;
+            --blue: #1a73e8;
+            --red: #dc2626;
+            --snow: #f0f4f8;
+            --text-dark: #1a2332;
+            --text-mid: #3d4f65;
+            --text-light: #6b7f94;
+            --card-shadow: 0 4px 20px rgba(22,101,52,0.10);
+            --radius: 16px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Assistant', sans-serif;
+            background: var(--snow);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(160deg, #052e16 0%, #14532d 40%, #166534 70%, #16a34a 100%);
+            color: white;
+            text-align: center;
+            padding: 55px 20px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 80px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80'%3E%3Cpath fill='%23f0f4f8' d='M0,80 L0,50 L120,22 L240,48 L360,10 L480,44 L600,4 L720,38 L840,8 L960,44 L1080,16 L1200,50 L1320,20 L1440,52 L1440,80 Z'/%3E%3C/svg%3E") no-repeat bottom;
+            background-size: cover;
+        }
+
+        .hero-logo {
+            font-size: 58px;
+            margin-bottom: 10px;
+            display: inline-block;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
+
+        .hero h1 {
+            font-size: clamp(26px, 5vw, 46px);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 6px;
+        }
+
+        .hero-sub {
+            font-size: 17px;
+            opacity: .85;
+            font-weight: 400;
+            margin-bottom: 28px;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero-badge {
+            background: rgba(255,255,255,.15);
+            border: 1px solid rgba(255,255,255,.3);
+            border-radius: 24px;
+            padding: 6px 16px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            color: rgba(255,255,255,.8);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.2);
+            padding: 6px 14px;
+            border-radius: 20px;
+            transition: background .2s;
+        }
+        .back-link:hover { background: rgba(255,255,255,.22); }
+
+        /* ===== LAYOUT ===== */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        section {
+            padding: 32px 0;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--green-mid);
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--green-border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ===== PRICING CARDS ===== */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        @media(max-width: 520px) {
+            .pricing-grid { grid-template-columns: 1fr; }
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--card-shadow);
+            border: 2px solid var(--green-border);
+            padding: 20px 22px;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--green-main);
+            background: var(--green-pale);
+        }
+
+        .pricing-card h3 {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--green-mid);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--green-border);
+        }
+        .price-row:last-child { border-bottom: none; }
+
+        .price-label { font-size: 14px; color: var(--text-mid); }
+        .price-val {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--green-mid);
+        }
+
+        .pricing-notes {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-size: 13px;
+            color: #92400e;
+            line-height: 1.7;
+        }
+
+        .pricing-notes strong { font-weight: 700; }
+
+        /* ===== ATTRACTION CARDS ===== */
+        .attractions-grid {
+            display: grid;
+            gap: 14px;
+        }
+
+        .attr-card {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--card-shadow);
+            border: 1.5px solid #e5e7eb;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .attr-card.in-trip {
+            border-color: var(--green-main);
+        }
+
+        .attr-header {
+            padding: 16px 18px 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .attr-emoji {
+            font-size: 32px;
+            flex-shrink: 0;
+            line-height: 1;
+            margin-top: 2px;
+        }
+
+        .attr-names { flex: 1; }
+
+        .attr-name-he {
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+
+        .attr-name-de {
+            font-size: 12px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .attr-badges {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            border-radius: 20px;
+            padding: 3px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .badge-saving {
+            background: #dcfce7;
+            color: #14532d;
+            border: 1px solid #86efac;
+        }
+
+        .badge-entry {
+            background: #f0f9ff;
+            color: #0369a1;
+            border: 1px solid #bae6fd;
+        }
+
+        .badge-in-trip {
+            background: #14532d;
+            color: #fff;
+        }
+
+        .badge-recommended {
+            background: #fef9c3;
+            color: #854d0e;
+            border: 1px solid #fde047;
+        }
+
+        .attr-desc {
+            font-size: 14px;
+            color: var(--text-mid);
+            padding: 0 18px 16px;
+            line-height: 1.6;
+        }
+
+        .attr-divider {
+            height: 1px;
+            background: #f3f4f6;
+            margin: 0 18px 12px;
+        }
+
+        /* ===== BONUS SECTION ===== */
+        .bonus-section {
+            background: linear-gradient(135deg, #1a3a5c, #2563a8);
+            color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 32px;
+        }
+
+        .bonus-header {
+            padding: 22px 24px 16px;
+            text-align: center;
+        }
+
+        .bonus-header h2 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .bonus-header p {
+            font-size: 13px;
+            opacity: .8;
+        }
+
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 0;
+        }
+
+        @media(max-width: 580px) {
+            .bonus-grid { grid-template-columns: 1fr; }
+            .bonus-or { padding: 8px; }
+        }
+
+        .bonus-option {
+            background: rgba(255,255,255,.08);
+            padding: 20px 20px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .bonus-option.trip { background: rgba(74,222,128,.12); }
+
+        .bonus-or {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,.06);
+            font-size: 13px;
+            font-weight: 800;
+            opacity: .6;
+            padding: 0 14px;
+            writing-mode: vertical-rl;
+        }
+
+        @media(max-width: 580px) {
+            .bonus-or { writing-mode: horizontal-tb; padding: 6px; }
+        }
+
+        .bonus-opt-title {
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .bonus-opt-saving {
+            display: inline-block;
+            background: rgba(74,222,128,.25);
+            border: 1px solid rgba(74,222,128,.4);
+            border-radius: 20px;
+            padding: 3px 12px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #a7f3d0;
+            align-self: flex-start;
+        }
+
+        .bonus-opt-desc {
+            font-size: 13px;
+            opacity: .85;
+            line-height: 1.6;
+        }
+
+        .bonus-opt-list {
+            list-style: none;
+            font-size: 13px;
+            opacity: .85;
+            line-height: 1.8;
+        }
+
+        .bonus-opt-list li::before {
+            content: '✓ ';
+            color: #4ade80;
+            font-weight: 700;
+        }
+
+        .bonus-opt-tag {
+            display: inline-block;
+            background: #4ade80;
+            color: #052e16;
+            border-radius: 20px;
+            padding: 3px 12px;
+            font-size: 11px;
+            font-weight: 800;
+            align-self: flex-start;
+        }
+
+        /* ===== CATEGORY LABEL ===== */
+        .cat-label {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 4px 4px 0 0;
+            display: inline-block;
+            margin-bottom: -2px;
+        }
+
+        .cat-spa { background: #fce7f3; color: #9d174d; }
+        .cat-nature { background: #d1fae5; color: #065f46; }
+        .cat-castle { background: #fef3c7; color: #92400e; }
+        .cat-fun { background: #ede9fe; color: #4c1d95; }
+        .cat-water { background: #dbeafe; color: #1e40af; }
+
+        /* ===== SUMMARY ROW ===== */
+        .savings-summary {
+            background: white;
+            border-radius: var(--radius);
+            border: 2px solid var(--green-main);
+            padding: 20px 24px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .savings-summary-icon { font-size: 36px; }
+
+        .savings-summary-text h3 {
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--green-mid);
+            margin-bottom: 3px;
+        }
+
+        .savings-summary-text p {
+            font-size: 13px;
+            color: var(--text-mid);
+        }
+
+        .savings-total {
+            margin-right: auto;
+            text-align: center;
+        }
+
+        .savings-total .amount {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--green-mid);
+            display: block;
+        }
+
+        .savings-total .label {
+            font-size: 11px;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--green-dark);
+            color: rgba(255,255,255,.7);
+            text-align: center;
+            padding: 28px 20px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        footer a {
+            color: #4ade80;
+            text-decoration: none;
+        }
+
+        footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <a href="austria.html" class="back-link">← חזרה לטיול</a>
+    <div class="hero-logo">💚</div>
+    <h1>כרטיס זלצבורגלנד</h1>
+    <p class="hero-sub">SalzburgerLand Card — אטרקציות מומלצות לטיול שלנו</p>
+    <div class="hero-badges">
+        <span class="hero-badge">🎫 180+ אטרקציות</span>
+        <span class="hero-badge">📅 מאי–אוקטובר</span>
+        <span class="hero-badge">👨‍👩‍👧‍👦 ילד שלישי חינם</span>
+        <span class="hero-badge">📱 דיגיטלי – QR Code</span>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- PRICING -->
+    <section>
+        <h2 class="section-title">💶 מחירים ומידע כללי</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>🕕 כרטיס 6 ימים</h3>
+                <div class="price-row">
+                    <span class="price-label">מבוגר</span>
+                    <span class="price-val">€95</span>
+                </div>
+                <div class="price-row">
+                    <span class="price-label">ילד (4–15.9)</span>
+                    <span class="price-val">€48</span>
+                </div>
+            </div>
+            <div class="pricing-card featured">
+                <h3>📅 כרטיס 12 ימים</h3>
+                <div class="price-row">
+                    <span class="price-label">מבוגר</span>
+                    <span class="price-val">€118</span>
+                </div>
+                <div class="price-row">
+                    <span class="price-label">ילד (4–15.9)</span>
+                    <span class="price-val">€59</span>
+                </div>
+            </div>
+        </div>
+        <div class="pricing-notes">
+            <strong>⚠️ שימו לב:</strong>
+            הכרטיס נכנס לתוקף ברגע השימוש הראשון באטרקציה · ילד שלישי ומעלה (גילאי 4–15.9) — <strong>חינם</strong> ·
+            הכרטיס תקף עד <strong>26 באוקטובר</strong> בלבד · ניתן לרכוש אונליין וקבל QR לטלפון ·
+            מי שרוצה רק את עיר זלצבורג — יש <strong>Salzburg City Card</strong> נפרד
+        </div>
+    </section>
+
+    <!-- SAVINGS SUMMARY FOR OUR TRIP -->
+    <div class="savings-summary">
+        <div class="savings-summary-icon">🧮</div>
+        <div class="savings-summary-text">
+            <h3>חיסכון משוער לטיול שלנו</h3>
+            <p>על בסיס האטרקציות המסומנות "📍 בטיול שלנו" בלבד</p>
+        </div>
+        <div class="savings-total">
+            <span class="amount">€99+</span>
+            <span class="label">לרכב (לא כולל ספאות)</span>
+        </div>
+    </div>
+
+    <!-- BONUS SECTION -->
+    <section>
+        <h2 class="section-title">⭐ בונוס — בחירה אחת מתוך שתיים</h2>
+        <div class="bonus-section">
+            <div class="bonus-header">
+                <h2>כלול בכרטיס — בחרו אחת מהשתיים</h2>
+                <p>כניסה חד פעמית חינם לאחת מהאפשרויות הבאות</p>
+            </div>
+            <div class="bonus-grid">
+                <div class="bonus-option trip">
+                    <div>
+                        <span class="bonus-opt-tag">📍 ביום 8 בטיול</span>
+                    </div>
+                    <div class="bonus-opt-title">🏔️ כביש גרוסגלוקנר</div>
+                    <div class="bonus-opt-saving">חיסכון €36 לרכב</div>
+                    <p class="bonus-opt-desc">
+                        הכביש האלפיני המרהיב ביותר באירופה — 48 ק"מ עד לפסגת ההר הגבוהה באוסטריה.
+                        נוף מרהיב, קרחון, ואטרקציה משפחתית אגדית.
+                    </p>
+                    <div style="font-size:12px;color:rgba(255,255,255,.6);">Großglockner Hochalpenstraße</div>
+                </div>
+                <div class="bonus-or">או</div>
+                <div class="bonus-option">
+                    <div class="bonus-opt-title">🏙️ כרטיס יומי לעיר זלצבורג</div>
+                    <div class="bonus-opt-saving">24 שעות — כניסה חינם</div>
+                    <ul class="bonus-opt-list">
+                        <li>טירת זלצבורג + רכבל</li>
+                        <li>ארמון הלברון + מזרקות</li>
+                        <li>מוזיאון דומקוורטיר</li>
+                        <li>בית הולדתו של מוצרט</li>
+                        <li>שייט בנהר זלצך</li>
+                        <li>מבשלת שטיגל</li>
+                        <li>גן החיות זלצבורג</li>
+                        <li>תחבורה ציבורית חינם</li>
+                    </ul>
+                    <div style="font-size:12px;color:rgba(255,255,255,.6);">Salzburg 24h City Card</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ATTRACTIONS -->
+    <section>
+        <h2 class="section-title">🏆 האטרקציות המומלצות מהכרטיס</h2>
+
+        <!-- SPAS -->
+        <div style="margin-bottom: 22px;">
+            <div class="cat-label cat-spa">🛁 ספאות ומרכזי בריאות</div>
+            <div class="attractions-grid">
+
+                <div class="attr-card">
+                    <div class="attr-header">
+                        <div class="attr-emoji">♨️</div>
+                        <div class="attr-names">
+                            <div class="attr-name-he">ספא אמדה המשובח</div>
+                            <div class="attr-name-de">Erlebnis-Therme Amadé · Altenmarkt/Flachau</div>
+                            <div class="attr-badges">
+                                <span class="badge badge-saving">💰 חיסכון €28.8</span>
+                                <span class="badge badge-entry">🎫 כניסה אחת · 4 שעות + סאונה</span>
+                                <span class="badge badge-recommended">⭐ ממש מומלץ!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attr-divider"></div>
+                    <div class="attr-desc">
+                        ספא ומרכז בריאות ראשי באזור — בריכות חוץ ופנים, מגלשות, סאונה ומרכז ספא מלא.
+                        <strong>נמצא קרוב לבסיס שלנו בAltenmarkt</strong> — אידיאלי לאחד מהערבות.
+                    </div>
+                </div>
+
+                <div class="attr-card">
+                    <div class="attr-header">
+                        <div class="attr-emoji">🌋</div>
+                        <div class="attr-names">
+                            <div class="attr-name-he">ספא פלזנתרמה — בד גשטיין</div>
+                            <div class="attr-name-de">Felsentherme Bad Gastein</div>
+                            <div class="attr-badges">
+                                <span class="badge badge-saving">💰 חיסכון €26</span>
+                                <span class="badge badge-entry">🎫 כניסה אחת · 4 שעות</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attr-divider"></div>
+                    <div class="attr-desc">
+                        ספא מרשים החצוב בסלע עם מי מעיינות טבעיים. Bad Gastein היא עיירה מהממת בעצמה — כדאי לשלב.
+                    </div>
+                </div>
+
+                <div class="attr-card">
+                    <div class="attr-header">
+                        <div class="attr-emoji">🌡️</div>
+                        <div class="attr-names">
+                            <div class="attr-name-he">ספא אלפנתרמה — הופגשטיין</div>
+                            <div class="attr-name-de">Alpentherme Hofgastein</div>
+                            <div class="attr-badges">
+                                <span class="badge badge-saving">💰 חיסכון €32.5</span>
+                                <span class="badge badge-entry">🎫 כניסה אחת · 4 שעות</span>
+                                <span class="badge badge-recommended">⭐ הכי גבוה חיסכון!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attr-divider"></div>
+                    <div class="attr-desc">
+                        ספא ענק עם בריכות תרמיות, מגלשות ומרכז רפואה. חיסכון הגבוה ביותר מבין הספאות — שווה במיוחד למשפחות.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- GORGES & WATERFALLS -->
+        <div style="margin-bottom: 22px;">
+            <div class="cat-label cat-nature">🏞️ קניונים ומפלים</div>
+            <div class="attractions-grid">
+
+                <div class="attr-card in-trip">
+                    <div class="attr-header">
+                        <div class="attr-emoji">🪨</div>
+                        <div class="attr-names">
+                            <div class="attr-name-he">נקיק ליכטנשטיין</div>
+                            <div class="attr-name-de">Liechtensteinklamm · St. Johann im Pongau</div>
+                            <div class="attr-badges">
+                                <span class="badge badge-in-trip">📍 ביום 6 בטיול</span>
+                                <span class="badge badge-saving">💰 חיסכון €10</span>
+                                <span class="badge badge-entry">♾️ כניסה ללא הגבלה</span>
+                                <span class="badge badge-recommended">⭐ ממש שווה!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attr-divider"></div>
+                    <div class="attr-desc">
+                        מסלול מאלף ויפהפה דרך נקיק צר בין סלעי אלפים. המסלול סלול ומתאים לכל גיל. אחת האטרקציות האהובות על המשפחה.
+                    </div>
+                </div>
+
+                <div class="attr-card">
+                    <div class="attr-header">
+                        <div class="attr-emoji">💧</div>
+                        <div class="attr-names">
+                            <div class="attr-name-he">מפלי קרימל</div>
+                            <div class="attr-name-de">Krimmler Wasserfälle · Krimml</div>
+                            <div class="attr-badges">
+                                <span class="badge badge-saving">💰 חיסכון €4</span>
+                                <span class="badge badge-entry">🎫 כניסה אחת</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attr-divider"></div>
+                    <div class="attr-desc">
+                        המפלים המרשימים ביותר באוסטריה — 380 מטר גובה, שלושה שלבים. מסלול ההליכה לאורכם הוא חוויה בלתי נשכחת. קצת רחוק מBasis אבל שווה יום נסיעה.
+                    </div>
+                </div>
+
+                <div class="attr-card">
+                    <div class="attr-header">
+                        <div class="attr-emoji">🌊</div>
+                        <div class="attr-names">
+                            <div class="attr-name-he">מפלי גולינג</div>
+                            <div class="attr-name-de">Gollinger Wasserfall · Golling</div>
+                            <div class="attr-badges">
+                                <span class="badge badge-saving">💰 חיסכון €3 בכל כניסה</span>
+                                <span class="badge badge-entry">♾️ כניסה ללא הגבלה</span>
+                                <span class="badge badge-recommended">⭐ מסלול קצר ומרשים</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attr-divider"></div>
+                    <div class="attr-desc">
+                        מפל מרשים עם מסלול קצר ונגיש. יפה מאוד וקרוב לאוטובן — מצוין כעצירת דרך.
+                    </div>
+                </div>
+
+                <div class="attr-card">
+                    <div class="attr-header">
+                        <div class="attr-emoji">🏔️</div>
+                        <div class="attr-names">
+                            <div class="attr-name-he">קניון זלנאכהופן — גולינג</div>
+                            <div class="attr-name-de">Salzachöfen Golling</div>
+                            <div class="attr-badges">
+                                <span class="badge badge-saving">💰 חיסכון €3 בכל כניסה</span>
+                                <span class="badge badge-entry">♾️ כניסה ללא הגבלה</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attr-divider"></div>
+                    <div class="attr-desc">
+                        קניון מרשים בגולינג עם הליכה לאורך נהר הזלצך. ניתן לשלב עם מפלי גולינג — שניהם באותו אזור.
+                    </div>
+                </div>
+
+                <div class="attr-card">
+                    <div class="attr-header">
+                        <div class="attr-emoji">🌿</div>
+                        <div class="attr-names">
+                            <div class="attr-name-he">קניון זיגמונד-טון — קפרון</div>
+                            <div class="attr-name-de">Sigmund-Thun-Klamm · Kaprun</div>
+                            <div class="attr-badges">
+                                <span class="badge badge-saving">💰 חיסכון €5.5 בכל כניסה</span>
+                                <span class="badge badge-entry">♾️ כניסה ללא הגבלה</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attr-divider"></div>
+                    <div class="attr-desc">
+                        מסלול נחמד וקליל בקפרון — ניתן לשלב עם יום של זל אם זה (יום 8 בטיול).
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CASTLES -->
+        <div style="margin-bottom: 22px;">
+            <div class="cat-label cat-castle">🏰 טירות ומבצרים</div>
+            <div class="attractions-grid">
+
+                <div class="attr-card in-trip">
+                    <div class="attr-header">
+                        <div class="attr-emoji">🏰</div>
+                        <div class="attr-names">
+                            <div class="attr-name-he">טירת ורפן — הוהנוורפן</div>
+                            <div class="attr-name-de">Burg Hohenwerfen · Werfen</div>
+                            <div class="attr-badges">
+                                <span class="badge badge-in-trip">📍 ביום 7 בטיול</span>
+                                <span class="badge badge-saving">💰 חיסכון €14.3</span>
+                                <span class="badge badge-entry">🎫 כניסה אחת · לא כולל רכבל</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attr-divider"></div>
+                    <div class="attr-desc">
+                        טירה מדהימה מהמאה ה-11 הניצבת מעל עמק פונגאו. כולל תצוגת נשרים ופלקונים. שימו לב — <strong>הרכבל לטירה אינו כלול בכרטיס</strong> (יש תשלום נפרד).
+                    </div>
+                </div>
+
+                <div class="attr-card">
+                    <div class="attr-header">
+                        <div class="attr-emoji">🗼</div>
+                        <div class="attr-names">
+                            <div class="attr-name-he">טירת מאוטרנדורף</div>
+                            <div class="attr-name-de">Burg Mauterndorf · Mauterndorf</div>
+                            <div class="attr-badges">
+                                <span class="badge badge-saving">💰 חיסכון €9.5</span>
+                                <span class="badge badge-entry">🎫 כניסה אחת</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attr-divider"></div>
+                    <div class="attr-desc">
+                        טירה מימי הביניים מהמאה ה-13 עם מוזיאון היסטורי. אם אתם באזור לונגאו — כדאי לשלב.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FUN / RECREATION -->
+        <div style="margin-bottom: 22px;">
+            <div class="cat-label cat-fun">🎢 פנאי ופעילות</div>
+            <div class="attractions-grid">
+
+                <div class="attr-card">
+                    <div class="attr-header">
+                        <div class="attr-emoji">🛷</div>
+                        <div class="attr-names">
+                            <div class="attr-name-he">מגלשת הקיץ — אבנטאו</div>
+                            <div class="attr-name-de">Sommerrodelbahn Karkogel · Abtenau</div>
+                            <div class="attr-badges">
+                                <span class="badge badge-saving">💰 חיסכון €12.1 לגלישה</span>
+                                <span class="badge badge-entry">🎫 גלישה אחת</span>
+                                <span class="badge badge-recommended">⭐ מבוקש מאוד!</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attr-divider"></div>
+                    <div class="attr-desc">
+                        אחת מהאטרקציות המבוקשות ביותר באזור זלצבורג — מגלשת קיץ על רכבת קטנה. ילדים מתים עליה!
+                        <strong>הכרטיס כולל גלישה אחת בלבד</strong> — אפשר לרכוש עוד גלישות בנפרד.
+                    </div>
+                </div>
+
+                <div class="attr-card in-trip">
+                    <div class="attr-header">
+                        <div class="attr-emoji">🏊</div>
+                        <div class="attr-names">
+                            <div class="attr-name-he">חופי הרחצה — זל אם זה</div>
+                            <div class="attr-name-de">Strandbäder Zell am See</div>
+                            <div class="attr-badges">
+                                <span class="badge badge-in-trip">📍 ביום 8 בטיול</span>
+                                <span class="badge badge-saving">💰 חיסכון €7.6 בכל כניסה</span>
+                                <span class="badge badge-entry">♾️ כניסה ללא הגבלה</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attr-divider"></div>
+                    <div class="attr-desc">
+                        חופי הרחצה הרשמיים של האגם המפורסם בזל אם זה. מים קרים ומצוינים לקיץ. כניסה בלתי מוגבלת — שווה לכמה ביקורים.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- QUICK CALC FOR OUR TRIP -->
+    <section>
+        <h2 class="section-title">🧾 חישוב מהיר — הטיול שלנו</h2>
+        <div style="background:white;border-radius:var(--radius);box-shadow:var(--card-shadow);overflow:hidden;margin-bottom:32px;">
+            <div style="background:linear-gradient(135deg,#14532d,#16a34a);color:white;padding:16px 20px;">
+                <div style="font-size:15px;font-weight:800;">אטרקציות מהכרטיס שכלולות בטיול שלנו</div>
+                <div style="font-size:12px;opacity:.8;">2 מבוגרים + 4 ילדים · רכב אחד</div>
+            </div>
+            <div style="padding:0 0 4px;">
+                <div style="display:grid;grid-template-columns:1fr auto;gap:0;">
+                    <div style="padding:12px 20px;font-size:14px;border-bottom:1px solid #f3f4f6;">
+                        🪨 נקיק ליכטנשטיין (יום 6) — כניסה למשפחה
+                    </div>
+                    <div style="padding:12px 20px;font-size:14px;font-weight:700;color:#14532d;border-bottom:1px solid #f3f4f6;white-space:nowrap;">
+                        ~€36
+                    </div>
+                    <div style="padding:12px 20px;font-size:14px;border-bottom:1px solid #f3f4f6;">
+                        🏰 טירת ורפן (יום 7) — כניסה למשפחה (לא כולל רכבל)
+                    </div>
+                    <div style="padding:12px 20px;font-size:14px;font-weight:700;color:#14532d;border-bottom:1px solid #f3f4f6;white-space:nowrap;">
+                        ~€86
+                    </div>
+                    <div style="padding:12px 20px;font-size:14px;border-bottom:1px solid #f3f4f6;">
+                        🏊 חוף הרחצה זל אם זה (יום 8)
+                    </div>
+                    <div style="padding:12px 20px;font-size:14px;font-weight:700;color:#14532d;border-bottom:1px solid #f3f4f6;white-space:nowrap;">
+                        ~€46
+                    </div>
+                    <div style="padding:12px 20px;font-size:14px;border-bottom:1px solid #f3f4f6;background:#f0fdf4;">
+                        🏔️ <strong>בונוס:</strong> כביש גרוסגלוקנר (יום 8)
+                    </div>
+                    <div style="padding:12px 20px;font-size:14px;font-weight:700;color:#14532d;border-bottom:1px solid #f3f4f6;background:#f0fdf4;white-space:nowrap;">
+                        €36
+                    </div>
+                    <div style="padding:14px 20px;font-size:15px;font-weight:800;background:#f0fdf4;">
+                        סה"כ חיסכון משוער בטיול שלנו
+                    </div>
+                    <div style="padding:14px 20px;font-size:18px;font-weight:800;color:#14532d;background:#f0fdf4;white-space:nowrap;">
+                        ~€204
+                    </div>
+                </div>
+            </div>
+            <div style="padding:14px 20px;background:#fefce8;border-top:1px solid #fde68a;font-size:12px;color:#92400e;line-height:1.6;">
+                💡 <strong>מחיר הכרטיס לכל המשפחה:</strong> 2 מבוגרים (€95×2=€190) + 2 ילדים (€48×2=€96) + ילד 3 ו-4 <strong>חינם</strong> = <strong>€286 סך הכל</strong> ·
+                כבר מהאטרקציות בטיול שלנו + הבונוס מחזירים כמעט את כל המחיר!
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <div style="font-size:22px;margin-bottom:8px;">💚</div>
+    <div>מבוסס על המידע מ-<strong>Rottravels</strong> ועל האתר הרשמי של</div>
+    <div><a href="https://www.salzburgerland.com/en/salzburgerland-card/" target="_blank" rel="noopener">SalzburgerLand Card</a></div>
+    <div style="margin-top:10px;font-size:11px;opacity:.6;">המחירים עשויים להשתנות · בדקו תמיד באתר הרשמי לפני הרכישה</div>
+    <div style="margin-top:16px;">
+        <a href="austria.html" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:8px 20px;border-radius:20px;color:white;text-decoration:none;font-size:13px;font-weight:700;">← חזרה לטיול</a>
+    </div>
+</footer>
+
+</body>
+</html>
