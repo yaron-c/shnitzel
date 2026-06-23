@@ -453,6 +453,27 @@
         .ov-date { font-size: 12px; color: var(--text-light); }
         .ov-dest { font-size: 15px; font-weight: 700; color: var(--text-dark); }
         .ov-weather { font-size: 13px; margin-top: 4px; }
+        .ov-rain { font-size: 11px; font-weight: 700; margin-top: 4px; }
+        .ov-rain-great { color: #0369a1; }
+        .ov-rain-ok    { color: #166534; }
+        .ov-rain-mixed { color: #92400e; }
+        .ov-rain-sun   { color: #991b1b; }
+
+        /* Rain suitability badge on day cards */
+        .rain-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 11px;
+            border-radius: 20px;
+            margin-top: 8px;
+        }
+        .rain-great { background:#e0f2fe; color:#0369a1; border:1px solid #7dd3fc; }
+        .rain-ok    { background:#f0fdf4; color:#166534; border:1px solid #86efac; }
+        .rain-mixed { background:#fff7ed; color:#92400e; border:1px solid #fdba74; }
+        .rain-sun   { background:#fef2f2; color:#991b1b; border:1px solid #fca5a5; }
 
 
         /* ===== USEFUL INFO ===== */
@@ -696,6 +717,7 @@
                     <div class="ov-date">רביעי, 1 ביולי</div>
                     <div class="ov-dest">✈️ LY361 נחיתה 09:25 וינה ← Altenmarkt</div>
                     <div class="ov-weather">☀️ 25°C · שמשי</div>
+                    <div class="ov-rain ov-rain-ok">🌧️ בסדר לגשם</div>
                 </div>
             </div>
             <div class="ov-card" onclick="showDay(2)">
@@ -704,6 +726,7 @@
                     <div class="ov-date">חמישי, 2 ביולי</div>
                     <div class="ov-dest">🏰 עיר זלצבורג</div>
                     <div class="ov-weather">⛅ 23°C · מעונן חלקית</div>
+                    <div class="ov-rain ov-rain-sun">☀️ חייב שמש</div>
                 </div>
             </div>
             <div class="ov-card" onclick="showDay(3)">
@@ -712,6 +735,7 @@
                     <div class="ov-date">שישי, 3 ביולי</div>
                     <div class="ov-dest">🪂 גרובמינג + 💎 הלשטאט</div>
                     <div class="ov-weather">☀️ 26°C · שמשי ויפה</div>
+                    <div class="ov-rain ov-rain-sun">☀️ חייב שמש</div>
                 </div>
             </div>
             <div class="ov-card" onclick="showDay(4)">
@@ -720,6 +744,7 @@
                     <div class="ov-date">שבת, 4 ביולי</div>
                     <div class="ov-dest">🕍 שבת — מנוחה ואזור הלינה</div>
                     <div class="ov-weather">🌦️ 20°C · גשם מקומי</div>
+                    <div class="ov-rain ov-rain-ok">🌧️ גמיש — יום מנוחה</div>
                 </div>
             </div>
             <div class="ov-card" onclick="showDay(5)">
@@ -728,6 +753,7 @@
                     <div class="ov-date">ראשון, 5 ביולי</div>
                     <div class="ov-dest">💧 גולינג — מפלים, קניון וספא</div>
                     <div class="ov-weather">🌤️ 22°C · שמש חלקית</div>
+                    <div class="ov-rain ov-rain-great">☔ מתאים לגשם!</div>
                 </div>
             </div>
             <div class="ov-card" onclick="showDay(6)">
@@ -736,6 +762,7 @@
                     <div class="ov-date">שני, 6 ביולי</div>
                     <div class="ov-dest">🦅 ברכטסגאדן וקניגסזה</div>
                     <div class="ov-weather">☀️ 25°C · שמשי</div>
+                    <div class="ov-rain ov-rain-mixed">🌤️ חלקי — נקיק כן, שייט לא</div>
                 </div>
             </div>
             <div class="ov-card" onclick="showDay(7)">
@@ -744,6 +771,7 @@
                     <div class="ov-date">שלישי, 7 ביולי</div>
                     <div class="ov-dest">🧊 וורפן — מערות הקרח</div>
                     <div class="ov-weather">⛅ 22°C · מעונן חלקית</div>
+                    <div class="ov-rain ov-rain-great">☔ מושלם לגשם!</div>
                 </div>
             </div>
             <div class="ov-card" onclick="showDay(8)">
@@ -752,6 +780,7 @@
                     <div class="ov-date">רביעי, 8 ביולי</div>
                     <div class="ov-dest">🏔️ גרוסגלוקנר ו-Zell am See</div>
                     <div class="ov-weather">🌤️ 24°C · בהיר בעיקר</div>
+                    <div class="ov-rain ov-rain-sun">☀️ חייב שמש</div>
                 </div>
             </div>
             <div class="ov-card" onclick="showDay(9)">
@@ -760,6 +789,7 @@
                     <div class="ov-date">חמישי, 9 ביולי</div>
                     <div class="ov-dest">✈️ LY364 המראה 21:35 וינה | Mondsee בדרך</div>
                     <div class="ov-weather">☀️ 26°C · שמשי</div>
+                    <div class="ov-rain ov-rain-mixed">🌤️ עדיף שמש — Mondsee</div>
                 </div>
             </div>
         </div>
@@ -785,6 +815,7 @@
                     <h2>יום 1 — הגעה לאוסטריה</h2>
                     <div class="day-subtitle">רביעי, 1 ביולי 2026</div>
                     <div class="main-destination">✈️ וינה ← חבל זלצבורג</div>
+                    <div class="rain-badge rain-ok">🌧️ בסדר לגשם — קניון SCS + מנזר מלק מקוריים</div>
                 </div>
                 <div class="weather-widget">
                     <div class="weather-icon">☀️</div>
@@ -938,6 +969,7 @@
                     <h2>יום 2 — Dachstein Skywalk</h2>
                     <div class="day-subtitle">חמישי, 2 ביולי 2026</div>
                     <div class="main-destination">🏔️ Dachstein · Ramsau · 2700 מ'</div>
+                    <div class="rain-badge rain-sun">☀️ חייב שמש — Skywalk חסר טעם בעננים</div>
                 </div>
                 <div class="weather-widget">
                     <div class="weather-icon">☀️</div>
@@ -1067,6 +1099,7 @@
                     <h2>יום 3 — גרובמינג + הלשטאט</h2>
                     <div class="day-subtitle">שישי, 3 ביולי 2026</div>
                     <div class="main-destination">🪂 אומגות + פארק חבלים · 💎 כפר הירושה העולמי</div>
+                    <div class="rain-badge rain-sun">☀️ חייב שמש — אומגות וחבלים נסגרים בגשם</div>
                 </div>
                 <div class="weather-widget">
                     <div class="weather-icon">☀️</div>
@@ -1223,6 +1256,7 @@
                     <h2>✡ שבת — מנוחה ורוגע</h2>
                     <div class="day-subtitle">שבת, 4 ביולי 2026 | אין נסיעות רחוקות</div>
                     <div class="main-destination" style="background:#fff3d0;color:#92400e;">🕍 שבת שלום — יום מנוחה</div>
+                    <div class="rain-badge rain-ok">🌧️ גמיש — יום מנוחה, גשם לא בעיה</div>
                 </div>
                 <div class="weather-widget" style="background:linear-gradient(135deg,#fff8e7,#fff3d0);border-color:#f0c060;">
                     <div class="weather-icon">🌦️</div>
@@ -1291,6 +1325,7 @@
                     <h2>יום 5 — גולינג</h2>
                     <div class="day-subtitle">ראשון, 5 ביולי 2026</div>
                     <div class="main-destination">💧 Gollinger Wasserfall · Salzachöfen · Aqua Salza</div>
+                    <div class="rain-badge rain-great">☔ מתאים לגשם! — Aqua Salza + קניון מקוריים</div>
                 </div>
                 <div class="weather-widget">
                     <div class="weather-icon">🌤️</div>
@@ -1386,6 +1421,7 @@
                     <h2>יום 6 — נקיק ופארק הרים</h2>
                     <div class="day-subtitle">שני, 6 ביולי 2026</div>
                     <div class="main-destination">🏔️ Liechtensteinklamm · Geisterberg</div>
+                    <div class="rain-badge rain-mixed">🌤️ חלקי — נקיק מושלם לגשם, Geisterberg לא</div>
                 </div>
                 <div class="weather-widget">
                     <div class="weather-icon">⛅</div>
@@ -1495,6 +1531,7 @@
                     <h2>יום 7 — וורפן ומערות הקרח</h2>
                     <div class="day-subtitle">שלישי, 7 ביולי 2026</div>
                     <div class="main-destination">🧊 Eisriesenwelt · Hohenwerfen</div>
+                    <div class="rain-badge rain-great">☔ מושלם לגשם! — מערות קרח + מבצר מקוריים</div>
                 </div>
                 <div class="weather-widget">
                     <div class="weather-icon">⛅</div>
@@ -1603,6 +1640,7 @@
                     <h2>יום 8 — גרוסגלוקנר</h2>
                     <div class="day-subtitle">רביעי, 8 ביולי 2026</div>
                     <div class="main-destination">🏔️ Grossglockner · Zell am See</div>
+                    <div class="rain-badge rain-sun">☀️ חייב שמש — גרוסגלוקנר חסר טעם בעננים</div>
                 </div>
                 <div class="weather-widget">
                     <div class="weather-icon">🌤️</div>
@@ -1721,6 +1759,7 @@
                     <h2>יום 9 — יום עזיבה</h2>
                     <div class="day-subtitle">חמישי, 9 ביולי 2026</div>
                     <div class="main-destination">✈️ חזרה לארץ</div>
+                    <div class="rain-badge rain-mixed">🌤️ עדיף שמש — Mondsee ונסיעה</div>
                 </div>
                 <div class="weather-widget">
                     <div class="weather-icon">☀️</div>
