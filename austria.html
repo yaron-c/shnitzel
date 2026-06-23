@@ -487,9 +487,8 @@
         /* ===== OPTIONAL DAYS ===== */
         .optional-section { background: #f5f3ff; padding: 40px 20px 48px; border-top: 3px solid #ede9fe; }
         .optional-section > h2 { text-align:center; font-size:22px; font-weight:800; color:#5b21b6; margin-bottom:8px; }
-        .opt-teaser-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:960px; margin:0 auto 20px; }
-        @media(max-width:700px){ .opt-teaser-grid{grid-template-columns:1fr 1fr;} }
-        @media(max-width:440px){ .opt-teaser-grid{grid-template-columns:1fr;} }
+        .opt-teaser-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; max-width:720px; margin:0 auto 20px; }
+        @media(max-width:520px){ .opt-teaser-grid{grid-template-columns:1fr;} }
         .opt-teaser-card { display:block; background:#fff; border:2px dashed #a78bfa; border-radius:16px; padding:20px 18px 16px; text-decoration:none; color:var(--text-dark); text-align:center; transition:transform .15s,box-shadow .15s; box-shadow:0 2px 12px rgba(91,33,182,.08); }
         .opt-teaser-card:hover { transform:translateY(-3px); box-shadow:0 6px 20px rgba(91,33,182,.18); border-color:#7c3aed; }
         .opt-teaser-emoji { font-size:36px; margin-bottom:6px; }
@@ -711,7 +710,7 @@
                 <div class="ov-num">3</div>
                 <div class="ov-info">
                     <div class="ov-date">שישי, 3 ביולי</div>
-                    <div class="ov-dest">💎 הלשטט ואגם הדכשטיין</div>
+                    <div class="ov-dest">🪂 גרובמינג + 💎 הלשטאט</div>
                     <div class="ov-weather">☀️ 26°C · שמשי ויפה</div>
                 </div>
             </div>
@@ -1065,111 +1064,150 @@
         <div class="day-card">
             <div class="day-header">
                 <div class="day-title-area">
-                    <h2>יום 3 — הלשטט</h2>
+                    <h2>יום 3 — גרובמינג + הלשטאט</h2>
                     <div class="day-subtitle">שישי, 3 ביולי 2026</div>
-                    <div class="main-destination">💎 כפר הירושה העולמי</div>
+                    <div class="main-destination">🪂 אומגות + פארק חבלים · 💎 כפר הירושה העולמי</div>
                 </div>
                 <div class="weather-widget">
                     <div class="weather-icon">☀️</div>
                     <div class="weather-temp">26°C</div>
                     <div class="weather-desc">שמשי ויפה</div>
                     <div class="weather-range">מינ' 14°C · מקס' 26°C</div>
-                    <div class="weather-note">תחזית ממוצע היסטורי</div>
+                    <div class="weather-note">שני האתרים דורשים שמש!</div>
                 </div>
             </div>
 
             <div class="timeline">
                 <div class="timeline-item">
-                    <div class="tl-time"><span class="time-text">08:00</span></div>
+                    <div class="tl-time"><span class="time-text">07:00</span></div>
                     <div class="tl-icon-wrap">🚗</div>
                     <div class="tl-content">
-                        <h3>יציאה מוקדמת להלשטט — B159 צפון</h3>
-                        <p>Altenmarkt → A10 צפון → Bad Ischl → B145 להלשטט. כדאי להגיע לפני 10:00 — החניה מתמלאת מהר. חנו ב-P1 ועברו בסירה (3€) לכפר.</p>
-                        <div class="tl-tags"><span class="tl-tag tag-drive">~65 דק' מהלינה</span><span class="tl-tag tag-tip">יציאה מוקדמת!</span></div>
+                        <h3>נסיעה לגרובמינג — Stoderzinken</h3>
+                        <p>Altenmarkt → Radstadt → B99 מעבר Tauern → Irdning → Gröbming. יציאה מוקדמת כדי להגיע לפני תורים. כתובת: <strong>Stoderstraße 114, 8962 Gröbming</strong>.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-drive">~55 דק'</span><span class="tl-tag tag-tip">סטיריה — דרך יפה</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">08:00</span></div>
+                    <div class="tl-icon-wrap">🎟️</div>
+                    <div class="tl-content">
+                        <h3>הגעה ורישום — כרטיס משולב אומגה + חבלים</h3>
+                        <p>הזמינו כרטיסים מראש! כרטיס משולב: מבוגר <strong>€69</strong> · ילד (8–16) <strong>€49</strong>. <strong>פארק חבלים — מזומן בלבד!</strong> ילד מתחת ל-8 / 30 ק"ג / 1.2 מ' — פארק חבלים בלבד (מגיל 3, €12–25).</p>
+                        <div class="tl-tags"><span class="tl-tag tag-book">הזמינו מראש!</span><span class="tl-tag tag-tip">מזומן לפארק</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">08:15</span></div>
+                    <div class="tl-icon-wrap">🪢</div>
+                    <div class="tl-content">
+                        <h3>פארק החבלים הגדול באוסטריה — Stoderzinken</h3>
+                        <p>18 מסלולים · 200 תחנות · 2,000 מ' חבלים! מסלולים מגיל 3 ועד מאתגרים למבוגרים. כולל רתמה וקסדה. ילדים מתחת לגיל 14 — חייב ליווי מבוגר.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">מגיל 3!</span><span class="tl-tag tag-nature">~90 דק'</span></div>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="tl-time"><span class="time-text">09:45</span></div>
-                    <div class="tl-icon-wrap">⛵</div>
+                    <div class="tl-icon-wrap">⏰</div>
                     <div class="tl-content">
-                        <h3>מעבורת לכפר הלשטט</h3>
-                        <p>עיר הציור! כפר אינסטגרמי עם בתים צבעוניים, כנסייה, ואגם קסום. אחד הכפרים היפים בעולם.</p>
-                        <div class="tl-tags"><span class="tl-tag tag-must">חובה!</span><span class="tl-tag tag-nature">UNESCO</span></div>
+                        <h3>רישום לשאטל האומגות — 30 דק' לפני!</h3>
+                        <p>שאטל יוצא ב-<strong>10:45 / 11:00 / 11:45</strong>. חובה להגיע לתחנת הרישום <strong>30 דקות לפני</strong> — אין יוצאים בלי זה. ביולי פתוח כל יום.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-book">30 דק' לפני!</span><span class="tl-tag tag-tip">יולי — כל יום</span></div>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="tl-time"><span class="time-text">10:30</span></div>
-                    <div class="tl-icon-wrap">🧂</div>
+                    <div class="tl-time"><span class="time-text">10:45</span></div>
+                    <div class="tl-icon-wrap">🏎️</div>
                     <div class="tl-content">
-                        <h3>מכרה המלח ההיסטורי של הלשטט</h3>
-                        <p>המכרה הפעיל הוותיק בעולם! גלשן מהשלה, רכבת מכרה, תצוגות מרתקות. ~30€ לכרטיס כולל הכל.</p>
-                        <div class="tl-tags"><span class="tl-tag tag-must">ממש שווה!</span><span class="tl-tag tag-culture">~2 שעות</span></div>
+                        <h3>מסלול האומגות — שטודרצינקן (1,600 מ')</h3>
+                        <p>שאטל עולה לגובה 1,600 מ' — ומשם ירידה ב-<strong>4 מסלולים מקבילים</strong>, אורך 2,500 מ', עד <strong>115 קמ"ש!</strong> כל המשפחה גולשת ביחד. ⚠️ מינ' גיל 8, מינ' 30 ק"ג, מינ' גובה 1.2 מ'.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">WOW! 115 קמ"ש</span><span class="tl-tag tag-nature">מגיל 8</span><span class="tl-tag tag-tip">~1 שעה</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="tl-time"><span class="time-text">12:00</span></div>
+                    <div class="tl-icon-wrap">🥪</div>
+                    <div class="tl-content">
+                        <h3>ארוחה מהירה + יציאה להלשטאט</h3>
+                        <p>מסעדה/קפה באתר. אחר כך — קדימה להלשטאט! Gröbming → Bad Ischl → B145 להלשטט. ~45 דק' נסיעה.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-food">~15€ לאדם</span><span class="tl-tag tag-drive">~45 דק' להלשטאט</span></div>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="tl-time"><span class="time-text">13:00</span></div>
-                    <div class="tl-icon-wrap">🥪</div>
+                    <div class="tl-icon-wrap">⛵</div>
                     <div class="tl-content">
-                        <h3>צהריים בכפר</h3>
-                        <p>מסעדות אגם עם דגי אגם טריים. Seehotel Grüner Baum — גישה טובה לאגם. אפשר גם פיקניק ענוג.</p>
-                        <div class="tl-tags"><span class="tl-tag tag-food">דגי אגם</span><span class="tl-tag tag-nature">נוף אגם</span></div>
+                        <h3>מעבורת לכפר הלשטאט + שייט מעגלי באגם</h3>
+                        <p>חנו ב-<strong>P1 (Salinenplatz)</strong> ועברו בסירה לכפר. מיד שוטו שייט מעגלי באגם — מלב האגם הנוף על הכפר וההרים הוא פנורמי ומדהים. מסלול דרומי (עד Obertraun וחזרה) ~1 שעה.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">נוף פנורמי!</span><span class="tl-tag tag-nature">€18 לאדם</span></div>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="tl-time"><span class="time-text">15:00</span></div>
-                    <div class="tl-icon-wrap">🏔️</div>
+                    <div class="tl-time"><span class="time-text">14:15</span></div>
+                    <div class="tl-icon-wrap">🚠</div>
                     <div class="tl-content">
-                        <h3>אופציה: מערות הקרח בדכשטיין</h3>
-                        <p>Dachstein Krippenstein — טלפריק למעלה (23€) עם מערות קרח ונוף על האלפים. ~1.5 שעות.</p>
-                        <div class="tl-tags"><span class="tl-tag tag-nature">אופציה</span><span class="tl-tag tag-book">הזמן מראש</span></div>
+                        <h3>פוניקיולר Salzbergbahn — Skywalk + מכרה המלח</h3>
+                        <p>עלייה בפוניקיולר (P1 → ראש ההר). ראשית — <strong>Skywalk</strong>: פלטפורמה שבולטת 12 מ' מחוץ לקצה ההר, נוף מנשים נשימה (⚠️ עדיף שמש). לאחר מכן — <strong>15 דקות הליכה</strong> למכרה. כרטיס משולב פוניקיולר + מכרה: מבוגר <strong>€43</strong> · ילד (4–15) <strong>€19.5</strong>.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">שני בכריכה אחת!</span><span class="tl-tag tag-book">אתר רשמי</span></div>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="tl-time"><span class="time-text">17:30</span></div>
-                    <div class="tl-icon-wrap">📸</div>
+                    <div class="tl-time"><span class="time-text">14:45</span></div>
+                    <div class="tl-icon-wrap">🧂</div>
                     <div class="tl-content">
-                        <h3>נקודת התצפית העליונה — Hallstatt Skywalk</h3>
-                        <p>נקודת הצילום הקלאסית הנסתרת: 400 מדרגות מהעיר, שלט "World Heritage" — הנוף הנפלא ביותר.</p>
-                        <div class="tl-tags"><span class="tl-tag tag-must">נוף מנשים נשימה</span><span class="tl-tag tag-nature">חינם</span></div>
+                        <h3>מכרה המלח העתיק בעולם — Salzwelten Hallstatt</h3>
+                        <p>סיור מודרך בתוך המנהרות, מגלשות עץ עתיקות, אגם מלח תת-קרקעי — וסיום ברכבת מכרה. ⚠️ 8°C בפנים — הביאו שכבה חמה! ⚠️ <strong>בדקו מראש</strong>: המכרה הוכרז כסגור לשיפוצים מ-09/2025 — אמתו שפתוח ביולי 2026.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-must">7,000 שנות היסטוריה!</span><span class="tl-tag tag-nature">~90 דק'</span><span class="tl-tag tag-tip">8°C — לבשו חם</span></div>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="tl-time"><span class="time-text">20:00</span></div>
+                    <div class="tl-time"><span class="time-text">16:15</span></div>
                     <div class="tl-icon-wrap">🏡</div>
                     <div class="tl-content">
-                        <h3>חזרה ללינה</h3>
-                        <p>ערב שבת — כדאי לסיים את הנסיעה לפני שקיעה ולהכין ללינה.</p>
-                        <div class="tl-tags"><span class="tl-tag tag-tip">ערב שבת</span></div>
+                        <h3>ירידה בפוניקיולר + מעבורת → חזרה ללינה</h3>
+                        <p>פוניקיולר ירידה → מעבורת חזרה ל-P1 → B145 → Bad Ischl → A10 → Altenmarkt. שבת נכנסת ~21:15 — מגיעים בנוחות.</p>
+                        <div class="tl-tags"><span class="tl-tag tag-drive">~65 דק'</span><span class="tl-tag tag-tip">ערב שבת — לחץ נמוך</span></div>
                     </div>
                 </div>
             </div>
 
+            <div class="tips-box">
+                <h4>💡 טיפים ליום גרובמינג + הלשטאט</h4>
+                <ul>
+                    <li><strong>הזמינו אומגות גרובמינג מראש</strong> — ביולי עמוס מאוד, אזל מהר! (<a href="https://www.stoderzinken.com" target="_blank" rel="noopener" style="color:#5b21b6;">stoderzinken.com</a>)</li>
+                    <li>כרטיס משולב גרובמינג (אומגה + פארק חבלים): מבוגר €69 · ילד (8–16) €49. <strong>פארק חבלים — מזומן בלבד!</strong></li>
+                    <li>הגיעו לשאטל הזינוקים <strong>30 דקות לפני</strong> — לא ניתן לפספס!</li>
+                    <li>ילדים מתחת לגיל 8 / 1.2 מ' / 30 ק"ג — פארק חבלים בלבד (מגיל 3, €12–25)</li>
+                    <li><strong>מכרה המלח הלשטאט:</strong> בדקו שפתוח ביולי 2026 — הוכרז כסגור לשיפוצים מ-09/2025</li>
+                    <li>קחו שכבת חום למכרה — 8°C גם בקיץ</li>
+                    <li>הלשטאט: חנו ב-P1 (Salinenplatz) — הכי קרוב לפוניקיולר ולמעבורת</li>
+                </ul>
+            </div>
+
             <div class="drive-info">
-                <div class="drive-pill">📍 <span>הלשטט מהלינה: <strong>~65 דק'</strong></span></div>
-                <div class="drive-pill">🎟️ <span>תקציב: <strong>~60€ לאדם</strong></span></div>
-                <div class="drive-pill">⚠️ <span>חניה: <strong>P1 מומלץ</strong></span></div>
+                <div class="drive-pill">📍 <span>גרובמינג: <strong>~55 דק' מהלינה</strong></span></div>
+                <div class="drive-pill">📍 <span>גרובמינג → הלשטאט: <strong>~45 דק'</strong></span></div>
+                <div class="drive-pill">🎟️ <span>גרובמינג: <strong>€69/€49</strong> · הלשטאט: <strong>€43+€18/person</strong></span></div>
+                <div class="drive-pill">⚠️ <span>חניה הלשטאט: <strong>P1 Salinenplatz</strong></span></div>
             </div>
             <details class="alt-routes">
-                <summary>🔄 מסלולים חלופיים ליום הלשטט</summary>
+                <summary>🔄 מסלולים חלופיים ליום גרובמינג + הלשטאט</summary>
                 <div class="alt-routes-content">
                     <div class="alt-option alt-weather">
-                        <div class="alt-trigger">🌧️ אם גשם כבד — וותרו על ה-Skywalk</div>
+                        <div class="alt-trigger">🌧️ אם גשם — רק הלשטאט</div>
                         <div class="alt-desc">
-                            הלשטט עדיין שווה בגשם קל — <strong>מכרה המלח</strong> (פנימי לחלוטין!) + <strong>מוזיאון הלשטט</strong> (4€ לאדם). וותרו על ה-Skywalk — אין נוף בערפל.
-                            <br>אם גשם ממש כבד: <strong>Dachstein מערות קרח</strong> (אופציה ב') — פנימי, מרשים, עובד בכל מזג אוויר.
+                            האומגות ופארק החבלים סגורים בגשם כבד. אם גשם — דלגו על גרובמינג, הגיעו ישר להלשטט בשעה 09:00. <strong>מכרה המלח</strong> (פנימי לחלוטין, ~2 שעות, 30€ לאדם) + טיול בכפר. הלשטאט יפה גם בגשם קל.
                         </div>
                     </div>
                     <div class="alt-option alt-crowd">
-                        <div class="alt-trigger">😰 אם הלשטט עמוסה מאוד</div>
+                        <div class="alt-trigger">😰 אם הלשטאט עמוסה מאוד</div>
                         <div class="alt-desc">
-                            <strong>St. Gilgen</strong> (אגם וולפגנגזה, ~45 דק' מאלטנמרקט) — כפר יפהפה הרבה פחות עמוס. מולדת אמא של מוצרט. שייט, שחייה, מסעדות. כמעט אותה אווירה.
-                            <br>חלופה שניה: <strong>Gmunden</strong> (קצה אגם Traunsee) — טירת Orth ישר מעל המים, ספינת גלגל. 50 דק' מאלטנמרקט.
+                            <strong>Gosausee</strong> — אגם הרים קטן ויפהפה, 15 דק' מהלשטאט, כניסה חינם, שחייה אפשרית. פחות ידוע = אפס עומס. חלופה שנייה: <strong>St. Gilgen</strong> (אגם וולפגנגזה) — כפר יפה עם שייט, מולדת אמא של מוצרט.
                         </div>
                     </div>
                     <div class="alt-option alt-tip">
-                        <div class="alt-trigger">💡 טיפ: הלשטט + Gosausee באותו יום</div>
+                        <div class="alt-trigger">💡 אם רוצים רק גרובמינג ביום שלם</div>
                         <div class="alt-desc">
-                            אחר הצהריים ב<strong>Gosausee</strong> — אגם הרים קטן ויפהפה עם רקע גלציאלי, 15 דק' מהלשטט. כניסה חינם, שחייה אפשרית. פחות ידוע = פחות עומס.
+                            דלגו על הלשטאט ובלו עוד זמן בגרובמינג: ריצות נוספות של האומגות, פארק חבלים ממושך, ו-(אופציה) עלייה ברגל ל-<strong>Friedenskircherl</strong> — כנסיית שלום מ-1902 בפסגה 1,898 מ', 25 דק' הליכה, נוף עמק האנס.
                         </div>
                     </div>
                 </div>
@@ -1800,12 +1838,6 @@
             <div class="opt-teaser-sub">Mirabellgarten · הוהנזלצבורג · Augustinerbräu</div>
             <div class="opt-teaser-meta">🎫 SLC ✓ · ~55 דק'</div>
         </a>
-        <a href="optional.html" class="opt-teaser-card">
-            <div class="opt-teaser-emoji">🪂</div>
-            <div class="opt-teaser-name">גרובמינג — אדרנלין</div>
-            <div class="opt-teaser-sub">4 אומגות 115 קמ"ש · פארק חבלים · Stoderzinken</div>
-            <div class="opt-teaser-meta">☀️ עדיף שמש · ~55 דק'</div>
-        </a>
     </div>
 
     <div style="text-align:center;margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
@@ -1931,7 +1963,8 @@
                 { ll:[48.2281,15.3337], e:'⛪', c:'#8b5cf6', n:'Stift Melk', d:'עצירה ביום 1' },
                 { ll:[47.9185,13.7975], e:'🏛️', c:'#0891b2', n:'Gmunden Rathausplatz', d:'עצירה ביום 1' },
                 { ll:[47.490, 13.601],  e:'🌉', c:'#7c3aed', n:'Dachstein Skywalk', d:'יום 2' },
-                { ll:[47.5622,13.649],  e:'💎', c:'#0891b2', n:'הלשטט', d:'יום 3' },
+                { ll:[47.451,  13.901], e:'🪂', c:'#7c3aed', n:'גרובמינג — אומגות', d:'יום 3 — בוקר' },
+                { ll:[47.5622,13.649],  e:'💎', c:'#0891b2', n:'הלשטאט', d:'יום 3 — אחה"צ' },
                 { ll:[47.3822,13.414],  e:'🏠', c:'#e74c3c', n:'Altenmarkt — לינה', d:'91 Götschlau' },
                 { ll:[47.570, 13.148],  e:'💧', c:'#0891b2', n:'גולינג — מפלים וספא', d:'יום 5' },
                 { ll:[47.303, 13.283],  e:'🏞️', c:'#0891b2', n:'Liechtensteinklamm', d:'יום 6' },
@@ -1965,13 +1998,14 @@
             ]
         },
         3: {
-            view: [47.562, 13.648], zoom: 14,
+            view: [47.51, 13.77], zoom: 10,
             home: true,
+            route: [[47.3822,13.414],[47.451,13.901],[47.5622,13.649]],
             places: [
-                { ll:[47.5623,13.6495], e:'🅿️', c:'#2563a8', n:'Parkplatz P1', d:'חנו כאן → סירה לכפר (3€)', w:'Parkplatz P1 Hallstatt Austria' },
-                { ll:[47.5622,13.649],  e:'💎', c:'#e74c3c', n:'כפר הלשטט', d:'UNESCO World Heritage', w:'Hallstatt Marktplatz Austria' },
-                { ll:[47.5588,13.660],  e:'🧂', c:'#c9973a', n:'מכרה המלח', d:'Salzwelten — ~30€', w:'Salzwelten Hallstatt Austria' },
-                { ll:[47.5558,13.643],  e:'📸', c:'#52b788', n:'Hallstatt Skywalk', d:'נוף מנשים נשימה — חינם', w:'Hallstatt Skywalk Austria' },
+                { ll:[47.451,  13.901], e:'🪂', c:'#7c3aed', n:'Stoderzinken — גרובמינג', d:'אומגות + פארק חבלים', w:'Stoderstraße 114 8962 Gröbming Austria' },
+                { ll:[47.5623,13.6495], e:'🅿️', c:'#2563a8', n:'Parkplatz P1 Salinenplatz', d:'חנו כאן → מעבורת לכפר', w:'Salinenplatz 4 4830 Hallstatt Austria' },
+                { ll:[47.5622,13.649],  e:'💎', c:'#e74c3c', n:'כפר הלשטאט', d:'UNESCO · שייט + מכרה + Skywalk', w:'Hallstatt Marktplatz Austria' },
+                { ll:[47.5588,13.660],  e:'🧂', c:'#c9973a', n:'מכרה המלח + Skywalk', d:'Salzwelten + פוניקיולר — €43', w:'Salzwelten Hallstatt Austria' },
             ]
         },
         4: {
@@ -2058,7 +2092,7 @@
     const dayGmapsDir = {
         1: 'https://www.google.com/maps/dir/Vienna+International+Airport+Schwechat/SCS+Shopping+City+Süd+Vösendorf/Rastplatz+Viehdorf+Austria/Stift+Melk+3390/Gmunden+Rathausplatz+Austria/Altenmarkt+im+Pongau+Austria',
         2: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Dachstein+Gletscherbahn+Ramsau+am+Dachstein/Altenmarkt+im+Pongau',
-        3: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Parkplatz+P1+Hallstatt/Hallstatt/Obertraun+Austria/Altenmarkt+im+Pongau',
+        3: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Stoderstra%C3%9Fe+114+8962+Gr%C3%B6bming+Austria/Salinenplatz+4+4830+Hallstatt+Austria/Hallstatt+Austria/Altenmarkt+im+Pongau',
         5: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Gollinger+Wasserfall+5440+Golling/Obergau+82+5440+Golling+Austria/M%C3%B6slstra%C3%9Fe+199+5440+Golling+Austria/Altenmarkt+im+Pongau',
         6: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Liechtensteinklamm+St.+Johann+im+Pongau/Alpendorf+2+St.+Johann+im+Pongau/Altenmarkt+im+Pongau',
         7: 'https://www.google.com/maps/dir/Altenmarkt+im+Pongau/Werfen+Pongau/Eisriesenwelt+Werfen+Austria/Burg+Hohenwerfen+Werfen/Altenmarkt+im+Pongau',
@@ -2241,9 +2275,14 @@
         'Café Tomaselli':                 'Cafe Tomaselli Alter Markt Salzburg Austria',
         'הוהנזלצבורג':                    'Festung Hohensalzburg Salzburg Austria',
         'Augustinerbräu':                 'Augustinerbräu Mülln Salzburg Austria',
-        'יציאה מוקדמת להלשטט':           'Parkplatz P1 4830 Hallstatt Austria',
-        'מעבורת לכפר הלשטט':             'Hallstatt Marktplatz Austria',
-        'מכרה המלח':                      'Salzwelten Hallstatt Austria',
+        'נסיעה לגרובמינג — Stoderzinken':  'Stoderstraße 114 8962 Gröbming Austria',
+        'פארק החבלים הגדול באוסטריה':    'Stoderstraße 114 8962 Gröbming Austria',
+        'רישום לשאטל האומגות':            'Stoderstraße 114 8962 Gröbming Austria',
+        'מסלול האומגות':                  'Stoderstraße 114 8962 Gröbming Austria',
+        'ארוחה מהירה + יציאה להלשטאט':   'Stoderstraße 114 8962 Gröbming Austria',
+        'מעבורת לכפר הלשטאט + שייט':     'Salinenplatz 4 4830 Hallstatt Austria',
+        'פוניקיולר Salzbergbahn':          'Salinenplatz 4 4830 Hallstatt Austria',
+        'מכרה המלח העתיק':               'Salzwelten Hallstatt Austria',
         'Hallstatt Skywalk':              'Salzwelten Hallstatt Lahn 61 4830 Hallstatt Austria',
         'מערות הקרח בדכשטיין':           'Dachstein Eishöhlen Winkl 34 4831 Obertraun Austria',
         'נסיעה לסנקט גילגן':             'St. Gilgen Wolfgangsee Austria',
@@ -2357,9 +2396,12 @@
         'הוהנזלצבורג':                     { w:'partly',    label:'🌤️ עננות בסדר' },
         'הקתדרלה וכיכר המוצרט':           { w:'lightrain', label:'🌦️ גשם קל בסדר' },
         'Augustinerbräu':                  { w:'lightrain', label:'🌦️ גשם קל בסדר' },
-        // יום 3 — הלשטט
-        'מעבורת לכפר הלשטט':              { w:'partly',    label:'🌤️ עדיף שמש' },
-        'מכרה המלח ההיסטורי':             { w:'any',       label:'🌧️ מושלם לגשם!' },
+        // יום 3 — גרובמינג + הלשטאט
+        'פארק החבלים הגדול באוסטריה':     { w:'sun',       label:'☀️ יום בהיר בלבד' },
+        'מסלול האומגות':                   { w:'sun',       label:'☀️ יום בהיר בלבד' },
+        'מעבורת לכפר הלשטאט + שייט':      { w:'partly',    label:'🌤️ עדיף שמש' },
+        'פוניקיולר Salzbergbahn':           { w:'sun',       label:'☀️ Skywalk — יום בהיר!' },
+        'מכרה המלח העתיק':                { w:'any',       label:'🌧️ מושלם לגשם!' },
         'מערות הקרח בדכשטיין':            { w:'any',       label:'🌧️ מושלם לגשם!' },
         'Hallstatt Skywalk':               { w:'sun',       label:'☀️ יום בהיר בלבד' },
         // יום 4 — שבת
