@@ -508,8 +508,9 @@
         /* ===== OPTIONAL DAYS ===== */
         .optional-section { background: #f5f3ff; padding: 40px 20px 48px; border-top: 3px solid #ede9fe; }
         .optional-section > h2 { text-align:center; font-size:22px; font-weight:800; color:#5b21b6; margin-bottom:8px; }
-        .opt-teaser-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; max-width:720px; margin:0 auto 20px; }
-        @media(max-width:520px){ .opt-teaser-grid{grid-template-columns:1fr;} }
+        .opt-teaser-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:960px; margin:0 auto 20px; }
+        @media(max-width:700px){ .opt-teaser-grid{grid-template-columns:1fr 1fr;} }
+        @media(max-width:440px){ .opt-teaser-grid{grid-template-columns:1fr;} }
         .opt-teaser-card { display:block; background:#fff; border:2px dashed #a78bfa; border-radius:16px; padding:20px 18px 16px; text-decoration:none; color:var(--text-dark); text-align:center; transition:transform .15s,box-shadow .15s; box-shadow:0 2px 12px rgba(91,33,182,.08); }
         .opt-teaser-card:hover { transform:translateY(-3px); box-shadow:0 6px 20px rgba(91,33,182,.18); border-color:#7c3aed; }
         .opt-teaser-emoji { font-size:36px; margin-bottom:6px; }
@@ -1876,6 +1877,12 @@
             <div class="opt-teaser-name">זלצבורג — עיר מוצרט</div>
             <div class="opt-teaser-sub">Mirabellgarten · הוהנזלצבורג · Augustinerbräu</div>
             <div class="opt-teaser-meta">🎫 SLC ✓ · ~55 דק'</div>
+        </a>
+        <a href="optional.html" class="opt-teaser-card">
+            <div class="opt-teaser-emoji">💧</div>
+            <div class="opt-teaser-name">קרימל + וילדקוגל</div>
+            <div class="opt-teaser-sub">מפלי 380 מ' · 10 מגלשות · גו-קארט הרים</div>
+            <div class="opt-teaser-meta">🎫 קרימל SLC ✓ · ~1:10 שעה</div>
         </a>
     </div>
 
