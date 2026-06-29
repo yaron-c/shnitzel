@@ -529,6 +529,21 @@
         .fc-source { font-size:10px; color:#9ca3af; text-align:left; margin-top:8px; }
         .fc-loading { text-align:center; padding:20px; color:var(--text-light); font-size:13px; }
 
+        /* ===== SCHEDULE OPTIMIZER ===== */
+        .sched-opt { background:#fff; border-radius:16px; border:2px solid #7c3aed; padding:20px 24px; max-width:860px; margin:16px auto 20px; box-shadow:0 4px 20px rgba(91,33,182,.12); }
+        .sched-title { font-size:15px; font-weight:800; color:#5b21b6; margin-bottom:4px; text-align:center; }
+        .sched-note { font-size:12px; color:#6b7280; text-align:center; margin-bottom:12px; }
+        .sched-list { display:flex; flex-direction:column; gap:5px; margin-top:10px; }
+        .sched-row { display:flex; align-items:center; gap:10px; padding:9px 12px; border-radius:10px; background:#f8fafc; border:1px solid #e2e8f0; font-size:13px; }
+        .sched-row.sched-changed { background:#f0fdf4; border-color:#86efac; }
+        .sched-row.sched-warn { background:#fff7ed; border-color:#fdba74; }
+        .sched-date { font-weight:700; color:#64748b; min-width:55px; font-size:12px; }
+        .sched-act { flex:1; font-weight:600; }
+        .sched-swap-tag { font-size:10px; font-weight:700; background:#dcfce7; color:#166534; border-radius:6px; padding:1px 5px; margin-right:4px; display:inline-block; }
+        .sched-wx { min-width:115px; color:#475569; font-size:12px; }
+        .sched-match { min-width:95px; font-size:11px; font-weight:700; color:#374151; }
+        @media(max-width:600px){ .sched-row{flex-wrap:wrap;} .sched-wx,.sched-match{min-width:unset;} }
+
         .opt-teaser-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:960px; margin:0 auto 20px; }
         @media(max-width:700px){ .opt-teaser-grid{grid-template-columns:1fr 1fr;} }
         @media(max-width:440px){ .opt-teaser-grid{grid-template-columns:1fr;} }
@@ -827,6 +842,8 @@
             </div>
             <div class="fc-source">מקור: Open-Meteo.com · מתעדכן אוטומטית בכל טעינה</div>
         </div>
+
+        <div id="schedule-optimizer" class="sched-opt" style="display:none"></div>
 
         <div class="day-card">
             <div class="tips-box" style="margin:24px;">
@@ -2423,9 +2440,87 @@
                 </div>`;
             }).join('');
             grid.innerHTML = html;
+            optimizeSchedule(results, TRIP_DAYS, wmoEmoji);
         } catch(e) {
             grid.innerHTML = '<div class="fc-loading">לא ניתן לטעון תחזית — בדקו חיבור לאינטרנט</div>';
         }
+    }
+
+    // ===== SCHEDULE OPTIMIZER =====
+    function optimizeSchedule(results, TRIP_DAYS, wmoEmoji) {
+        // Indices into results[] / TRIP_DAYS[] for the 6 flexible activity days
+        const FLEX_IDX = [1, 2, 4, 5, 6, 7];
+        const ACTIVITIES = [
+            { name:'Dachstein Skywalk', emoji:'🏔️', sunNeed:95, rainNote:'☀️ חייב שמש' },
+            { name:'גרובמינג + הלשטאט', emoji:'🪂', sunNeed:80, rainNote:'☀️ עדיף שמש' },
+            { name:'גולינג + הליין',    emoji:'💧', sunNeed:10, rainNote:'☔ מתאים לגשם' },
+            { name:'ליכטנשטיין',        emoji:'🏔️', sunNeed:40, rainNote:'🌤️ מעורב' },
+            { name:'וורפן + מערות קרח', emoji:'🧊', sunNeed:5,  rainNote:'☔ מושלם לגשם' },
+            { name:'גרוסגלוקנר',        emoji:'🏔️', sunNeed:90, rainNote:'☀️ חייב שמש' },
+        ];
+
+        // Extract weather for each flexible date
+        const dayWeather = FLEX_IDX.map(idx => {
+            const data = results[idx];
+            const date = TRIP_DAYS[idx].date;
+            const i = data.daily.time.indexOf(date);
+            if (i < 0) return null;
+            return {
+                label: TRIP_DAYS[idx].label,
+                code:  data.daily.weathercode[i],
+                tmax:  Math.round(data.daily.temperature_2m_max[i]),
+                rain:  data.daily.precipitation_probability_max[i] ?? 0,
+            };
+        });
+        if (dayWeather.some(d => !d)) return;
+
+        // Score: how well activity a fits date d (higher = better match)
+        function matchScore(actIdx, dayIdx) {
+            const sunAvail = 100 - dayWeather[dayIdx].rain;
+            return 100 - Math.abs(ACTIVITIES[actIdx].sunNeed - sunAvail);
+        }
+
+        // Brute-force optimal assignment (6! = 720 permutations)
+        let bestScore = -Infinity, bestAssign = null;
+        function permute(arr, l) {
+            if (l === 6) {
+                let s = 0; for (let i = 0; i < 6; i++) s += matchScore(arr[i], i);
+                if (s > bestScore) { bestScore = s; bestAssign = arr.slice(); }
+                return;
+            }
+            for (let i = l; i < 6; i++) {
+                [arr[l], arr[i]] = [arr[i], arr[l]];
+                permute(arr, l + 1);
+                [arr[l], arr[i]] = [arr[i], arr[l]];
+            }
+        }
+        permute([0, 1, 2, 3, 4, 5], 0);
+
+        const isOptimal = bestAssign.every((a, i) => a === i);
+        let rows = '';
+        for (let di = 0; di < 6; di++) {
+            const actIdx = bestAssign[di];
+            const act    = ACTIVITIES[actIdx];
+            const day    = dayWeather[di];
+            const changed = actIdx !== di;
+            const good   = matchScore(actIdx, di) >= 65;
+            const cls    = !good ? ' sched-warn' : changed ? ' sched-changed' : '';
+            rows += `<div class="sched-row${cls}">
+                <div class="sched-date">${day.label}</div>
+                <div class="sched-act">${act.emoji} ${act.name}${changed ? ' <span class="sched-swap-tag">🔄 הוחלף</span>' : ''}</div>
+                <div class="sched-wx">${wmoEmoji(day.code)} ${day.tmax}° · 💧${day.rain}%</div>
+                <div class="sched-match">${act.rainNote}</div>
+            </div>`;
+        }
+
+        const panel = document.getElementById('schedule-optimizer');
+        if (!panel) return;
+        panel.innerHTML = `
+            <div class="sched-title">${isOptimal ? '✅ הסדר הנוכחי כבר אופטימלי לפי מזג האוויר!' : '💡 המלצה: שנה את סדר הימים לפי מזג האוויר'}</div>
+            ${!isOptimal ? '<div class="sched-note">ימים המסומנים ב-🔄 מומלץ להחליף — לחץ על כל יום לפרטי הפעילות</div>' : ''}
+            <div class="sched-list">${rows}</div>
+        `;
+        panel.style.display = 'block';
     }
 
     // ===== WAZE BUTTONS =====
