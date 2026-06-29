@@ -821,7 +821,7 @@
 
         <!-- ===== WEATHER FORECAST ===== -->
         <div class="fc-strip" id="weather-forecast">
-            <div class="fc-title">🌦️ תחזית מזג אוויר לימי הטיול — Altenmarkt im Pongau</div>
+            <div class="fc-title">🌦️ תחזית מזג אוויר — כל יום לפי היעד שלו</div>
             <div class="fc-scroll" id="fc-grid">
                 <div class="fc-loading">⏳ טוען תחזית...</div>
             </div>
@@ -2362,31 +2362,30 @@
     // ===== WEATHER FORECAST =====
     async function loadWeatherForecast() {
         const grid = document.getElementById('fc-grid');
+        // Each day has its own destination coordinates for a per-location forecast
         const TRIP_DAYS = [
-            { date:'2026-07-01', label:'ד׳ 1.7', name:'יום 1', shabbat:false },
-            { date:'2026-07-02', label:'ה׳ 2.7', name:'יום 2', shabbat:false },
-            { date:'2026-07-03', label:'ו׳ 3.7', name:'יום 3', shabbat:false },
-            { date:'2026-07-04', label:'ש׳ 4.7', name:'שבת',  shabbat:true  },
-            { date:'2026-07-05', label:'א׳ 5.7', name:'יום 5', shabbat:false },
-            { date:'2026-07-06', label:'ב׳ 6.7', name:'יום 6', shabbat:false },
-            { date:'2026-07-07', label:'ג׳ 7.7', name:'יום 7', shabbat:false },
-            { date:'2026-07-08', label:'ד׳ 8.7', name:'יום 8', shabbat:false },
-            { date:'2026-07-09', label:'ה׳ 9.7', name:'יום 9', shabbat:false },
+            { date:'2026-07-01', label:'ד׳ 1.7', name:'יום 1', shabbat:false, dayNum:1, lat:47.3822, lon:13.414,  locHe:'Altenmarkt' },
+            { date:'2026-07-02', label:'ה׳ 2.7', name:'יום 2', shabbat:false, dayNum:2, lat:47.430,  lon:13.637,  locHe:'דאכשטיין' },
+            { date:'2026-07-03', label:'ו׳ 3.7', name:'יום 3', shabbat:false, dayNum:3, lat:47.456,  lon:13.905,  locHe:'גרובמינג·הלשטאט' },
+            { date:'2026-07-04', label:'ש׳ 4.7', name:'שבת',  shabbat:true,  dayNum:4, lat:47.3822, lon:13.414,  locHe:'Altenmarkt' },
+            { date:'2026-07-05', label:'א׳ 5.7', name:'יום 5', shabbat:false, dayNum:5, lat:47.596,  lon:13.176,  locHe:'גולינג·הליין' },
+            { date:'2026-07-06', label:'ב׳ 6.7', name:'יום 6', shabbat:false, dayNum:6, lat:47.352,  lon:13.204,  locHe:'ליכטנשטיין' },
+            { date:'2026-07-07', label:'ג׳ 7.7', name:'יום 7', shabbat:false, dayNum:7, lat:47.481,  lon:13.178,  locHe:'וורפן' },
+            { date:'2026-07-08', label:'ד׳ 8.7', name:'יום 8', shabbat:false, dayNum:8, lat:47.074,  lon:12.694,  locHe:'גרוסגלוקנר' },
+            { date:'2026-07-09', label:'ה׳ 9.7', name:'יום 9', shabbat:false, dayNum:9, lat:47.855,  lon:13.358,  locHe:'מונדזה' },
         ];
         const wmoEmoji = c => c===0?'☀️':c<=2?'🌤️':c===3?'⛅':c<=48?'🌫️':c<=55?'🌦️':c<=65?'🌧️':c<=75?'❄️':c<=82?'🌦️':c<=86?'❄️':'⛈️';
         const wmoDesc  = c => c===0?'שמשי':c<=2?'מעונן חלקית':c===3?'מעונן':c<=48?'ערפל':c<=55?'טפטוף':c<=65?'גשם':c<=75?'שלג':c<=82?'גשמי':c<=86?'שלג':'סופה';
         try {
-            const url = 'https://api.open-meteo.com/v1/forecast?latitude=47.3822&longitude=13.414&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FVienna&forecast_days=16';
-            const res  = await fetch(url);
-            const data = await res.json();
-            const idx  = d => data.daily.time.indexOf(d);
+            const baseUrl = 'https://api.open-meteo.com/v1/forecast?daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FVienna&forecast_days=16';
+            const results = await Promise.all(
+                TRIP_DAYS.map(day => fetch(`${baseUrl}&latitude=${day.lat}&longitude=${day.lon}`).then(r => r.json()))
+            );
 
-            const today = new Date().toISOString().slice(0,10);
-
-            const html = TRIP_DAYS.map(day => {
-                const i = idx(day.date);
+            const html = TRIP_DAYS.map((day, di) => {
+                const data = results[di];
+                const i = data.daily.time.indexOf(day.date);
                 if (i < 0) {
-                    // Date not yet in forecast window
                     return `<div class="fc-day${day.shabbat?' fc-shabbat':''}">
                         <div class="fc-label">${day.label}</div>
                         <div class="fc-label">${day.name}</div>
@@ -2402,6 +2401,17 @@
                 const isSunny = rain < 20 && code <= 3;
                 const cls = day.shabbat ? 'fc-shabbat' : isRainy ? 'fc-rain' : isSunny ? 'fc-sun' : '';
                 const rainCls = isRainy ? 'wet' : 'dry';
+
+                // Update the in-day weather-widget with live per-location data
+                const widget = document.querySelector(`#day-${day.dayNum} .weather-widget`);
+                if (widget) {
+                    widget.querySelector('.weather-icon').textContent  = wmoEmoji(code);
+                    widget.querySelector('.weather-temp').textContent  = `${tmax}°C`;
+                    widget.querySelector('.weather-desc').textContent  = wmoDesc(code);
+                    widget.querySelector('.weather-range').textContent = `מינ׳ ${tmin}°C · מקס׳ ${tmax}°C`;
+                    widget.querySelector('.weather-note').textContent  = `💧 ${rain}% גשם`;
+                }
+
                 return `<div class="fc-day${cls?' '+cls:''}">
                     <div class="fc-label">${day.label}</div>
                     <div class="fc-label" style="color:var(--text-dark);font-size:10px;">${day.name}</div>
@@ -2409,6 +2419,7 @@
                     <div style="font-size:9px;color:var(--text-light);margin:2px 0 4px;">${wmoDesc(code)}</div>
                     <div class="fc-temps">${tmax}°<span>/${tmin}°</span></div>
                     <div class="fc-rain-pct ${rainCls}">💧 ${rain}%</div>
+                    <div style="font-size:8px;color:#94a3b8;margin-top:3px;">${day.locHe}</div>
                 </div>`;
             }).join('');
             grid.innerHTML = html;
