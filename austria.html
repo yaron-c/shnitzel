@@ -508,6 +508,27 @@
         /* ===== OPTIONAL DAYS ===== */
         .optional-section { background: #f5f3ff; padding: 40px 20px 48px; border-top: 3px solid #ede9fe; }
         .optional-section > h2 { text-align:center; font-size:22px; font-weight:800; color:#5b21b6; margin-bottom:8px; }
+        /* ===== WEATHER FORECAST WIDGET ===== */
+        .fc-strip { background:#fff; border-radius:16px; box-shadow:var(--card-shadow); padding:18px 20px 14px; margin-bottom:20px; }
+        .fc-title { font-size:15px; font-weight:800; color:var(--blue-dark); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+        .fc-scroll { display:flex; gap:8px; overflow-x:auto; padding-bottom:4px; scrollbar-width:thin; }
+        .fc-scroll::-webkit-scrollbar { height:4px; }
+        .fc-scroll::-webkit-scrollbar-track { background:#f1f5f9; border-radius:4px; }
+        .fc-scroll::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:4px; }
+        .fc-day { flex:0 0 80px; border-radius:12px; padding:10px 6px 8px; text-align:center; border:1.5px solid #e5e7eb; background:var(--snow); transition:transform .15s; cursor:default; }
+        .fc-day.fc-shabbat { border-color:var(--gold); background:var(--shabbat-bg); }
+        .fc-day.fc-rain     { border-color:#93c5fd; background:#eff6ff; }
+        .fc-day.fc-sun      { border-color:#fde68a; background:#fffbeb; }
+        .fc-label { font-size:10px; font-weight:800; color:var(--text-light); margin-bottom:4px; }
+        .fc-emoji-big { font-size:26px; line-height:1.1; }
+        .fc-temps { font-size:13px; font-weight:800; color:var(--blue-dark); margin:4px 0 2px; white-space:nowrap; }
+        .fc-tmin  { font-size:11px; color:var(--text-light); font-weight:400; }
+        .fc-rain-pct { font-size:10px; font-weight:700; margin-top:4px; }
+        .fc-rain-pct.wet  { color:#0891b2; }
+        .fc-rain-pct.dry  { color:#16a34a; }
+        .fc-source { font-size:10px; color:#9ca3af; text-align:left; margin-top:8px; }
+        .fc-loading { text-align:center; padding:20px; color:var(--text-light); font-size:13px; }
+
         .opt-teaser-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:960px; margin:0 auto 20px; }
         @media(max-width:700px){ .opt-teaser-grid{grid-template-columns:1fr 1fr;} }
         @media(max-width:440px){ .opt-teaser-grid{grid-template-columns:1fr;} }
@@ -691,6 +712,9 @@
     <a href="slc.html" style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;color:#16a34a;text-decoration:none;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:700;border:1.5px solid #bbf7d0;transition:background .15s;">
         💚 כרטיס זלצבורגלנד
     </a>
+    <a href="#weather-forecast" onclick="showDay(0)" style="display:inline-flex;align-items:center;gap:6px;background:#eff6ff;color:#1d4ed8;text-decoration:none;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:700;border:1.5px solid #bfdbfe;transition:background .15s;">
+        🌦️ תחזית מזג אוויר
+    </a>
 </div>
 
 <main class="container">
@@ -793,6 +817,15 @@
                     <div class="ov-rain ov-rain-mixed">🌤️ עדיף שמש — Mondsee</div>
                 </div>
             </div>
+        </div>
+
+        <!-- ===== WEATHER FORECAST ===== -->
+        <div class="fc-strip" id="weather-forecast">
+            <div class="fc-title">🌦️ תחזית מזג אוויר לימי הטיול — Altenmarkt im Pongau</div>
+            <div class="fc-scroll" id="fc-grid">
+                <div class="fc-loading">⏳ טוען תחזית...</div>
+            </div>
+            <div class="fc-source">מקור: Open-Meteo.com · מתעדכן אוטומטית בכל טעינה</div>
         </div>
 
         <div class="day-card">
@@ -2323,7 +2356,66 @@
     document.addEventListener('DOMContentLoaded', () => {
         showDay(0);
         buildMap(0);
+        loadWeatherForecast();
     });
+
+    // ===== WEATHER FORECAST =====
+    async function loadWeatherForecast() {
+        const grid = document.getElementById('fc-grid');
+        const TRIP_DAYS = [
+            { date:'2026-07-01', label:'ד׳ 1.7', name:'יום 1', shabbat:false },
+            { date:'2026-07-02', label:'ה׳ 2.7', name:'יום 2', shabbat:false },
+            { date:'2026-07-03', label:'ו׳ 3.7', name:'יום 3', shabbat:false },
+            { date:'2026-07-04', label:'ש׳ 4.7', name:'שבת',  shabbat:true  },
+            { date:'2026-07-05', label:'א׳ 5.7', name:'יום 5', shabbat:false },
+            { date:'2026-07-06', label:'ב׳ 6.7', name:'יום 6', shabbat:false },
+            { date:'2026-07-07', label:'ג׳ 7.7', name:'יום 7', shabbat:false },
+            { date:'2026-07-08', label:'ד׳ 8.7', name:'יום 8', shabbat:false },
+            { date:'2026-07-09', label:'ה׳ 9.7', name:'יום 9', shabbat:false },
+        ];
+        const wmoEmoji = c => c===0?'☀️':c<=2?'🌤️':c===3?'⛅':c<=48?'🌫️':c<=55?'🌦️':c<=65?'🌧️':c<=75?'❄️':c<=82?'🌦️':c<=86?'❄️':'⛈️';
+        const wmoDesc  = c => c===0?'שמשי':c<=2?'מעונן חלקית':c===3?'מעונן':c<=48?'ערפל':c<=55?'טפטוף':c<=65?'גשם':c<=75?'שלג':c<=82?'גשמי':c<=86?'שלג':'סופה';
+        try {
+            const url = 'https://api.open-meteo.com/v1/forecast?latitude=47.3822&longitude=13.414&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FVienna&forecast_days=16';
+            const res  = await fetch(url);
+            const data = await res.json();
+            const idx  = d => data.daily.time.indexOf(d);
+
+            const today = new Date().toISOString().slice(0,10);
+
+            const html = TRIP_DAYS.map(day => {
+                const i = idx(day.date);
+                if (i < 0) {
+                    // Date not yet in forecast window
+                    return `<div class="fc-day${day.shabbat?' fc-shabbat':''}">
+                        <div class="fc-label">${day.label}</div>
+                        <div class="fc-label">${day.name}</div>
+                        <div class="fc-emoji-big">📅</div>
+                        <div class="fc-tmin" style="margin-top:6px;font-size:10px;">עוד לא זמין</div>
+                    </div>`;
+                }
+                const code  = data.daily.weathercode[i];
+                const tmax  = Math.round(data.daily.temperature_2m_max[i]);
+                const tmin  = Math.round(data.daily.temperature_2m_min[i]);
+                const rain  = data.daily.precipitation_probability_max[i] ?? 0;
+                const isRainy = rain >= 40;
+                const isSunny = rain < 20 && code <= 3;
+                const cls = day.shabbat ? 'fc-shabbat' : isRainy ? 'fc-rain' : isSunny ? 'fc-sun' : '';
+                const rainCls = isRainy ? 'wet' : 'dry';
+                return `<div class="fc-day${cls?' '+cls:''}">
+                    <div class="fc-label">${day.label}</div>
+                    <div class="fc-label" style="color:var(--text-dark);font-size:10px;">${day.name}</div>
+                    <div class="fc-emoji-big">${wmoEmoji(code)}</div>
+                    <div style="font-size:9px;color:var(--text-light);margin:2px 0 4px;">${wmoDesc(code)}</div>
+                    <div class="fc-temps">${tmax}°<span>/${tmin}°</span></div>
+                    <div class="fc-rain-pct ${rainCls}">💧 ${rain}%</div>
+                </div>`;
+            }).join('');
+            grid.innerHTML = html;
+        } catch(e) {
+            grid.innerHTML = '<div class="fc-loading">לא ניתן לטעון תחזית — בדקו חיבור לאינטרנט</div>';
+        }
+    }
 
     // ===== WAZE BUTTONS =====
     const wazeMap = {
