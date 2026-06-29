@@ -736,19 +736,6 @@
 
     <!-- ===== DAY 0 - OVERVIEW ===== -->
     <section class="day-section active" id="day-0">
-        <div class="section-title">🗺️ סקירת הטיול</div>
-
-        <div class="info-row">
-            <div class="info-card"><div class="ic-icon">🌡️</div><div class="ic-title">טמפרטורה ביולי</div><div class="ic-value">20–27°C</div></div>
-            <div class="info-card"><div class="ic-icon">☀️</div><div class="ic-title">שעות אור ביום</div><div class="ic-value">~16 שעות</div></div>
-            <div class="info-card"><div class="ic-icon">💶</div><div class="ic-title">מטבע</div><div class="ic-value">€ יורו</div></div>
-            <div class="info-card"><div class="ic-icon">🚗</div><div class="ic-title">טיפוס טיול</div><div class="ic-value">נסיעת כוכב</div></div>
-        </div>
-
-        <div class="map-day-0-wrap" id="map-day-0-wrap">
-            <div id="map-day-0" class="leaflet-map"></div>
-        </div>
-
         <div class="section-title">📅 לוח הטיול</div>
         <div class="overview-grid">
             <div class="ov-card" onclick="showDay(1)">
@@ -756,7 +743,7 @@
                 <div class="ov-info">
                     <div class="ov-date">רביעי, 1 ביולי</div>
                     <div class="ov-dest">✈️ LY361 נחיתה 09:25 וינה ← Altenmarkt</div>
-                    <div class="ov-weather">☀️ 25°C · שמשי</div>
+                    <div class="ov-weather" id="ov-wx-1">⏳</div>
                     <div class="ov-rain ov-rain-ok">🌧️ בסדר לגשם</div>
                 </div>
             </div>
@@ -764,8 +751,8 @@
                 <div class="ov-num">2</div>
                 <div class="ov-info">
                     <div class="ov-date">חמישי, 2 ביולי</div>
-                    <div class="ov-dest">🏰 עיר זלצבורג</div>
-                    <div class="ov-weather">⛅ 23°C · מעונן חלקית</div>
+                    <div class="ov-dest">🏔️ Dachstein Skywalk · 2700 מ'</div>
+                    <div class="ov-weather" id="ov-wx-2">⏳</div>
                     <div class="ov-rain ov-rain-sun">☀️ חייב שמש</div>
                 </div>
             </div>
@@ -774,7 +761,7 @@
                 <div class="ov-info">
                     <div class="ov-date">שישי, 3 ביולי</div>
                     <div class="ov-dest">🪂 גרובמינג + 💎 הלשטאט</div>
-                    <div class="ov-weather">☀️ 26°C · שמשי ויפה</div>
+                    <div class="ov-weather" id="ov-wx-3">⏳</div>
                     <div class="ov-rain ov-rain-sun">☀️ חייב שמש</div>
                 </div>
             </div>
@@ -783,7 +770,7 @@
                 <div class="ov-info">
                     <div class="ov-date">שבת, 4 ביולי</div>
                     <div class="ov-dest">🕍 שבת — מנוחה ואזור הלינה</div>
-                    <div class="ov-weather">🌦️ 20°C · גשם מקומי</div>
+                    <div class="ov-weather" id="ov-wx-4">⏳</div>
                     <div class="ov-rain ov-rain-ok">🌧️ גמיש — יום מנוחה</div>
                 </div>
             </div>
@@ -792,7 +779,7 @@
                 <div class="ov-info">
                     <div class="ov-date">ראשון, 5 ביולי</div>
                     <div class="ov-dest">💧 גולינג + 🧂 מכרה מלח הליין</div>
-                    <div class="ov-weather">🌤️ 22°C · שמש חלקית</div>
+                    <div class="ov-weather" id="ov-wx-5">⏳</div>
                     <div class="ov-rain ov-rain-great">☔ מתאים לגשם!</div>
                 </div>
             </div>
@@ -800,9 +787,9 @@
                 <div class="ov-num">6</div>
                 <div class="ov-info">
                     <div class="ov-date">שני, 6 ביולי</div>
-                    <div class="ov-dest">🦅 ברכטסגאדן וקניגסזה</div>
-                    <div class="ov-weather">☀️ 25°C · שמשי</div>
-                    <div class="ov-rain ov-rain-mixed">🌤️ חלקי — נקיק כן, שייט לא</div>
+                    <div class="ov-dest">🏔️ Liechtensteinklamm + Geisterberg</div>
+                    <div class="ov-weather" id="ov-wx-6">⏳</div>
+                    <div class="ov-rain ov-rain-mixed">🌤️ חלקי — נקיק מושלם לגשם, Geisterberg לא</div>
                 </div>
             </div>
             <div class="ov-card" onclick="showDay(7)">
@@ -810,7 +797,7 @@
                 <div class="ov-info">
                     <div class="ov-date">שלישי, 7 ביולי</div>
                     <div class="ov-dest">🧊 וורפן — מערות הקרח</div>
-                    <div class="ov-weather">⛅ 22°C · מעונן חלקית</div>
+                    <div class="ov-weather" id="ov-wx-7">⏳</div>
                     <div class="ov-rain ov-rain-great">☔ מושלם לגשם!</div>
                 </div>
             </div>
@@ -819,7 +806,7 @@
                 <div class="ov-info">
                     <div class="ov-date">רביעי, 8 ביולי</div>
                     <div class="ov-dest">🏔️ גרוסגלוקנר ו-Zell am See</div>
-                    <div class="ov-weather">🌤️ 24°C · בהיר בעיקר</div>
+                    <div class="ov-weather" id="ov-wx-8">⏳</div>
                     <div class="ov-rain ov-rain-sun">☀️ חייב שמש</div>
                 </div>
             </div>
@@ -828,7 +815,7 @@
                 <div class="ov-info">
                     <div class="ov-date">חמישי, 9 ביולי</div>
                     <div class="ov-dest">✈️ LY364 המראה 21:35 וינה | Mondsee בדרך</div>
-                    <div class="ov-weather">☀️ 26°C · שמשי</div>
+                    <div class="ov-weather" id="ov-wx-9">⏳</div>
                     <div class="ov-rain ov-rain-mixed">🌤️ עדיף שמש — Mondsee</div>
                 </div>
             </div>
@@ -2428,6 +2415,9 @@
                     widget.querySelector('.weather-range').textContent = `מינ׳ ${tmin}°C · מקס׳ ${tmax}°C`;
                     widget.querySelector('.weather-note').textContent  = `💧 ${rain}% גשם`;
                 }
+                // Update overview grid ov-weather span
+                const ovWx = document.getElementById(`ov-wx-${day.dayNum}`);
+                if (ovWx) ovWx.textContent = `${wmoEmoji(code)} ${tmax}° · 💧${rain}%`;
 
                 return `<div class="fc-day${cls?' '+cls:''}">
                     <div class="fc-label">${day.label}</div>
