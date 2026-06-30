@@ -217,6 +217,8 @@
         .weather-desc { font-size: 13px; color: var(--text-mid); }
         .weather-range { font-size: 12px; color: var(--text-light); margin-top: 2px; }
         .weather-note { font-size: 11px; color: var(--text-light); margin-top: 6px; font-style: italic; }
+        .wcom-link { display:block; text-align:center; font-size:11px; font-weight:700; color:#1d4ed8; text-decoration:none; margin-top:8px; padding-top:6px; border-top:1px solid rgba(91,163,208,.2); }
+        .wcom-link:hover { text-decoration:underline; }
 
         /* ===== TIMELINE ===== */
         .timeline {
@@ -2438,6 +2440,17 @@
                     widget.querySelector('.weather-desc').textContent  = wmoDesc(code);
                     widget.querySelector('.weather-range').textContent = `מינ׳ ${tmin}°C · מקס׳ ${tmax}°C`;
                     widget.querySelector('.weather-note').textContent  = `💧 ${rain}% גשם`;
+                    // Inject / update weather.com hourly link for this location
+                    let wcomEl = widget.querySelector('.wcom-link');
+                    if (!wcomEl) {
+                        wcomEl = document.createElement('a');
+                        wcomEl.className = 'wcom-link';
+                        wcomEl.target = '_blank';
+                        wcomEl.rel = 'noopener noreferrer';
+                        wcomEl.textContent = '📊 תחזית שעתית — weather.com ←';
+                        widget.appendChild(wcomEl);
+                    }
+                    wcomEl.href = `https://weather.com/weather/hourbyhour/l/${day.lat},${day.lon}?unit=C`;
                 }
                 // Update overview grid ov-weather span
                 const ovWx = document.getElementById(`ov-wx-${day.dayNum}`);
